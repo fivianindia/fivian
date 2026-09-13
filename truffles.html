@@ -56,8 +56,8 @@
 
     .cart-btn { 
       order: 2;
-      background: var(--choc-dark); 
-      color: var(--bg-cream); 
+      background: var(--brand-red-accent); 
+      color: #FFFFFF; 
       border: none; 
       padding: 8px 16px; 
       border-radius: 30px; 
@@ -102,7 +102,7 @@
     .container { max-width: 1100px; margin: 0 auto; padding: 20px 20px 40px; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
     .product-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; transition: transform 0.2s, border-color 0.2s; }
-    .product-card:hover { border-color: var(--choc-dark); transform: translateY(-3px); }
+    .product-card:hover { border-color: var(--brand-red-accent); transform: translateY(-3px); }
 
     .product-img { width: 100%; aspect-ratio: 1 / 1; background: #FAF6F0; border-radius: var(--radius-sm); object-fit: cover; margin-bottom: 12px; border: 1px solid var(--border-color); }
     .product-name { font-weight: 700; font-size: 1.1rem; color: var(--choc-dark); margin-bottom: 6px; font-family: var(--font-serif); font-style: italic; }
@@ -191,7 +191,7 @@
       </a>
 
       <button class="cart-btn" onclick="openCart()">
-        🛒 Cart (<span id="cartCount">0</span>)
+        🛒 Cart
       </button>
 
       <nav>
@@ -450,7 +450,6 @@
 
     function saveCart(cart) { 
       localStorage.setItem('fivian_cart', JSON.stringify(cart)); 
-      updateBadge(); 
       updateCardUI(); 
     }
 
@@ -470,12 +469,6 @@
       if (document.getElementById('cartModal').style.display === 'flex') {
         openCart();
       }
-    }
-
-    function updateBadge() {
-      let cart = getCart();
-      let total = Object.values(cart).reduce((sum, itemObj) => sum + itemObj.qty, 0);
-      document.getElementById('cartCount').innerText = total;
     }
 
     function updateCardUI() {
@@ -598,12 +591,10 @@
       
       localStorage.removeItem('fivian_cart');
       closeCart();
-      updateBadge();
       updateCardUI();
     }
 
     window.onload = function() {
-      updateBadge();
       updateCardUI();
     };
   </script>
