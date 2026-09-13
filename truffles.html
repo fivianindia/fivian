@@ -32,14 +32,6 @@
     .top-bar { background: var(--choc-dark); color: var(--bg-cream); text-align: center; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; }
 
     /* Header Nav */
-    header { 
-      background: var(--card-bg); 
-      border-bottom: 1px solid var(--border-color); 
-      position: sticky; 
-      top: 0; 
-      z-index: 100; 
-      padding: 12px 16px;
-    }
     .header-container {
       max-width: 1100px;
       margin: 0 auto;
@@ -48,6 +40,14 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
+    }
+    header { 
+      background: var(--card-bg); 
+      border-bottom: 1px solid var(--border-color); 
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+      padding: 12px 16px;
     }
     .brand-logo { text-decoration: none; display: flex; align-items: center; gap: 8px; order: 1; }
     .brand-logo img { height: 38px; width: auto; display: block; object-fit: contain; }
@@ -144,11 +144,33 @@
       padding: 0 4px;
     }
 
-    /* Cart Modal */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
-    .modal-box { background: #FFF; padding: 24px; border-radius: var(--radius-lg); max-width: 420px; width: 90%; }
-    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
-    .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; margin-top: 16px; cursor: pointer; }
+    /* Modern Cart Modal */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; padding: 16px; }
+    .modal-box { background: #FFF; padding: 24px; border-radius: var(--radius-lg); max-width: 480px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+    
+    .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--bg-cream); padding-bottom: 12px; margin-bottom: 16px; }
+    .cart-header h3 { font-family: var(--font-serif); font-style: italic; font-size: 1.4rem; color: var(--choc-dark); }
+    .close-cart-x { cursor: pointer; font-size: 1.2rem; font-weight: bold; color: var(--text-muted); }
+    .close-cart-x:hover { color: var(--brand-red-accent); }
+
+    #cartItemsList { overflow-y: auto; max-height: 240px; margin-bottom: 16px; padding-right: 4px; }
+    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); gap: 12px; }
+    .cart-item-info { flex-grow: 1; }
+    .cart-item-title { font-weight: 700; font-size: 0.92rem; color: var(--choc-dark); margin-bottom: 2px; }
+    .cart-item-price-tag { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+
+    .cart-summary-box { background: var(--bg-cream); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 16px; border: 1px solid var(--border-color); }
+    .summary-row { display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 6px; color: var(--text-muted); }
+    .summary-row.total { font-weight: 800; color: var(--choc-dark); font-size: 1.1rem; border-top: 1px dashed var(--border-color); padding-top: 8px; margin-top: 6px; }
+    .delivery-note { font-size: 0.75rem; color: var(--brand-red-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; text-align: center; }
+
+    /* Checkout Customer Form */
+    .checkout-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .checkout-form input { width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 0.9rem; background: #fff; }
+    .checkout-form input:focus { outline: none; border-color: var(--choc-dark); }
+
+    .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 14px; border-radius: var(--radius-sm); font-weight: 800; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .checkout-btn:hover { opacity: 0.9; }
 
     /* Footer Styles */
     footer { background: #2B1B17; color: #FAF6F0; text-align: center; padding: 40px 16px 24px; margin-top: 50px; border-top: 3px solid #C8102E; }
@@ -192,7 +214,7 @@
     <div class="products-grid" id="productsGrid">
 
       <!-- 1. Almond Truffles -->
-      <div class="product-card" data-item="Almond Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Almond Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1uQtBsifl_d23bhDNd--MA9cSf44XXyHz" alt="Almond Truffles" class="product-img">
         <div>
           <div class="product-name">Almond Truffles</div>
@@ -201,13 +223,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Almond Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Almond Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 2. Blackcurrant Truffles -->
-      <div class="product-card" data-item="Blackcurrant Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Blackcurrant Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1HV6aiBZyBJBTXGY9PS-MCWAls6I2aASI" alt="Blackcurrant Truffles" class="product-img">
         <div>
           <div class="product-name">Blackcurrant Truffles</div>
@@ -216,13 +238,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Blackcurrant Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Blackcurrant Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 3. Coconut Truffles -->
-      <div class="product-card" data-item="Coconut Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Coconut Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1B06N2FzTSzgvIsnPZmKnwJM2XXu8EeFl" alt="Coconut Truffles" class="product-img">
         <div>
           <div class="product-name">Coconut Truffles</div>
@@ -231,13 +253,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Coconut Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Coconut Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 4. Kunafa Truffles -->
-      <div class="product-card" data-item="Kunafa Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Kunafa Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1BnypBFABKg9OmPUBZaiG-72HvyUhrdEQ" alt="Kunafa Truffles" class="product-img">
         <div>
           <div class="product-name">Kunafa Truffles</div>
@@ -246,13 +268,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Kunafa Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Kunafa Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 5. Lemon Truffles -->
-      <div class="product-card" data-item="Lemon Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Lemon Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1UUcQE2a23XSaITqW7ZG_a4Y9Fz9W8-uG" alt="Lemon Truffles" class="product-img">
         <div>
           <div class="product-name">Lemon Truffles</div>
@@ -261,13 +283,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Lemon Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Lemon Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 6. Paan Truffles -->
-      <div class="product-card" data-item="Paan Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Paan Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1OEQjK6J9v6_gV3L4N9dApsJif6YarWUl" alt="Paan Truffles" class="product-img">
         <div>
           <div class="product-name">Paan Truffles</div>
@@ -276,13 +298,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Paan Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Paan Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 7. Peanut Truffles -->
-      <div class="product-card" data-item="Peanut Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Peanut Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1wmRi-fWICzke6zjHWqu9FBLxPUYXy-nK" alt="Peanut Truffles" class="product-img">
         <div>
           <div class="product-name">Peanut Truffles</div>
@@ -291,13 +313,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Peanut Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Peanut Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 8. Rasmalai Truffles -->
-      <div class="product-card" data-item="Rasmalai Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Rasmalai Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1ctXTFmomYJSM3tWP1DcRsnhf4K8vJnfY" alt="Rasmalai Truffles" class="product-img">
         <div>
           <div class="product-name">Rasmalai Truffles</div>
@@ -306,13 +328,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Rasmalai Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Rasmalai Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 9. Red Velvet Truffles -->
-      <div class="product-card" data-item="Red Velvet Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Red Velvet Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/1AgETjrvVP7d6oTVTQKIPtaKnrdosSC5G" alt="Red Velvet Truffles" class="product-img">
         <div>
           <div class="product-name">Red Velvet Truffles</div>
@@ -321,13 +343,13 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Red Velvet Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Red Velvet Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
 
       <!-- 10. Strawberry Truffles -->
-      <div class="product-card" data-item="Strawberry Truffles (Box of 9) - ₹399">
+      <div class="product-card" data-item="Strawberry Truffles (Box of 9)" data-price="399">
         <img src="https://lh3.googleusercontent.com/d/176WloGzrY28oMmXJU7LuynfdInY0eh1i" alt="Strawberry Truffles" class="product-img">
         <div>
           <div class="product-name">Strawberry Truffles</div>
@@ -336,7 +358,7 @@
         <div class="product-footer">
           <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
           <div class="action-container">
-            <button class="add-product-btn" onclick="updateQty('Strawberry Truffles (Box of 9) - ₹399', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('Strawberry Truffles (Box of 9)', 399, 1)">+ Add</button>
           </div>
         </div>
       </div>
@@ -347,12 +369,34 @@
   <!-- Cart Modal -->
   <div class="modal-overlay" id="cartModal">
     <div class="modal-box">
-      <h3 style="margin-bottom: 14px; display: flex; justify-content: space-between; color: var(--choc-dark); font-family: var(--font-serif); font-style: italic;">
-        Your Cart
-        <span style="cursor: pointer; font-style: normal;" onclick="closeCart()">✕</span>
-      </h3>
+      <div class="cart-header">
+        <h3>Your Shopping Cart</h3>
+        <span class="close-cart-x" onclick="closeCart()">✕</span>
+      </div>
+      
       <div id="cartItemsList"></div>
-      <button class="checkout-btn" onclick="sendWhatsAppOrder()">Order via WhatsApp 📲</button>
+
+      <div class="cart-summary-box">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+        <div class="summary-row total">
+          <span>Estimated Total</span>
+          <span id="cartTotal">₹0</span>
+        </div>
+      </div>
+      <div class="delivery-note">Delivery charges calculated after inquiry</div>
+
+      <div class="checkout-form">
+        <input type="text" id="custName" placeholder="Your Full Name *" required>
+        <input type="tel" id="custPhone" placeholder="Phone Number / WhatsApp *" required>
+        <input type="text" id="custAddress" placeholder="Delivery Address / Landmark *" required>
+      </div>
+
+      <button class="checkout-btn" onclick="placeOrderAndWhatsApp()">
+        Order via WhatsApp 📲
+      </button>
     </div>
   </div>
 
@@ -396,24 +440,40 @@
   </footer>
 
   <script>
-    function getCart() { return JSON.parse(localStorage.getItem('fivian_cart') || '{}'); }
-    function saveCart(cart) { localStorage.setItem('fivian_cart', JSON.stringify(cart)); updateBadge(); updateCardUI(); }
+    const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1548727130454761502/uQbUb9BvtlTtMTnQ_p2pIy8NpEg0-giznGYbSz53Ux3ASdwYvndbcUNYli1yaNMSc_fh';
 
-    function updateQty(item, change) {
+    function getCart() { 
+      return JSON.parse(localStorage.getItem('fivian_cart') || '{}'); 
+    }
+
+    function saveCart(cart) { 
+      localStorage.setItem('fivian_cart', JSON.stringify(cart)); 
+      updateBadge(); 
+      updateCardUI(); 
+    }
+
+    function updateQty(item, price, change) {
       let cart = getCart();
-      let current = cart[item] || 0;
-      let next = current + change;
-      if (next > 0) {
-        cart[item] = next;
-      } else {
+      if (!cart[item]) {
+        cart[item] = { qty: 0, price: price };
+      }
+      cart[item].qty += change;
+      
+      if (cart[item].qty <= 0) {
         delete cart[item];
       }
+      
       saveCart(cart);
+
+      // If cart modal is open, dynamically refresh its view
+      if (document.getElementById('cartModal').style.display === 'flex') {
+        openCart();
+      }
     }
 
     function updateBadge() {
       let cart = getCart();
-      let total = Object.values(cart).reduce((a, b) => a + b, 0);
+      let total = Object.values(cart).reduce((sum, itemObj) => sum + itemObj.qty, 0);
       document.getElementById('cartCount').innerText = total;
     }
 
@@ -421,20 +481,24 @@
       let cart = getCart();
       document.querySelectorAll('.product-card').forEach(card => {
         let itemName = card.getAttribute('data-item');
+        let itemPrice = Number(card.getAttribute('data-price'));
         let actionContainer = card.querySelector('.action-container');
-        let qty = cart[itemName] || 0;
+        let itemObj = cart[itemName];
+        let qty = itemObj ? itemObj.qty : 0;
+
+        let safeItemName = itemName.replace(/'/g, "\\'");
 
         if (qty > 0) {
           actionContainer.innerHTML = `
             <div class="qty-counter">
-              <button onclick="updateQty('${itemName}', -1)">–</button>
+              <button onclick="updateQty('${safeItemName}', ${itemPrice}, -1)">–</button>
               <span>${qty}</span>
-              <button onclick="updateQty('${itemName}', 1)">+</button>
+              <button onclick="updateQty('${safeItemName}', ${itemPrice}, 1)">+</button>
             </div>
           `;
         } else {
           actionContainer.innerHTML = `
-            <button class="add-product-btn" onclick="updateQty('${itemName}', 1)">+ Add</button>
+            <button class="add-product-btn" onclick="updateQty('${safeItemName}', ${itemPrice}, 1)">+ Add</button>
           `;
         }
       });
@@ -444,26 +508,102 @@
       let cart = getCart();
       let list = document.getElementById('cartItemsList');
       list.innerHTML = '';
-      if (Object.keys(cart).length === 0) {
-        list.innerHTML = '<p style="color: var(--text-muted);">Your cart is currently empty.</p>';
+      
+      let keys = Object.keys(cart);
+      let subtotal = 0;
+
+      if (keys.length === 0) {
+        list.innerHTML = '<p style="color: var(--text-muted); text-align:center; padding: 20px 0;">Your cart is currently empty.</p>';
       } else {
-        for (let [item, qty] of Object.entries(cart)) {
-          list.innerHTML += `<div class="cart-item"><span>${item} (x${qty})</span><button onclick="updateQty('${item}', -999)" style="background:none; border:none; color:var(--brand-red-accent); cursor:pointer; font-weight:700;">Remove</button></div>`;
+        for (let [item, data] of Object.entries(cart)) {
+          let itemTotal = data.price * data.qty;
+          subtotal += itemTotal;
+          let safeItem = item.replace(/'/g, "\\'");
+
+          list.innerHTML += `
+            <div class="cart-item-row">
+              <div class="cart-item-info">
+                <div class="cart-item-title">${item}</div>
+                <div class="cart-item-price-tag">₹${data.price} each</div>
+              </div>
+              <div class="qty-counter">
+                <button onclick="updateQty('${safeItem}', ${data.price}, -1)">–</button>
+                <span>${data.qty}</span>
+                <button onclick="updateQty('${safeItem}', ${data.price}, 1)">+</button>
+              </div>
+            </div>
+          `;
         }
       }
+
+      document.getElementById('cartSubtotal').innerText = '₹' + subtotal;
+      document.getElementById('cartTotal').innerText = '₹' + subtotal;
       document.getElementById('cartModal').style.display = 'flex';
     }
 
-    function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
+    function closeCart() { 
+      document.getElementById('cartModal').style.display = 'none'; 
+    }
 
-    function sendWhatsAppOrder() {
+    function placeOrderAndWhatsApp() {
       let cart = getCart();
-      if (Object.keys(cart).length === 0) return alert('Your cart is empty!');
-      let text = "Hello Fivian! I'd like to place an order from Artisanal Truffles:\n";
-      for (let [item, qty] of Object.entries(cart)) {
-        text += `- ${item} x${qty}\n`;
+      if (Object.keys(cart).length === 0) {
+        return alert('Your cart is empty!');
       }
-      window.open(`https://wa.me/919088055818?text=${encodeURIComponent(text)}`, '_blank');
+
+      let name = document.getElementById('custName').value.trim();
+      let phone = document.getElementById('custPhone').value.trim();
+      let address = document.getElementById('custAddress').value.trim();
+
+      if (!name || !phone || !address) {
+        return alert('Please fill in your Name, Phone Number, and Delivery Address to proceed.');
+      }
+
+      let subtotal = 0;
+      let orderItemsText = "";
+      let discordItemsText = "";
+
+      for (let [item, data] of Object.entries(cart)) {
+        let cost = data.price * data.qty;
+        subtotal += cost;
+        orderItemsText += `- ${item} x${data.qty} (₹${cost})\n`;
+        discordItemsText += `• **${item}** x${data.qty} - ₹${cost}\n`;
+      }
+
+      // Build Discord Webhook payload
+      let discordPayload = {
+        embeds: [{
+          title: "🛍️ New Fivian Truffles Order!",
+          color: 13111342, // Hex #C8102E in decimal
+          fields: [
+            { name: "👤 Customer Name", value: name, inline: true },
+            { name: "📞 Phone / WhatsApp", value: phone, inline: true },
+            { name: "📍 Delivery Address", value: address, inline: false },
+            { name: "🛒 Order Items", value: discordItemsText, inline: false },
+            { name: "💰 Estimated Subtotal", value: `₹${subtotal} (+ delivery charges)`, inline: false }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      // Send background request to Discord webhook
+      fetch(DISCORD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(discordPayload)
+      }).catch(err => console.log('Discord notification error:', err));
+
+      // Construct WhatsApp message string
+      let waText = `Hello Fivian! I'd like to place an order:\n\n*Customer Details:*\n- Name: ${name}\n- Phone: ${phone}\n- Address: ${address}\n\n*Items Ordered:*\n${orderItemsText}\n*Estimated Subtotal:* ₹${subtotal}\n*(Delivery charges to be calculated)*`;
+
+      // Open WhatsApp
+      window.open(`https://wa.me/919088055818?text=${encodeURIComponent(waText)}`, '_blank');
+      
+      // Clear cart & close modal
+      localStorage.removeItem('fivian_cart');
+      closeCart();
+      updateBadge();
+      updateCardUI();
     }
 
     window.onload = function() {
