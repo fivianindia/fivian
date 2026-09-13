@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handcrafted Chocolate Bars | Fivian Chocolates</title>
+
+  <!-- Google Fonts: Libre Baskerville & System Sans-Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-cream: #FAF6F0;
+      --card-bg: #FFFFFF;
+      --brand-red-accent: #C8102E;
+      --choc-dark: #2B1B17;
+      --choc-mid: #4A352F;
+      --text-muted: #665A55;
+      --border-color: #E8E1D9;
+      --radius-lg: 16px;
+      --radius-sm: 8px;
+      --font-serif: 'Libre Baskerville', Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-cream); color: var(--choc-dark); font-family: var(--font-sans); line-height: 1.5; }
+
+    /* Top Bar */
+    .top-bar { background: var(--choc-dark); color: var(--bg-cream); text-align: center; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; }
+
+    /* Header Nav */
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    header { 
+      background: var(--card-bg); 
+      border-bottom: 1px solid var(--border-color); 
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+      padding: 12px 16px;
+    }
+    .brand-logo { text-decoration: none; display: flex; align-items: center; gap: 8px; order: 1; }
+    .brand-logo img { height: 38px; width: auto; display: block; object-fit: contain; }
+    .brand-name { font-family: var(--font-serif); font-style: italic; font-size: 1.7rem; font-weight: 700; color: var(--choc-dark); letter-spacing: -0.5px; margin: 0; }
+    .brand-name span { color: var(--brand-red-accent); font-style: normal; }
+
+    .cart-btn { 
+      order: 2;
+      background: var(--brand-red-accent); 
+      color: #FFFFFF; 
+      border: none; 
+      padding: 8px 16px; 
+      border-radius: 30px; 
+      font-weight: 700; 
+      font-size: 0.85rem;
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+      white-space: nowrap;
+      transition: opacity 0.2s; 
+    }
+    .cart-btn:hover { opacity: 0.9; }
+
+    nav {
+      order: 3;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      padding-top: 8px;
+      border-top: 1px solid #F5F1EB;
+    }
+    nav a { text-decoration: none; color: var(--choc-dark); font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+    nav a:hover { color: var(--brand-red-accent); }
+
+    @media (min-width: 768px) {
+      header { padding: 12px 5%; }
+      nav { order: 2; width: auto; padding-top: 0; border-top: none; gap: 24px; }
+      .cart-btn { order: 3; }
+      .brand-logo img { height: 44px; }
+      .brand-name { font-size: 1.8rem; }
+    }
+
+    /* Page Header */
+    .page-header { text-align: center; padding: 40px 20px 20px; max-width: 850px; margin: 0 auto; }
+    .page-header h1 { font-family: var(--font-serif); font-style: italic; font-size: 2.5rem; color: var(--choc-dark); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
+    .page-header h1 span { color: var(--brand-red-accent); font-style: normal; font-weight: 700; }
+    .page-header p { font-size: 1.05rem; color: var(--text-muted); font-weight: 500; }
+
+    /* Products Grid */
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px 20px 40px; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .product-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; transition: transform 0.2s, border-color 0.2s; }
+    .product-card:hover { border-color: var(--brand-red-accent); transform: translateY(-3px); }
+
+    /* Carousel Image Box (Strict 1:1 Square Ratio) */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #FAF6F0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-color);
+    }
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .size-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(43, 27, 23, 0.85);
+      color: #FAF6F0;
+      padding: 3px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .product-name { font-weight: 700; font-size: 1.1rem; color: var(--choc-dark); margin-bottom: 6px; font-family: var(--font-serif); font-style: italic; }
+    .product-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px; flex-grow: 1; }
+
+    /* Size Selector Tabs */
+    .size-selector {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      background: var(--bg-cream);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+    }
+    .size-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .size-btn.active {
+      background: var(--choc-dark);
+      color: #FAF6F0;
+    }
+
+    .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 12px; }
+    .product-price { font-weight: 800; font-size: 1.05rem; color: var(--brand-red-accent); display: flex; align-items: center; }
+
+    .add-product-btn { background: var(--choc-dark); color: var(--bg-cream); border: none; padding: 8px 16px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: background 0.2s; }
+    .add-product-btn:hover { background: var(--brand-red-accent); }
+
+    /* Zomato/Swiggy Style Quantity Counter Pill */
+    .qty-counter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      min-width: 90px;
+      font-weight: 700;
+    }
+    .qty-counter button {
+      background: none;
+      border: none;
+      color: var(--brand-red-accent);
+      font-size: 1.1rem;
+      font-weight: 900;
+      cursor: pointer;
+      padding: 0 6px;
+      line-height: 1;
+    }
+    .qty-counter button:hover { opacity: 0.8; }
+    .qty-counter span {
+      color: var(--choc-dark);
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 0 4px;
+    }
+
+    /* Modern Cart Modal */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; padding: 16px; }
+    .modal-box { background: #FFF; padding: 24px; border-radius: var(--radius-lg); max-width: 480px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+    
+    .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--bg-cream); padding-bottom: 12px; margin-bottom: 16px; }
+    .cart-header h3 { font-family: var(--font-serif); font-style: italic; font-size: 1.4rem; color: var(--choc-dark); }
+    .close-cart-x { cursor: pointer; font-size: 1.2rem; font-weight: bold; color: var(--text-muted); }
+    .close-cart-x:hover { color: var(--brand-red-accent); }
+
+    #cartItemsList { overflow-y: auto; max-height: 260px; margin-bottom: 16px; padding-right: 4px; }
+    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); gap: 12px; }
+    .cart-item-info { flex-grow: 1; }
+    .cart-item-title { font-weight: 700; font-size: 0.92rem; color: var(--choc-dark); margin-bottom: 2px; }
+    .cart-item-price-tag { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+
+    .cart-summary-box { background: var(--bg-cream); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 16px; border: 1px solid var(--border-color); }
+    .summary-row { display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 6px; color: var(--text-muted); }
+    .summary-row.total { font-weight: 800; color: var(--choc-dark); font-size: 1.1rem; border-top: 1px dashed var(--border-color); padding-top: 8px; margin-top: 6px; }
+    .delivery-note { font-size: 0.75rem; color: var(--brand-red-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; text-align: center; }
+
+    .checkout-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .checkout-form input { width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 0.9rem; background: #fff; }
+    .checkout-form input:focus { outline: none; border-color: var(--choc-dark); }
+
+    .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 14px; border-radius: var(--radius-sm); font-weight: 800; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .checkout-btn:hover { opacity: 0.9; }
+
+    /* Footer Styles */
+    footer { background: #2B1B17; color: #FAF6F0; text-align: center; padding: 40px 16px 24px; margin-top: 50px; border-top: 3px solid #C8102E; }
+    .social-link { transition: transform 0.2s, opacity 0.2s; }
+    .social-link:hover { transform: translateY(-2px); opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">Handcrafted Fresh in Kolkata | Direct Local & Nationwide Delivery Available</div>
+
+  <!-- Header Nav -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <img src="https://lh3.googleusercontent.com/d/1jkp6vnIVF5LLFulcj7Sm7LANKjuSvuWn" alt="Fivian Chocolates Logo">
+        <span class="brand-name">Fivian<span>.</span></span>
+      </a>
+
+      <button class="cart-btn" onclick="openCart()">
+        🛒 Cart <span id="cartCountBadge" style="background:#fff; color:#C8102E; border-radius:10px; padding:0 6px; font-size:0.75rem; margin-left:4px;">0</span>
+      </button>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="chocolates.html" style="color: var(--brand-red-accent);">Chocolates</a>
+        <a href="truffles.html">Truffles</a>
+        <a href="stuffeddates.html">Dates</a>
+        <a href="milkshakes.html">Milkshakes</a>
+        <a href="index.html#about">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Title -->
+  <section class="page-header">
+    <h1>Handcrafted <span>Chocolate Bars</span> Collection</h1>
+    <p>Artisanal chocolate bars available in 50g and 100g sizes.</p>
+  </section>
+
+  <!-- Products Grid -->
+  <div class="container">
+    <div class="products-grid" id="productsGrid">
+      <!-- Dynamic Rendered via Script below -->
+    </div>
+  </div>
+
+  <!-- Cart Modal Overlay -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal-box">
+      <div class="cart-header">
+        <h3>Your Shopping Cart</h3>
+        <span class="close-cart-x" onclick="closeCart()">✕</span>
+      </div>
+      <div class="delivery-note">Order 2 Days in Advance • Hand-Packed with Care</div>
+      <div id="cartItemsList"></div>
+      
+      <div class="cart-summary-box">
+        <div class="summary-row total">
+          <span>Total Amount:</span>
+          <span id="cartTotalPrice">₹0</span>
+        </div>
+      </div>
+
+      <div class="checkout-form">
+        <input type="text" id="customerName" placeholder="Your Full Name" required>
+        <input type="tel" id="customerPhone" placeholder="WhatsApp Phone Number" required>
+        <input type="text" id="customerAddress" placeholder="Delivery Address / Area in Kolkata" required>
+      </div>
+
+      <button class="checkout-btn" onclick="sendWhatsAppOrder()">
+        <span>Order via WhatsApp</span> 📲
+      </button>
+    </div>
+  </div>
+
+  <!-- Custom Footer -->
+  <footer>
+    <div style="max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <h2 style="font-family: var(--font-serif); font-style: italic; font-size: 2.1rem; font-weight: 700; color: #FAF6F0; margin-bottom: 2px;">
+        Fivian<span style="color: #C8102E; font-style: normal;">.</span>
+      </h2>
+      <p style="font-style: italic; font-family: var(--font-serif); color: #E8E1D9; margin-bottom: 24px; font-size: 0.9rem; opacity: 0.9;">
+        Handcrafted Artisanal Chocolates
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #FAF6F0; font-weight: 500; margin-bottom: 24px;">
+        <span>📍 12 Gora Chand Road, Kolkata 700014</span>
+        <span>📞 <a href="tel:+919088055818" style="color: #FAF6F0; text-decoration: none;">+91 9088 055 818</a></span>
+        <span>✉️ <a href="mailto:fivianindia@gmail.com" style="color: #FAF6F0; text-decoration: none;">fivianindia@gmail.com</a></span>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 24px;">
+        <a href="https://wa.me/919088055818" target="_blank" title="WhatsApp" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/1qmtByzzVWRH8GbYRvboxbqQ7vVMvugTY" alt="WhatsApp" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+        <a href="https://instagram.com/fivian.in" target="_blank" title="Instagram" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/1d_lH4q3EBbucuoTOtA_E6VzIAe_hHBWb" alt="Instagram" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+        <a href="https://youtube.com/@fivianindia" target="_blank" title="YouTube" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/13DdNGoSKsdvMd4LQwX6I0Qjc8BJVBB59" alt="YouTube" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+        <a href="https://facebook.com/fivian.in" target="_blank" title="Facebook" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/1caAi5AIPIrPCiyMPqOJiXw_csihy4YNt" alt="Facebook" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+      </div>
+
+      <p style="font-size: 0.75rem; color: #A0948D; font-weight: 600; letter-spacing: 1px;">
+        © 2026 FIVIAN INDIA | ALL RIGHTS RESERVED
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // All 17 varieties with precise 50g & 100g lh3 direct image URLs and prices
+    const chocolateProducts = [
+      {
+        id: "signature-blend",
+        name: "Signature Blend Chocolate Bar",
+        desc: "Striking the ideal balance right between milk and dark, this signature blend offers a smooth, harmonious bite that suits every preference.",
+        prices: { "50g": 50, "100g": 100 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/11CiPR5TFB-Ib0qXFkoZiHyEFQEWoaJlt",
+          "100g": "https://lh3.googleusercontent.com/d/1t-uJY2JPvvPFvQYbgz7OkhIl9694t5Yi"
+        }
+      },
+      {
+        id: "milk",
+        name: "Milk Chocolate Bar",
+        desc: "A smooth, classic milk chocolate bar crafted for a comforting, familiar sweetness in every single square.",
+        prices: { "50g": 50, "100g": 100 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1A7TpNfLoo7JF394C7iPEi8ewA1LyfPPu",
+          "100g": "https://lh3.googleusercontent.com/d/1mF6O7_I4lf30atpnYGQZm7MIMVH4HcUW"
+        }
+      },
+      {
+        id: "dark",
+        name: "Dark Chocolate Bar",
+        desc: "A rich, deep dark chocolate bar offering a smooth texture and a bold, satisfying finish for those who prefer less sweetness.",
+        prices: { "50g": 50, "100g": 100 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1BrAM8K6eJZveoetwPNmHTWob4bqlFEkw",
+          "100g": "https://lh3.googleusercontent.com/d/1mF6O7_I4lf30atpnYGQZm7MIMVH4HcUW"
+        }
+      },
+      {
+        id: "mango",
+        name: "Mango Chocolate Bar",
+        desc: "A vibrant white chocolate base embedded with authentic aam papad / aamsathh pieces, delivering a delightfully sweet, fruit-forward flavour.",
+        prices: { "50g": 60, "100g": 100 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1OKCM62HGio0vJqdl0zaxx9P1sd8jEb_G",
+          "100g": "https://lh3.googleusercontent.com/d/1dtflVpXtUmsiGXa_b7LQOU5zXg4IBCZp"
+        }
+      },
+      {
+        id: "butterscotch",
+        name: "Butterscotch Chocolate Bar",
+        desc: "A smooth chocolate base studded with crisp, buttery granules that bring a delightful crunch to every bite.",
+        prices: { "50g": 60, "100g": 130 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1aQ_C7IbHL-DldzlLwSrZcfykGnk5wWxh",
+          "100g": "https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji"
+        }
+      },
+      {
+        id: "crackle",
+        name: "Crackle Chocolate Bar",
+        desc: "Light, crispy pieces folded into a smooth chocolate bar, offering an airy and satisfying snap reminiscent of classic crispello styles.",
+        prices: { "50g": 60, "100g": 120 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1OPylxt7BXZfR_hTw6SX-8x6lo7gT2GEi",
+          "100g": "https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji"
+        }
+      },
+      {
+        id: "cookie-cream",
+        name: "Cookie & Cream Chocolate Bar",
+        desc: "A sweet white chocolate base loaded with crushed Dark Fantasy biscuit pieces, giving you a wonderful contrast of smooth and crunchy textures.",
+        prices: { "50g": 70, "100g": 120 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1DPt1G2L42SM7G6BhGWDrPWN7cpnPy1h3",
+          "100g": "https://lh3.googleusercontent.com/d/1yLMPNd6X9FU8GrVR9xueuO0D2kX7n8rf"
+        }
+      },
+      {
+        id: "peanut",
+        name: "Peanut Chocolate Bar",
+        desc: "A hearty chocolate bar packed tight with roasted peanuts for a satisfying, nutty crunch in every piece.",
+        prices: { "50g": 70, "100g": 120 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1hzj2LPYMPyymzp6KO8f9eiZKt5pQcJc8",
+          "100g": "https://lh3.googleusercontent.com/d/1jYHd70cEte7z_bUjEx5A0DyeY_KFe7m2"
+        }
+      },
+      {
+        id: "coffee",
+        name: "Coffee Chocolate Bar",
+        desc: "Featuring a rich coffee paste centre encased in smooth chocolate, carrying the deep, inviting scent and robust flavour of fresh coffee.",
+        prices: { "50g": 80, "100g": 130 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1r5ln66viRTqQROZ-FKA8YXcecLkxLKHQ",
+          "100g": "https://lh3.googleusercontent.com/d/1i5vo4DCIc7SyG7ymcy7A6mFo-A6ScvQ4"
+        }
+      },
+      {
+        id: "fruit-nut",
+        name: "Fruit & Nut Chocolate Bar",
+        desc: "Generously sprinkled inside and out with dried berries, almonds, cashews, and raisins, giving this bar a wholesome, textured touch.",
+        prices: { "50g": 80, "100g": 140 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1b48lToIWheEcUMnKMtUehYHTHRlJpXpR",
+          "100g": "https://lh3.googleusercontent.com/d/1p6NCya0jnGkmpk48_tPOjBm1vB8oBQHN"
+        }
+      },
+      {
+        id: "rose-pistachio",
+        name: "Rose Pistachio Chocolate Bar",
+        desc: "A fragrant white chocolate base infused with delicate rose petals and crunchy pistachio pieces, offering a floral and nutty profile.",
+        prices: { "50g": 80, "100g": 150 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1c60RenTvJBlDH5OzghDfXMu1XZvWBkWe",
+          "100g": "https://lh3.googleusercontent.com/d/1RvbfbPLOAPRXg2E28E2FX5Bo1Y8d0ceE"
+        }
+      },
+      {
+        id: "sugar-free",
+        name: "Sugar-Free Chocolate Bar",
+        desc: "A bitter, robust chocolate bar specially crafted for diabetic individuals or those looking to skip the sugar without compromising on the authentic chocolate experience.",
+        prices: { "50g": 80, "100g": 100 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1Ck5PthTP6xFi8htBZUnyt_15OYc0rzNA",
+          "100g": "https://lh3.googleusercontent.com/d/1mF6O7_I4lf30atpnYGQZm7MIMVH4HcUW"
+        }
+      },
+      {
+        id: "hazelnut",
+        name: "Hazelnut Chocolate Bar",
+        desc: "Smooth chocolate paired with crunchy roasted hazelnuts for a classic, luxurious crunch.",
+        prices: { "50g": 90, "100g": 160 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1sQoo8Vh9Y6VtvHeNcEGuar0Ylb6p8gJK",
+          "100g": "https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji"
+        }
+      },
+      {
+        id: "paan-bahaar",
+        name: "Paan Bahaar Chocolate Bar",
+        desc: "A refreshing white chocolate base blended with traditional paan and gulkand flavours, finished with colourful tutti frutti bits.",
+        prices: { "50g": 90, "100g": 150 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/10PhEgE_9MmU7wuinq0QpHK9Erw-Y2-Fe",
+          "100g": "https://lh3.googleusercontent.com/d/1RvbfbPLOAPRXg2E28E2FX5Bo1Y8d0ceE"
+        }
+      },
+      {
+        id: "rasmalai",
+        name: "Rasmalai Chocolate Bar",
+        desc: "A white chocolate base infused with aromatic rasmalai flavor and garnished with dried rose petals and pistachios for a traditional dessert-inspired treat.",
+        prices: { "50g": 90, "100g": 150 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1sKqzoDhqG3CLhoNfpXpIN5zCHr4LDDQn",
+          "100g": "https://lh3.googleusercontent.com/d/1iDbKcIkSVOGsGx68EZNGmZ5je2jXFwcl"
+        }
+      },
+      {
+        id: "blueberry",
+        name: "Blueberry Chocolate Bar",
+        desc: "A sweet white chocolate base dotted with dried blueberry pieces, releasing a distinct berry scent and sweet tang with every bite.",
+        prices: { "50g": 90, "100g": 170 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1aoW4WDhaxIKvxccxZIkrMh65MhzVfy3A",
+          "100g": "https://lh3.googleusercontent.com/d/1k4yIikipnlDzlRrHMduol8cRI6MmlsVo"
+        }
+      },
+      {
+        id: "kunafa",
+        name: "Kunafa Chocolate Bar",
+        desc: "A brilliant Dubai-inspired, budget-friendly creation featuring rich pistachio paste layered with crispy toasted vermicelli for an incredible crunch.",
+        prices: { "50g": 100, "100g": 180 },
+        images: {
+          "50g": "https://lh3.googleusercontent.com/d/1uR6pET9zfVWCYYfuCGK_JxrHUeAotoAb",
+          "100g": "https://lh3.googleusercontent.com/d/1aZA88ee5H4HEE2khFB9IZoPCms2RalIu"
+        }
+      },
+      {
+        id: "caramel",
+        name: "Caramel Chocolate Bar",
+        desc: "A rich chocolate bar filled with a smooth, buttery caramel paste centre that flows with every bite.",
+        prices: { "100g": 130 },
+        images: {
+          "100g": "https://lh3.googleusercontent.com/d/1WnImdKsxtfUteKlXyCVnraFZpeHjQv-a"
+        },
+        exclusiveBig: true
+      }
+    ];
+
+    function getCart() { return JSON.parse(localStorage.getItem('fivian_cart') || '{}'); }
+    function saveCart(cart) { localStorage.setItem('fivian_cart', JSON.stringify(cart)); updateCartBadge(); }
+
+    function updateCartBadge() {
+      let cart = getCart();
+      let totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cartCountBadge').innerText = totalQty;
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      let cart = getCart();
+
+      chocolateProducts.forEach(product => {
+        const hasBothSizes = !product.exclusiveBig;
+        const initialSize = hasBothSizes ? '50g' : '100g';
+        const cartKey = `${product.name} (${initialSize})`;
+        const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
+        const currentPrice = product.prices[initialSize];
+
+        let carouselHtml = '';
+        if (hasBothSizes) {
+          carouselHtml = `
+            <div class="carousel-container" id="carousel-${product.id}">
+              <div class="carousel-slide active" data-size="50g">
+                <img src="${product.images['50g']}" alt="${product.name} 50g" loading="lazy">
+                <span class="size-badge">50g Variant</span>
+              </div>
+              <div class="carousel-slide" data-size="100g">
+                <img src="${product.images['100g']}" alt="${product.name} 100g" loading="lazy">
+                <span class="size-badge">100g Variant</span>
+              </div>
+            </div>
+          `;
+        } else {
+          carouselHtml = `
+            <div class="carousel-container">
+              <div class="carousel-slide active" data-size="100g">
+                <img src="${product.images['100g']}" alt="${product.name} 100g" loading="lazy">
+                <span class="size-badge">100g Only</span>
+              </div>
+            </div>
+          `;
+        }
+
+        let sizeSelectorHtml = '';
+        if (hasBothSizes) {
+          sizeSelectorHtml = `
+            <div class="size-selector" id="sizes-${product.id}">
+              <button class="size-btn active" data-size="50g" onclick="switchProductSize('${product.id}', '50g')">50g (₹${product.prices['50g']})</button>
+              <button class="size-btn" data-size="100g" onclick="switchProductSize('${product.id}', '100g')">100g (₹${product.prices['100g']})</button>
+            </div>
+          `;
+        } else {
+          sizeSelectorHtml = `
+            <div class="size-selector">
+              <button class="size-btn active" data-size="100g">100g Only (₹${product.prices['100g']})</button>
+            </div>
+          `;
+        }
+
+        let actionHtml = '';
+        if (currentQty === 0) {
+          actionHtml = `<button class="add-product-btn" id="btn-${product.id}" onclick="changeItemQty('${product.id}', 1)">+ Add</button>`;
+        } else {
+          actionHtml = `
+            <div class="qty-counter" id="counter-${product.id}">
+              <button onclick="changeItemQty('${product.id}', -1)">-</button>
+              <span>${currentQty}</span>
+              <button onclick="changeItemQty('${product.id}', 1)">+</button>
+            </div>
+          `;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.dataset.id = product.id;
+        card.innerHTML = `
+          <div>
+            ${carouselHtml}
+            <div class="product-name">${product.name}</div>
+            <div class="product-desc">${product.desc}</div>
+            ${sizeSelectorHtml}
+          </div>
+          <div class="product-footer">
+            <span class="product-price" id="price-tag-${product.id}">₹${currentPrice}</span>
+            <div id="action-wrap-${product.id}">
+              ${actionHtml}
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+
+        if (hasBothSizes) {
+          initCarousel(product.id);
+        }
+      });
+      updateCartBadge();
+    }
+
+    function initCarousel(productId) {
+      const container = document.getElementById(`carousel-${productId}`);
+      if (!container) return;
+      const slides = container.querySelectorAll('.carousel-slide');
+
+      setInterval(() => {
+        let activeIdx = Array.from(slides).findIndex(s => s.classList.contains('active'));
+        slides[activeIdx].classList.remove('active');
+        let nextIdx = (activeIdx + 1) % slides.length;
+        slides[nextIdx].classList.add('active');
+
+        const targetSize = slides[nextIdx].dataset.size;
+        syncProductSizeState(productId, targetSize, false);
+      }, 3500);
+    }
+
+    function switchProductSize(productId, size) {
+      syncProductSizeState(productId, size, true);
+    }
+
+    function syncProductSizeState(productId, size, manualClick = true) {
+      const product = chocolateProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      const sizeContainer = document.getElementById(`sizes-${productId}`);
+      if (sizeContainer) {
+        sizeContainer.querySelectorAll('.size-btn').forEach(btn => {
+          if (btn.dataset.size === size) btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+      }
+
+      const priceTag = document.getElementById(`price-tag-${productId}`);
+      if (priceTag) priceTag.innerText = `₹${product.prices[size]}`;
+
+      if (manualClick) {
+        const container = document.getElementById(`carousel-${productId}`);
+        if (container) {
+          container.querySelectorAll('.carousel-slide').forEach(slide => {
+            if (slide.dataset.size === size) slide.classList.add('active');
+            else slide.classList.remove('active');
+          });
+        }
+      }
+
+      updateActionWrapper(productId);
+    }
+
+    function getSelectedSize(productId) {
+      const sizeContainer = document.getElementById(`sizes-${productId}`);
+      if (!sizeContainer) return '100g';
+      const activeBtn = sizeContainer.querySelector('.size-btn.active');
+      return activeBtn ? activeBtn.dataset.size : '100g';
+    }
+
+    function updateActionWrapper(productId) {
+      const product = chocolateProducts.find(p => p.id === productId);
+      const size = getSelectedSize(productId);
+      const cartKey = `${product.name} (${size})`;
+      let cart = getCart();
+      const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
+
+      const actionWrap = document.getElementById(`action-wrap-${productId}`);
+      if (!actionWrap) return;
+
+      if (currentQty === 0) {
+        actionWrap.innerHTML = `<button class="add-product-btn" onclick="changeItemQty('${productId}', 1)">+ Add</button>`;
+      } else {
+        actionWrap.innerHTML = `
+          <div class="qty-counter">
+            <button onclick="changeItemQty('${productId}', -1)">-</button>
+            <span>${currentQty}</span>
+            <button onclick="changeItemQty('${productId}', 1)">+</button>
+          </div>
+        `;
+      }
+    }
+
+    function changeItemQty(productId, change) {
+      const product = chocolateProducts.find(p => p.id === productId);
+      const size = getSelectedSize(productId);
+      const cartKey = `${product.name} (${size})`;
+      let cart = getCart();
+
+      let currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
+      let newQty = currentQty + change;
+
+      if (newQty <= 0) {
+        delete cart[cartKey];
+      } else {
+        cart[cartKey] = {
+          name: product.name,
+          size: size,
+          price: product.prices[size],
+          qty: newQty
+        };
+      }
+      saveCart(cart);
+      updateActionWrapper(productId);
+      if (document.getElementById('cartModal').style.display === 'flex') {
+        openCart();
+      }
+    }
+
+    function openCart() {
+      let cart = getCart();
+      let list = document.getElementById('cartItemsList');
+      list.innerHTML = '';
+      let totalPrice = 0;
+
+      if (Object.keys(cart).length === 0) {
+        list.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px 0;">Your cart is currently empty.</p>';
+      } else {
+        for (let [key, item] of Object.entries(cart)) {
+          totalPrice += item.price * item.qty;
+          list.innerHTML += `
+            <div class="cart-item-row">
+              <div class="cart-item-info">
+                <div class="cart-item-title">${item.name} (${item.size})</div>
+                <div class="cart-item-price-tag">₹${item.price} × ${item.qty} = <strong>₹${item.price * item.qty}</strong></div>
+              </div>
+              <div class="qty-counter" style="min-width: 80px; padding: 2px 6px;">
+                <button onclick="updateCartItemQtyFromModal('${key}', -1)">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateCartItemQtyFromModal('${key}', 1)">+</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+      document.getElementById('cartTotalPrice').innerText = `₹${totalPrice}`;
+      document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function updateCartItemQtyFromModal(cartKey, change) {
+      let cart = getCart();
+      if (!cart[cartKey]) return;
+      cart[cartKey].qty += change;
+      if (cart[cartKey].qty <= 0) {
+        delete cart[cartKey];
+      }
+      saveCart(cart);
+      openCart();
+      renderProducts();
+    }
+
+    function closeCart() {
+      document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function sendWhatsAppOrder() {
+      let cart = getCart();
+      if (Object.keys(cart).length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      let name = document.getElementById('customerName').value.trims ? document.getElementById('customerName').value.trim() : document.getElementById('customerName').value.trim();
+      let phone = document.getElementById('customerPhone').value.trim();
+      let address = document.getElementById('customerAddress').value.trim();
+
+      if (!name || !phone || !address) {
+        alert('Please fill in your Name, Phone Number, and Delivery Address before ordering.');
+        return;
+      }
+
+      let text = `Hello Fivian! I'd like to place an order:%0A%0A`;
+      text += `*Customer Name:* ${name}%0A`;
+      text += `*Phone:* ${phone}%0A`;
+      text += `*Delivery Address:* ${address}%0A%0A`;
+      text += `*Order Items:*%0A`;
+
+      let total = 0;
+      for (let [key, item] of Object.entries(cart)) {
+        let itemTotal = item.price * item.qty;
+        total += itemTotal;
+        text += `- ${item.name} [${item.size}] x${item.qty} = ₹${itemTotal}%0A`;
+      }
+      text += `%0A*Total Amount:* ₹${total}`;
+
+      window.open(`https://wa.me/919088055818?text=${text}`, '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', renderProducts);
+  </script>
+</body>
+</html>
