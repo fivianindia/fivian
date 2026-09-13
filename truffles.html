@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artisanal Truffles Range | Fivian Chocolates</title>
-
+  <title>Artisanal Truffles | Fivian Chocolates</title>
+  
   <!-- Google Fonts: Libre Baskerville & System Sans-Serif -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,7 @@
     /* Top Bar */
     .top-bar { background: var(--choc-dark); color: var(--bg-cream); text-align: center; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; }
 
-    /* Header Nav */
+    /* Mobile Responsive Header Nav */
     header { 
       background: var(--card-bg); 
       border-bottom: 1px solid var(--border-color); 
@@ -84,34 +84,65 @@
     nav a { text-decoration: none; color: var(--choc-dark); font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
     nav a:hover { color: var(--brand-red-accent); }
 
+    /* Desktop View Adjustments */
     @media (min-width: 768px) {
       header { padding: 12px 5%; }
-      nav { order: 2; width: auto; padding-top: 0; border-top: none; gap: 24px; }
+      nav {
+        order: 2;
+        width: auto;
+        padding-top: 0;
+        border-top: none;
+        gap: 24px;
+      }
       .cart-btn { order: 3; }
       .brand-logo img { height: 44px; }
       .brand-name { font-size: 1.8rem; }
     }
 
-    /* Page Header */
-    .page-header { text-align: center; padding: 40px 20px 20px; max-width: 850px; margin: 0 auto; }
-    .page-header h1 { font-family: var(--font-serif); font-style: italic; font-size: 2.5rem; color: var(--choc-dark); font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
-    .page-header h1 span { color: var(--brand-red-accent); font-style: normal; font-weight: 700; }
-    .page-header p { font-size: 1.05rem; color: var(--text-muted); font-weight: 500; }
+    /* Hero Section */
+    .hero { text-align: center; padding: 40px 20px 24px; max-width: 850px; margin: 0 auto; }
+    .hero h1 { font-family: var(--font-serif); font-style: italic; font-size: 2.8rem; color: var(--choc-dark); font-weight: 400; line-height: 1.2; margin-bottom: 12px; }
+    .hero h1 span { color: var(--brand-red-accent); font-style: normal; font-weight: 700; }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); font-weight: 500; max-width: 680px; margin: 0 auto; }
 
-    /* Products Grid */
-    .container { max-width: 1100px; margin: 0 auto; padding: 20px 20px 40px; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .product-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; transition: transform 0.2s, border-color 0.2s; }
-    .product-card:hover { border-color: var(--choc-dark); transform: translateY(-3px); }
-
-    .product-img { width: 100%; aspect-ratio: 1 / 1; background: #FAF6F0; border-radius: var(--radius-sm); object-fit: cover; margin-bottom: 12px; border: 1px solid var(--border-color); }
-    .product-name { font-weight: 700; font-size: 1.1rem; color: var(--choc-dark); margin-bottom: 6px; font-family: var(--font-serif); font-style: italic; }
-    .product-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px; flex-grow: 1; }
+    /* Main Container & Product Grid */
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     
-    .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 12px; }
-    .product-price { font-weight: 800; font-size: 1.05rem; color: var(--brand-red-accent); display: flex; align-items: center; flex-wrap: wrap; }
-    .add-product-btn { background: var(--choc-dark); color: var(--bg-cream); border: none; padding: 8px 16px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: background 0.2s; }
-    .add-product-btn:hover { background: var(--brand-red-accent); }
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .product-card:hover { border-color: var(--choc-dark); transform: translateY(-4px); }
+
+    /* Image Box - A5 Landscape Ratio */
+    .product-img-box {
+      width: 100%;
+      aspect-ratio: 1.414 / 1;
+      background: #FAF6F0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .product-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .product-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+    .product-title { font-family: var(--font-serif); font-style: italic; font-size: 1.4rem; font-weight: 700; color: var(--choc-dark); margin-bottom: 8px; }
+    .product-desc { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+    
+    .product-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; border-top: 1px solid #F5F1EB; padding-top: 14px; }
+    .price-wrap { display: flex; flex-direction: column; }
+    .original-price { font-size: 0.8rem; color: #999; text-decoration: line-through; }
+    .current-price { font-size: 1.1rem; font-weight: 800; color: var(--brand-red-accent); }
+    .price-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+
+    .add-btn { background: var(--choc-dark); color: var(--bg-cream); border: none; padding: 10px 18px; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: background 0.2s; }
+    .add-btn:hover { background: var(--brand-red-accent); }
 
     /* Cart Modal */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
@@ -119,20 +150,72 @@
     .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
     .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; margin-top: 16px; cursor: pointer; }
 
-    /* Footer Styles */
-    footer { background: #2B1B17; color: #FAF6F0; text-align: center; padding: 40px 16px 24px; margin-top: 50px; border-top: 3px solid #C8102E; }
-    .social-link { transition: transform 0.2s, opacity 0.2s; }
-    .social-link:hover { transform: translateY(-2px); opacity: 0.9; }
+    /* Zomato/Amazon Style Toast Notification */
+    #toast-notification {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: var(--choc-dark);
+      color: var(--bg-cream);
+      text-align: center;
+      border-radius: 30px;
+      padding: 12px 20px;
+      position: fixed;
+      z-index: 9999;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%) translateY(20px);
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    #toast-notification.show {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Footer Responsive Styles */
+    .footer-contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #FAF6F0;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .footer-dot { display: none; }
+    .banner-text {
+      font-size: 0.75rem;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #E8E1D9;
+      border-top: 1px solid rgba(232,225,217,0.2);
+      border-bottom: 1px solid rgba(232,225,217,0.2);
+      padding: 12px 10px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 600px) {
+      .footer-contact-wrapper { flex-direction: row; justify-content: center; gap: 16px; }
+      .footer-dot { display: inline; color: #C8102E; opacity: 0.8; }
+      .banner-text { font-size: 0.78rem; letter-spacing: 1.5px; }
+    }
   </style>
 </head>
 <body>
 
   <div class="top-bar">Handcrafted Fresh in Kolkata | Direct Local & Nationwide Delivery Available</div>
 
-  <!-- Header Nav -->
+  <!-- Responsive Mobile Header -->
   <header>
     <div class="header-container">
-      <a href="/" class="brand-logo">
+      <a href="index.html" class="brand-logo">
         <img src="https://lh3.googleusercontent.com/d/1jkp6vnIVF5LLFulcj7Sm7LANKjuSvuWn" alt="Fivian Chocolates Logo">
         <span class="brand-name">Fivian<span>.</span></span>
       </a>
@@ -142,158 +225,82 @@
       </button>
 
       <nav>
-        <a href="/">Home</a>
-        <a href="/chocolates.html">Chocolate Bars</a>
-        <a href="/truffles.html" style="color: var(--brand-red-accent);">Artisanal Truffles</a>
-        <a href="/#explore">Other Ranges</a>
+        <a href="index.html">Home</a>
+        <a href="index.html#bestsellers">Best Seller</a>
+        <a href="index.html#explore">Explore Range</a>
+        <a href="index.html#about">About Us</a>
       </nav>
     </div>
   </header>
 
-  <!-- Page Title -->
-  <section class="page-header">
-    <h1>Artisanal <span>Truffles</span> Collection</h1>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Artisanal <span>Truffles</span></h1>
     <p>Hand-rolled, melt-in-the-mouth delicacies crafted with rich ganache and premium ingredients.</p>
   </section>
 
-  <!-- Products Section -->
-  <div class="container">
-    <div class="products-grid">
+  <!-- Product Listing Container -->
+  <section class="container">
+    <div class="product-grid">
 
       <!-- 1. Almond Truffles -->
       <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1uQtBsifl_d23bhDNd--MA9cSf44XXyHz" alt="Almond Truffles" class="product-img">
-        <div>
-          <div class="product-name">Almond Truffles</div>
-          <div class="product-desc">Prepared by folding chopped toasted almonds into a rich cream-and-chocolate ganache with glucose syrup, hand-shaped into balls, and dipped in a smooth chocolate coat.</div>
+        <div class="product-img-box">
+          <img src="https://lh3.googleusercontent.com/d/1GDbNcT1LYT5YxPsq7PJhjzXsWrSM9koh" alt="Almond Truffles">
         </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Almond Truffles (Box of 9) - ₹399')">+ Add</button>
+        <div class="product-content">
+          <h3 class="product-title">Almond Truffles</h3>
+          <p class="product-desc">Prepared by folding chopped toasted almonds into a rich cream-and-chocolate ganache with glucose syrup, hand-shaped into balls, and dipped in a smooth chocolate coat.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="original-price">₹415</span>
+              <span class="current-price">₹399 <span class="price-sub">(Box of 9)</span></span>
+            </div>
+            <button class="add-btn" onclick="addToCart('Almond Truffles (Box of 9)')">+ Add</button>
+          </div>
         </div>
       </div>
 
       <!-- 2. Blackcurrant Truffles -->
       <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1HV6aiBZyBJBTXGY9PS-MCWAls6I2aASI" alt="Blackcurrant Truffles" class="product-img">
-        <div>
-          <div class="product-name">Blackcurrant Truffles</div>
-          <div class="product-desc">A vibrant fusion of tart blackcurrant puree and smooth cocoa ganache, offering a sweet-and-tangy burst wrapped in exquisite chocolate shells.</div>
+        <div class="product-img-box">
+          <img src="https://lh3.googleusercontent.com/d/1GDbNcT1LYT5YxPsq7PJhjzXsWrSM9koh" alt="Blackcurrant Truffles">
         </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Blackcurrant Truffles (Box of 9) - ₹399')">+ Add</button>
+        <div class="product-content">
+          <h3 class="product-title">Blackcurrant Truffles</h3>
+          <p class="product-desc">A vibrant fusion of tart blackcurrant puree and smooth cocoa ganache, offering a sweet-and-tangy burst wrapped in exquisite chocolate shells.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="original-price">₹415</span>
+              <span class="current-price">₹399 <span class="price-sub">(Box of 9)</span></span>
+            </div>
+            <button class="add-btn" onclick="addToCart('Blackcurrant Truffles (Box of 9)')">+ Add</button>
+          </div>
         </div>
       </div>
 
       <!-- 3. Coconut Truffles -->
       <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1B06N2FzTSzgvIsnPZmKnwJM2XXu8EeFl" alt="Coconut Truffles" class="product-img">
-        <div>
-          <div class="product-name">Coconut Truffles</div>
-          <div class="product-desc">Crafted by mixing desiccated coconut with condensed milk to form tender balls, fully covered in a decadent layer of rich chocolate.</div>
+        <div class="product-img-box">
+          <img src="https://lh3.googleusercontent.com/d/1GDbNcT1LYT5YxPsq7PJhjzXsWrSM9koh" alt="Coconut Truffles">
         </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Coconut Truffles (Box of 9) - ₹399')">+ Add</button>
-        </div>
-      </div>
-
-      <!-- 4. Kunafa Truffles -->
-      <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1BnypBFABKg9OmPUBZaiG-72HvyUhrdEQ" alt="Kunafa Truffles" class="product-img">
-        <div>
-          <div class="product-name">Kunafa Truffles</div>
-          <div class="product-desc">Our viral sensation in bite-sized form: crispy shredded vermicelli, milk powder, and smooth pistachio paste shaped into centers and coated in chocolate.</div>
-        </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Kunafa Truffles (Box of 9) - ₹399')">+ Add</button>
-        </div>
-      </div>
-
-      <!-- 5. Lemon Truffles -->
-      <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1UUcQE2a23XSaITqW7ZG_a4Y9Fz9W8-uG" alt="Lemon Truffles" class="product-img">
-        <div>
-          <div class="product-name">Lemon Truffles</div>
-          <div class="product-desc">Zesty sun-ripened lemon ganache encased in delicate white chocolate shells for a bright, refreshing citrus note.</div>
-        </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Lemon Truffles (Box of 9) - ₹399')">+ Add</button>
-        </div>
-      </div>
-
-      <!-- 6. Paan Truffles -->
-      <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1OEQjK6J9v6_gV3L4N9dApsJif6YarWUl" alt="Paan Truffles" class="product-img">
-        <div>
-          <div class="product-name">Paan Truffles</div>
-          <div class="product-desc">Created by mixing paan-flavored chocolate with vibrant green paan essence, dried fruits, glucose syrup, and cream to form an aromatic center.</div>
-        </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Paan Truffles (Box of 9) - ₹399')">+ Add</button>
-        </div>
-      </div>
-
-      <!-- 7. Peanut Truffles -->
-      <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1wmRi-fWICzke6zjHWqu9FBLxPUYXy-nK" alt="Peanut Truffles" class="product-img">
-        <div>
-          <div class="product-name">Peanut Truffles</div>
-          <div class="product-desc">A delicious blend of chocolate, glucose syrup, creamy peanut butter, cream, and chopped peanuts bound into balls, dipped in chocolate, and garnished with peanuts.</div>
-        </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Peanut Truffles (Box of 9) - ₹399')">+ Add</button>
-        </div>
-      </div>
-
-      <!-- 8. Rasmalai Truffles -->
-      <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1ctXTFmomYJSM3tWP1DcRsnhf4K8vJnfY" alt="Rasmalai Truffles" class="product-img">
-        <div>
-          <div class="product-name">Rasmalai Truffles</div>
-          <div class="product-desc">White chocolate, rasmalai flavor, cream, and glucose syrup bound together into delicate balls, coated in chocolate, and garnished with rose petals and saffron.</div>
-        </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Rasmalai Truffles (Box of 9) - ₹399')">+ Add</button>
-        </div>
-      </div>
-
-      <!-- 9. Red Velvet Truffles -->
-      <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/1AgETjrvVP7d6oTVTQKIPtaKnrdosSC5G" alt="Red Velvet Truffles" class="product-img">
-        <div>
-          <div class="product-name">Red Velvet Truffles</div>
-          <div class="product-desc">Subtly tangy cocoa-infused red velvet cake crumbs folded into smooth white ganache with a soft crimson finish.</div>
-        </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Red Velvet Truffles (Box of 9) - ₹399')">+ Add</button>
-        </div>
-      </div>
-
-      <!-- 10. Strawberry Truffles -->
-      <div class="product-card">
-        <img src="https://lh3.googleusercontent.com/d/176WloGzrY28oMmXJU7LuynfdInY0eh1i" alt="Strawberry Truffles" class="product-img">
-        <div>
-          <div class="product-name">Strawberry Truffles</div>
-          <div class="product-desc">Made by blending strawberry chocolate, strawberry crush, cream, and glucose, covered in strawberry chocolate and finished with a delicate white chocolate drizzle.</div>
-        </div>
-        <div class="product-footer">
-          <span class="product-price"><del style="color: var(--text-muted); font-size: 0.85rem; margin-right: 6px; font-weight: normal;">₹415</del>₹399 <span style="font-size: 0.75rem; font-weight: normal; margin-left: 4px;">(Box of 9)</span></span>
-          <button class="add-product-btn" onclick="addToCart('Strawberry Truffles (Box of 9) - ₹399')">+ Add</button>
+        <div class="product-content">
+          <h3 class="product-title">Coconut Truffles</h3>
+          <p class="product-desc">Crafted by mixing desiccated coconut with condensed milk to form tender balls, fully covered in a decadent layer of rich chocolate.</p>
+          <div class="product-footer">
+            <div class="price-wrap">
+              <span class="original-price">₹415</span>
+              <span class="current-price">₹399 <span class="price-sub">(Box of 9)</span></span>
+            </div>
+            <button class="add-btn" onclick="addToCart('Coconut Truffles (Box of 9)')">+ Add</button>
+          </div>
         </div>
       </div>
 
     </div>
-  </div>
+  </section>
 
-  <!-- Cart Modal -->
+  <!-- Cart Modal Overlay -->
   <div class="modal-overlay" id="cartModal">
     <div class="modal-box">
       <h3 style="margin-bottom: 14px; display: flex; justify-content: space-between; color: var(--choc-dark); font-family: var(--font-serif); font-style: italic;">
@@ -305,55 +312,61 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
+  <!-- Toast Notification Bar -->
+  <div id="toast-notification">Item added to cart!</div>
+
+  <!-- Custom Footer -->
+  <footer style="background: #2B1B17; color: #FAF6F0; text-align: center; padding: 40px 16px 24px; margin-top: 50px; border-top: 3px solid #C8102E;">
     <div style="max-width: 850px; margin: 0 auto;">
-      <h2 style="font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 2.1rem; font-weight: 700; color: #FAF6F0; margin-bottom: 2px;">
+      
+      <!-- Brand Header -->
+      <h2 style="font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 2.1rem; letter-spacing: 1px; font-weight: 700; color: #FAF6F0; margin-bottom: 2px;">
         Fivian<span style="color: #C8102E; font-style: normal;">.</span>
       </h2>
-      <p style="font-style: italic; font-family: 'Libre Baskerville', Georgia, serif; color: #E8E1D9; margin-bottom: 25px; font-size: 0.9rem;">
+      <p style="font-style: italic; font-family: 'Libre Baskerville', Georgia, serif; color: #E8E1D9; margin-bottom: 24px; font-size: 0.9rem; opacity: 0.9;">
         Handcrafted Artisanal Chocolates
       </p>
 
-      <!-- Footer Notice Strip -->
-      <div style="border-top: 1px solid rgba(255, 255, 255, 0.12); border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding: 12px 0; margin-bottom: 25px;">
-        <p style="font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; color: #FAF6F0;">
-          ORDER 2 DAYS IN ADVANCE • HAND-PACKED WITH CARE • FRESH INGREDIENTS
-        </p>
+      <!-- Contact Info -->
+      <div class="footer-contact-wrapper">
+        <span>📍 12 Gora Chand Road, Kolkata 700014</span>
+        <span class="footer-dot">•</span>
+        <span>📞 <a href="tel:+919088055818" style="color: #FAF6F0; text-decoration: none;">+91 9088 055 818</a></span>
+        <span class="footer-dot">•</span>
+        <span>✉️ <a href="mailto:fivianindia@gmail.com" style="color: #FAF6F0; text-decoration: none;">fivianindia@gmail.com</a></span>
       </div>
 
-      <!-- Social Icons -->
-      <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 24px;">
-        <a href="https://wa.me/919088055818" target="_blank" title="WhatsApp" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
-          <img src="https://lh3.googleusercontent.com/d/1qmtByzzVWRH8GbYRvboxbqQ7vVMvugTY" alt="WhatsApp" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </a>
-        <a href="#" id="social-ig" target="_blank" title="Instagram" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
-          <img src="https://lh3.googleusercontent.com/d/1d_lH4q3EBbucuoTOtA_E6VzIAe_hHBWb" alt="Instagram" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </a>
-        <a href="#" id="social-yt" target="_blank" title="YouTube" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
-          <img src="https://lh3.googleusercontent.com/d/13DdNGoSKsdvMd4LQwX6I0Qjc8BJVBB59" alt="YouTube" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </a>
-        <a href="#" id="social-fb" target="_blank" title="Facebook" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
-          <img src="https://lh3.googleusercontent.com/d/1caAi5AIPIrPCiyMPqOJiXw_csihy4YNt" alt="Facebook" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </a>
-      </div>
+      <!-- Order & Delivery Banner -->
+      <p class="banner-text">
+        ORDER 2 DAYS IN ADVANCE &bull; HAND-PACKED WITH CARE &bull; FRESH INGREDIENTS
+      </p>
 
+      <!-- Copyright -->
       <p style="font-size: 0.75rem; color: #A0948D; font-weight: 600; letter-spacing: 1px;">
         © 2026 FIVIAN INDIA | ALL RIGHTS RESERVED
       </p>
+
     </div>
   </footer>
 
   <script>
-    // Shared Cart Logic using LocalStorage
     function getCart() { return JSON.parse(localStorage.getItem('fivian_cart') || '{}'); }
     function saveCart(cart) { localStorage.setItem('fivian_cart', JSON.stringify(cart)); updateBadge(); }
+
+    function showToast(message) {
+      let toast = document.getElementById("toast-notification");
+      toast.innerText = message;
+      toast.className = "show";
+      setTimeout(function() {
+        toast.className = toast.className.replace("show", "");
+      }, 2500);
+    }
 
     function addToCart(item) {
       let cart = getCart();
       cart[item] = (cart[item] || 0) + 1;
       saveCart(cart);
-      alert(item + ' added to cart!');
+      showToast(item + " added to cart! 🛒");
     }
 
     function updateBadge() {
@@ -388,7 +401,7 @@
     function sendWhatsAppOrder() {
       let cart = getCart();
       if (Object.keys(cart).length === 0) return alert('Your cart is empty!');
-      let text = "Hello Fivian! I'd like to place an order from Artisanal Truffles:\n";
+      let text = "Hello Fivian! I'd like to place an order:\n";
       for (let [item, qty] of Object.entries(cart)) {
         text += `- ${item} x${qty}\n`;
       }
