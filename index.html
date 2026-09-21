@@ -1,716 +1,424 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fivian Chocolates | Handcrafted Chocolates & Gourmet Desserts Kolkata</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brandRed: '#C8102E',
-                        chocDark: '#2B1B17',
-                        chocMedium: '#4A332C',
-                        bgCream: '#FAF6F0',
-                        bgWarm: '#F5EFE6',
-                        goldAccent: '#D4AF37',
-                        goldLight: '#F3E5AB'
-                    },
-                    fontFamily: {
-                        serif: ['"Libre Baskerville"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fivian Chocolates | Handcrafted Artisanal Desserts</title>
+  
+  <!-- Google Fonts: Libre Baskerville & System Sans-Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --brand-red: #C8102E;
-            --choc-dark: #2B1B17;
-            --choc-medium: #4A332C;
-            --bg-cream: #FAF6F0;
-            --gold-accent: #D4AF37;
-        }
+  <style>
+    :root {
+      --bg-cream: #FAF6F0;
+      --card-bg: #FFFFFF;
+      --brand-red-accent: #C8102E;
+      --choc-dark: #2B1B17;
+      --choc-mid: #4A352F;
+      --text-muted: #665A55;
+      --border-color: #E8E1D9;
+      --radius-lg: 16px;
+      --radius-sm: 8px;
+      --font-serif: 'Libre Baskerville', Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-        body {
-            background-color: var(--bg-cream);
-            color: var(--choc-dark);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-cream); color: var(--choc-dark); font-family: var(--font-sans); line-height: 1.5; }
 
-        h1, h2, h3, h4, .font-serif-title {
-            font-family: 'Libre Baskerville', serif;
-        }
+    /* Top Bar */
+    .top-bar { background: var(--choc-dark); color: var(--bg-cream); text-align: center; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; }
 
-        /* Top Announcement Bar */
-        .announcement-bar {
-            background: linear-gradient(90deg, #1d120f 0%, #2B1B17 50%, #1d120f 100%);
-        }
+    /* Mobile Responsive Header Nav */
+    header { 
+      background: var(--card-bg); 
+      border-bottom: 1px solid var(--border-color); 
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+      padding: 12px 16px;
+    }
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .brand-logo { text-decoration: none; display: flex; align-items: center; gap: 8px; order: 1; }
+    .brand-logo img { height: 38px; width: auto; display: block; object-fit: contain; }
+    .brand-name { font-family: var(--font-serif); font-style: italic; font-size: 1.7rem; font-weight: 700; color: var(--choc-dark); letter-spacing: -0.5px; margin: 0; }
+    .brand-name span { color: var(--brand-red-accent); font-style: normal; }
 
-        /* Hero Background Overlay Pattern (Brown with subtle gold dots) */
-        .hero-bg-pattern {
-            background-color: #2B1B17;
-            background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px), radial-gradient(#D4AF37 0.75px, #2B1B17 0.75px);
-            background-size: 28px 28px;
-            background-position: 0 0, 14px 14px;
-        }
+    .cart-btn { 
+      order: 2;
+      background: var(--brand-red-accent); 
+      color: #FFFFFF; 
+      border: none; 
+      padding: 8px 18px; 
+      border-radius: 30px; 
+      font-weight: 700; 
+      font-size: 0.9rem;
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(200, 16, 46, 0.25);
+      transition: opacity 0.2s, transform 0.2s; 
+    }
+    .cart-btn:hover { opacity: 0.95; transform: scale(1.02); }
 
-        /* Gradient Text Across Chocolates & Desserts */
-        .gold-brand-gradient {
-            background: linear-gradient(135deg, #FFF 0%, #F3E5AB 50%, #D4AF37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    nav {
+      order: 3;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+      padding-top: 10px;
+      border-top: 1px solid #F5F1EB;
+    }
+    nav a { text-decoration: none; color: var(--choc-dark); font-weight: 600; font-size: 0.88rem; white-space: nowrap; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: var(--brand-red-accent); }
 
-        /* Pill Navigation Bar Effects */
-        .nav-pill {
-            position: relative;
-            padding: 0.5rem 1.1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #2B1B17;
-            transition: all 0.25s ease-in-out;
-        }
+    /* Desktop View Adjustments */
+    @media (min-width: 768px) {
+      header { padding: 12px 5%; }
+      nav {
+        order: 2;
+        width: auto;
+        padding-top: 0;
+        border-top: none;
+        gap: 22px;
+      }
+      .cart-btn { order: 3; }
+      .brand-logo img { height: 44px; }
+      .brand-name { font-size: 1.8rem; }
+    }
 
-        .nav-pill:hover {
-            color: #C8102E;
-            background-color: rgba(200, 16, 46, 0.06);
-        }
+    /* Hero Section */
+    .hero { text-align: center; padding: 40px 20px 24px; max-width: 850px; margin: 0 auto; }
+    .hero h1 { font-family: var(--font-serif); font-style: italic; font-size: 2.8rem; color: var(--choc-dark); font-weight: 400; line-height: 1.2; margin-bottom: 12px; }
+    .hero h1 span { color: var(--brand-red-accent); font-style: normal; font-weight: 700; }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); font-weight: 500; max-width: 680px; margin: 0 auto; }
 
-        .nav-pill.active-pill {
-            background-color: #2B1B17;
-            color: #FAF6F0;
-            box-shadow: 0 4px 12px rgba(43, 27, 23, 0.2);
-            font-weight: 600;
-        }
+    /* Main Container & Section Titles */
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+    .section-title { font-family: var(--font-serif); font-style: italic; font-size: 2.1rem; color: var(--choc-dark); font-weight: 700; margin-bottom: 4px; text-align: center; }
+    .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 24px; font-weight: 500; font-size: 0.95rem; }
 
-        .nav-pill.active-pill:hover {
-            color: #FAF6F0;
-            background-color: #3d2722;
-        }
+    /* Best Seller Spotlight */
+    .bestseller-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .bestseller-img-wrap { border-radius: var(--radius-sm); overflow: hidden; background: #FAF6F0; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1.414 / 1; }
+    .bestseller-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    
+    .bestseller-info .badge { background: var(--brand-red-accent); color: #FFF; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 10px; }
+    .bestseller-info h3 { font-family: var(--font-serif); font-style: italic; font-size: 1.9rem; font-weight: 700; color: var(--choc-dark); margin-bottom: 10px; line-height: 1.2; }
+    .bestseller-info p { color: var(--text-muted); margin-bottom: 12px; font-size: 0.95rem; line-height: 1.5; }
+    .bestseller-info .note { font-size: 0.85rem; font-style: italic; color: var(--choc-mid); margin-bottom: 18px; border-left: 3px solid var(--brand-red-accent); padding-left: 10px; }
+    
+    .action-btn { display: inline-block; background: var(--choc-dark); color: var(--bg-cream); text-decoration: none; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: background 0.2s; text-align: center; }
+    .action-btn:hover { background: var(--brand-red-accent); }
 
-        /* Interactive Card Shadows & Zoom */
-        .luxury-card-shadow {
-            box-shadow: 0 12px 30px -6px rgba(43, 27, 23, 0.08), 0 4px 10px -2px rgba(43, 27, 23, 0.04);
-            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+    /* Category Cards Grid */
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .cat-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: inherit; transition: all 0.2s; display: flex; flex-direction: column; }
+    .cat-card:hover { border-color: var(--choc-dark); transform: translateY(-4px); }
+    
+    /* Strict A5 Landscape Ratio (1.414 : 1) for Category Banners */
+    .cat-img-box { width: 100%; aspect-ratio: 1.414 / 1; background: #FAF6F0; overflow: hidden; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-color); }
+    .cat-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cat-title { padding: 16px; font-weight: 800; font-size: 1.05rem; text-align: center; }
 
-        .luxury-card-shadow:hover {
-            box-shadow: 0 20px 40px -8px rgba(43, 27, 23, 0.15), 0 6px 16px -4px rgba(200, 16, 46, 0.1);
-            transform: translateY(-4px);
-        }
+    /* About Us / Brand Story */
+    .about-wrap { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; text-align: center; max-width: 850px; margin: 0 auto; }
+    .about-wrap p { font-size: 1rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.7; }
+    .about-wrap p:last-child { margin-bottom: 0; }
 
-        .zoom-img-container {
-            overflow: hidden;
-            border-radius: 1rem 1rem 0 0;
-        }
+    /* Cart Modal (Consistent with Truffles Page) */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
+    .modal-box { background: #FFF; padding: 24px; border-radius: var(--radius-lg); max-width: 420px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
+    .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; margin-top: 16px; cursor: pointer; transition: opacity 0.2s; }
+    .checkout-btn:hover { opacity: 0.9; }
 
-        .zoom-img {
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+    /* Footer Mobile-Optimized Layout */
+    .footer-content {
+      max-width: 850px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #FAF6F0;
+      font-weight: 500;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+    .footer-dot {
+      display: none;
+    }
+    .banner-text {
+      font-size: 0.72rem;
+      letter-spacing: 1.1px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #E8E1D9;
+      border-top: 1px solid rgba(232,225,217,0.2);
+      border-bottom: 1px solid rgba(232,225,217,0.2);
+      padding: 12px 10px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+      width: 100%;
+    }
 
-        .category-card:hover .zoom-img {
-            transform: scale(1.08);
-        }
+    @media (min-width: 768px) {
+      .footer-contact-wrapper {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+      }
+      .footer-dot {
+        display: inline;
+        color: #C8102E;
+        opacity: 0.8;
+      }
+      .banner-text {
+        font-size: 0.78rem;
+        letter-spacing: 1.5px;
+      }
+    }
 
-        /* Rounded Social Media Icons Fix */
-        .social-icon-btn img {
-            border-radius: 8px;
-            transition: transform 0.2s ease;
-        }
-        .social-icon-btn:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FAF6F0;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2B1B17;
-            border-radius: 4px;
-        }
-    </style>
+    @media (max-width: 768px) {
+      .bestseller-card { grid-template-columns: 1fr; gap: 20px; }
+      .hero h1 { font-size: 2.1rem; }
+      .container { padding: 16px; }
+    }
+  </style>
 </head>
-<body class="antialiased flex flex-col min-h-screen">
+<body>
 
-    <!-- Top Announcement Bar -->
-    <div class="announcement-bar text-amber-100 text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2 border-b border-amber-900/40">
-        <span class="inline-block w-2 h-2 rounded-full bg-brandRed animate-pulse"></span>
-        <span>Handcrafted Fresh in Kolkata | Direct Local & Nationwide Delivery Available</span>
-    </div>
+  <div class="top-bar">Handcrafted Fresh in Kolkata | Direct Local & Nationwide Delivery Available</div>
 
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-40 bg-[#FAF6F0]/95 backdrop-blur-md border-b border-amber-900/10 shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="index.html" class="flex items-center gap-3 group">
-                <img src="https://lh3.googleusercontent.com/d/1jkp6vnIVF5LLFulcj7Sm7LANKjuSvuWn" 
-                     alt="Fivian Logo" 
-                     class="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                     onerror="this.onerror=null; this.src='https://placehold.co/180x50/2B1B17/FAF6F0?text=Fivian';">
-            </a>
+  <!-- Responsive Mobile Header with Consistent Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <img src="https://lh3.googleusercontent.com/d/1jkp6vnIVF5LLFulcj7Sm7LANKjuSvuWn" alt="Fivian Chocolates Logo">
+        <span class="brand-name">Fivian<span>.</span></span>
+      </a>
 
-            <!-- Pill Navigation Links -->
-            <nav class="hidden md:flex items-center space-x-1.5 p-1.5 bg-amber-900/5 rounded-full border border-amber-900/10">
-                <a href="index.html" class="nav-pill active-pill">Home</a>
-                <a href="chocolates.html" class="nav-pill">Chocolates</a>
-                <a href="truffles.html" class="nav-pill">Truffles</a>
-                <a href="stuffeddates.html" class="nav-pill">Dates</a>
-                <a href="milkshakes.html" class="nav-pill">Milkshakes</a>
-                <a href="#contact" class="nav-pill">Contact</a>
-            </nav>
+      <!-- Consistent Red Cart Button -->
+      <button class="cart-btn" onclick="openCart()">
+        🛒 Cart
+      </button>
 
-            <!-- Actions (Sleek Cart Button without empty zero count) -->
-            <div class="flex items-center gap-3">
-                <button onclick="openCartModal()" class="relative bg-brandRed hover:bg-red-700 text-white px-5 py-2.5 rounded-full font-medium text-sm flex items-center gap-2 transition-all duration-300 shadow-sm hover:shadow-md active:scale-95">
-                    <i class="fa-solid fa-bag-shopping text-sm"></i>
-                    <span>Cart</span>
-                    <span id="cart-badge" class="hidden bg-amber-100 text-brandRed font-bold text-xs w-5 h-5 rounded-full items-center justify-center ml-0.5"></span>
-                </button>
-                
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-chocDark p-2 focus:outline-none" onclick="toggleMobileMenu()">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="chocolates.html">Chocolates</a>
+        <a href="truffles.html">Truffles</a>
+        <a href="stuffeddates.html">Dates</a>
+        <a href="milkshakes.html">Milkshakes</a>
+        <a href="#about">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#FAF6F0] border-b border-amber-900/10 px-6 py-4 space-y-2">
-            <a href="index.html" class="block py-2 font-semibold text-brandRed border-l-2 border-brandRed pl-3">Home</a>
-            <a href="chocolates.html" class="block py-2 text-chocDark hover:text-brandRed pl-3">Chocolates</a>
-            <a href="truffles.html" class="block py-2 text-chocDark hover:text-brandRed pl-3">Truffles</a>
-            <a href="stuffeddates.html" class="block py-2 text-chocDark hover:text-brandRed pl-3">Dates</a>
-            <a href="milkshakes.html" class="block py-2 text-chocDark hover:text-brandRed pl-3">Milkshakes</a>
-            <a href="#contact" class="block py-2 text-chocDark hover:text-brandRed pl-3">Contact</a>
-        </div>
-    </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Handcrafted <span>Chocolates</span> & Gourmet Desserts</h1>
+    <p>Premium, artisanal chocolates and gourmet desserts. Handcrafted and hand-packed with care.</p>
+  </section>
 
-    <main class="flex-grow">
-        <!-- Refined Hero Section -->
-        <section class="relative hero-bg-pattern text-white py-14 sm:py-20 overflow-hidden border-b-2 border-amber-900/30">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif leading-tight mb-5">
-                    Handcrafted <span class="gold-brand-gradient">Chocolates</span> & Gourmet <span class="gold-brand-gradient">Desserts</span>
-                </h1>
+  <!-- Best Seller Spotlight -->
+  <section class="container" id="bestsellers">
+    <h2 class="section-title">Best Seller</h2>
+    <p class="section-subtitle">Our signature viral creation crafted with honest local ingredients.</p>
 
-                <p class="max-w-2xl mx-auto text-amber-100/90 text-sm sm:text-base font-normal leading-relaxed mb-8">
-                    Handcrafted and hand-packed with care. Thoughtful dessert creations for corporate gifting, celebrations, and everyday indulgences.
-                </p>
+    <div class="bestseller-card">
+      <div class="bestseller-img-wrap">
+        <img src="https://lh3.googleusercontent.com/d/1XU35Wurbl1MFBwL0GKsLpQUYYwZBI6cq" alt="Dubai Viral Kunafa Chocolate Bar">
+      </div>
+      <div class="bestseller-info">
+        <span class="badge">Viral Favourite</span>
+        <h3>Dubai Kunafa Chocolate Bar</h3>
+        <p>Crafted using smooth compound chocolate filled with our house-roasted vermicelli and freshly whipped pistachio paste. We specially formulated this creation to bring the world-famous Dubai chocolate experience to youth and dessert lovers at an accessible price point, without compromising on crunch or flavour.</p>
+        <p class="note">*A premium couverture chocolate version is also available upon request!</p>
+        <a href="chocolates.html" class="action-btn">Get Here</a>
+      </div>
+    </div>
+  </section>
 
-                <div class="flex flex-wrap items-center justify-center gap-4">
-                    <a href="#catalog" class="bg-brandRed hover:bg-red-700 text-white font-medium px-7 py-3 rounded-full shadow-md transition-all duration-300">
-                        View Handcrafted Catalog
-                    </a>
-                    <a href="#bestseller" class="bg-white/10 hover:bg-white/20 text-amber-100 border border-amber-200/20 font-medium px-6 py-3 rounded-full backdrop-blur-sm transition-all duration-300">
-                        Explore Best Seller
-                    </a>
-                </div>
-            </div>
-        </section>
+  <!-- Explore Products -->
+  <section class="container" id="explore">
+    <h2 class="section-title">Explore Range</h2>
+    <p class="section-subtitle">Select a category to view all flavours and creations.</p>
 
-        <!-- Clean Highlight Bar Under Hero (Separate Background) -->
-        <section class="bg-amber-100/60 border-b border-amber-900/10 py-4 px-4">
-            <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs sm:text-sm font-semibold text-chocDark">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-leaf text-emerald-600"></i>
-                    <span>100% Preservative-Free</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-truck-fast text-brandRed"></i>
-                    <span>Fresh Direct Local Delivery</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-award text-amber-700"></i>
-                    <span>15+ Years of Experience</span>
-                </div>
-            </div>
-        </section>
+    <div class="category-grid">
+      <!-- 1. Chocolate Bars -->
+      <a href="chocolates.html" class="cat-card">
+        <div class="cat-img-box">
+          <img src="https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji" alt="Handcrafted Chocolate Bars">
+        </div>
+        <div class="cat-title">Chocolate Bars</div>
+      </a>
 
-        <!-- Bestseller Section (Restored Original Text) -->
-        <section id="bestseller" class="py-14 sm:py-18 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div class="text-center mb-8">
-                <span class="text-brandRed font-semibold text-xs uppercase tracking-widest block mb-1">Signature Creation</span>
-                <h2 class="text-2xl sm:text-4xl font-serif text-chocDark">Best Seller</h2>
-                <p class="text-gray-500 text-xs sm:text-sm mt-1">Our signature viral creation crafted with honest local ingredients.</p>
-            </div>
+      <!-- 2. Artisanal Truffles -->
+      <a href="truffles.html" class="cat-card">
+        <div class="cat-img-box">
+          <img src="https://lh3.googleusercontent.com/d/1GDbNcT1LYT5YxPsq7PJhjzXsWrSM9koh" alt="Artisanal Truffles Range">
+        </div>
+        <div class="cat-title">Artisanal Truffles</div>
+      </a>
 
-            <div class="bg-white rounded-2xl luxury-card-shadow overflow-hidden border border-amber-900/10 grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
-                <!-- Product Image -->
-                <div class="lg:col-span-6 bg-amber-50/50 p-6 sm:p-8 flex items-center justify-center relative min-h-[300px]">
-                    <span class="absolute top-4 left-4 bg-brandRed text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
-                        Viral Favourite
-                    </span>
-                    <img src="https://lh3.googleusercontent.com/d/1XU35Wurbl1MFBwL0GKsLpQUYYwZBI6cq" 
-                         alt="Dubai Viral Kunafa Chocolate Bar" 
-                         class="max-h-80 w-auto object-contain rounded-xl transition-transform duration-500 hover:scale-105"
-                         onerror="this.onerror=null; this.src='https://placehold.co/500x350/2B1B17/FAF6F0?text=Dubai+Kunafa+Bar';">
-                </div>
+      <!-- 3. Stuffed & Coated Dates -->
+      <a href="stuffeddates.html" class="cat-card">
+        <div class="cat-img-box">
+          <img src="https://lh3.googleusercontent.com/d/1S1FOpeer9LJluhB0VPnpaO__o7CUeoo-" alt="Stuffed & Coated Dates Range">
+        </div>
+        <div class="cat-title">Stuffed & Coated Dates</div>
+      </a>
 
-                <!-- Product Text Content -->
-                <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-2xl sm:text-3xl font-serif text-chocDark mb-3">
-                            Dubai Kunafa Chocolate Bar
-                        </h3>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                            Crafted using smooth compound chocolate filled with our house-roasted vermicelli and freshly whipped pistachio paste. We specially formulated this creation to bring the world-famous Dubai chocolate experience to youth and dessert lovers at an accessible price point, without compromising on crunch or flavour.
-                        </p>
-                        <p class="text-xs italic text-amber-900/80 bg-amber-50/80 p-3 rounded-lg border-l-2 border-brandRed mb-4">
-                            *A premium couverture chocolate version is also available upon request!
-                        </p>
+      <!-- 4. Thick Milkshakes -->
+      <a href="milkshakes.html" class="cat-card">
+        <div class="cat-img-box">
+          <img src="https://lh3.googleusercontent.com/d/10333tsr8Xg9fgSYJcPC5EEtbiLuSAtZK" alt="Gourmet Milkshakes Range">
+        </div>
+        <div class="cat-title">Thick Milkshakes</div>
+      </a>
+    </div>
+  </section>
 
-                        <!-- 5-Star Rating directly under description -->
-                        <div class="flex items-center gap-2 bg-amber-100/50 p-2.5 rounded-xl border border-amber-200/60 mb-6">
-                            <div class="flex text-amber-500 text-xs gap-0.5">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <span class="text-xs font-semibold text-chocDark">
-                                5.0 Rating from 800+ Kolkata Foodies & Dessert Lovers
-                            </span>
-                        </div>
-                    </div>
+  <!-- About Us Section -->
+  <section class="container" id="about">
+    <h2 class="section-title">About Us</h2>
+    <p class="section-subtitle">A mother-daughter duo built from the ground up.</p>
 
-                    <div>
-                        <a href="chocolates.html" class="inline-block bg-chocDark hover:bg-brandRed text-white font-medium text-sm px-6 py-3 rounded-xl transition-colors duration-300">
-                            Get Here
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="about-wrap">
+      <p>Fivian is a homegrown brand born from a mother-daughter duo with a shared passion for culinary excellence and thoughtful design. Named after our family of five, Fivian was created to give a formal identity to Arshia Ahmad’s 15+ years of award-winning culinary expertise, turning proven artisanal recipes into an unmistakable gourmet brand.</p>
+      
+      <p>Every single chocolate, truffle, and stuffed date is handcrafted, preservative-free, and made in small batches in our Kolkata workshop under Arshia's direct supervision. From unique flavour pairings like Rose-Pistachio, Paan, and Rasmalai to our take on the viral Kunafa chocolate bar, the magic inside every product comes from her kitchen mastery.</p>
+      
+      <p>The visual story on the outside is shaped by her daughter, Madeeha Anwar, an MBA in Marketing who handles all branding, custom packaging, and visual design. Rooted in Make-in-India principles, Fivian offers an authentic, small-batch alternative to mass-produced sweets—delivering pure flavour, fresh local ingredients, and personalised gifting experiences.</p>
+    </div>
+  </section>
 
-        <!-- Handcrafted Catalog Section -->
-        <section id="catalog" class="py-14 bg-bgWarm border-y border-amber-900/10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-10">
-                    <h2 class="text-2xl sm:text-4xl font-serif text-chocDark">Handcrafted Catalog</h2>
-                    <p class="text-gray-600 text-sm mt-1.5">Select a category to view all signature flavours and creations.</p>
-                </div>
+  <!-- Cart Modal Overlay -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal-box">
+      <h3 style="margin-bottom: 14px; display: flex; justify-content: space-between; color: var(--choc-dark); font-family: var(--font-serif); font-style: italic;">
+        Your Cart
+        <span style="cursor: pointer; font-style: normal;" onclick="closeCart()">✕</span>
+      </h3>
+      <div id="cartItemsList"></div>
+      <button class="checkout-btn" onclick="sendWhatsAppOrder()">Order via WhatsApp 📲</button>
+    </div>
+  </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Chocolate Bars -->
-                    <a href="chocolates.html" class="category-card bg-white rounded-2xl luxury-card-shadow group flex flex-col justify-between transition-all duration-300">
-                        <div>
-                            <div class="zoom-img-container aspect-[4/3] bg-amber-50 relative">
-                                <img src="https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji" 
-                                     alt="Chocolate Bars" 
-                                     class="zoom-img w-full h-full object-cover"
-                                     onerror="this.onerror=null; this.src='https://placehold.co/400x300/2B1B17/FAF6F0?text=Chocolate+Bars';">
-                                <span class="absolute top-3 right-3 bg-chocDark/80 backdrop-blur-md text-amber-100 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                                    12+ Flavours
-                                </span>
-                            </div>
-                            <div class="p-5 text-center">
-                                <h3 class="font-serif font-bold text-lg text-chocDark group-hover:text-brandRed transition-colors">
-                                    Chocolate Bars
-                                </h3>
-                                <p class="text-xs text-gray-500 mt-1">100g Bars & 50g Bars • Fusion Flavours</p>
-                            </div>
-                        </div>
-                        <div class="px-5 pb-5 text-center">
-                            <span class="text-xs font-semibold text-brandRed inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                                View Collection <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                            </span>
-                        </div>
-                    </a>
+  <!-- Custom Footer -->
+  <footer style="background: #2B1B17; color: #FAF6F0; text-align: center; padding: 40px 16px 24px; margin-top: 50px; border-top: 3px solid #C8102E;">
+    <div class="footer-content">
+      
+      <!-- Brand Header -->
+      <h2 style="font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 2.1rem; letter-spacing: 1px; font-weight: 700; color: #FAF6F0; margin-bottom: 2px;">
+        Fivian<span style="color: #C8102E; font-style: normal;">.</span>
+      </h2>
+      <p style="font-style: italic; font-family: 'Libre Baskerville', Georgia, serif; color: #E8E1D9; margin-bottom: 24px; font-size: 0.9rem; opacity: 0.9;">
+        Handcrafted Artisanal Chocolates
+      </p>
 
-                    <!-- Artisanal Truffles -->
-                    <a href="truffles.html" class="category-card bg-white rounded-2xl luxury-card-shadow group flex flex-col justify-between transition-all duration-300">
-                        <div>
-                            <div class="zoom-img-container aspect-[4/3] bg-amber-50 relative">
-                                <img src="https://lh3.googleusercontent.com/d/1GDbNcT1LYT5YxPsq7PJhjzXsWrSM9koh" 
-                                     alt="Artisanal Truffles" 
-                                     class="zoom-img w-full h-full object-cover"
-                                     onerror="this.onerror=null; this.src='https://placehold.co/400x300/2B1B17/FAF6F0?text=Artisanal+Truffles';">
-                                <span class="absolute top-3 right-3 bg-chocDark/80 backdrop-blur-md text-amber-100 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                                    Gift Boxes
-                                </span>
-                            </div>
-                            <div class="p-5 text-center">
-                                <h3 class="font-serif font-bold text-lg text-chocDark group-hover:text-brandRed transition-colors">
-                                    Artisanal Truffles
-                                </h3>
-                                <p class="text-xs text-gray-500 mt-1">9 Signature Flavours • Gift Boxes</p>
-                            </div>
-                        </div>
-                        <div class="px-5 pb-5 text-center">
-                            <span class="text-xs font-semibold text-brandRed inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                                View Collection <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                            </span>
-                        </div>
-                    </a>
+      <!-- Contact Info -->
+      <div class="footer-contact-wrapper">
+        <span>📍 12 Gora Chand Road, Kolkata 700014</span>
+        <span class="footer-dot">•</span>
+        <span>📞 <a href="tel:+919088055818" style="color: #FAF6F0; text-decoration: none;">+91 9088 055 818</a></span>
+        <span class="footer-dot">•</span>
+        <span>✉️ <a href="mailto:fivianindia@gmail.com" style="color: #FAF6F0; text-decoration: none;">fivianindia@gmail.com</a></span>
+      </div>
 
-                    <!-- Stuffed & Coated Dates -->
-                    <a href="stuffeddates.html" class="category-card bg-white rounded-2xl luxury-card-shadow group flex flex-col justify-between transition-all duration-300">
-                        <div>
-                            <div class="zoom-img-container aspect-[4/3] bg-amber-50 relative">
-                                <img src="https://lh3.googleusercontent.com/d/1S1FOpeer9LJluhB0VPnpaO__o7CUeoo-" 
-                                     alt="Stuffed & Coated Dates" 
-                                     class="zoom-img w-full h-full object-cover"
-                                     onerror="this.onerror=null; this.src='https://placehold.co/400x300/2B1B17/FAF6F0?text=Stuffed+Dates';">
-                                <span class="absolute top-3 right-3 bg-chocDark/80 backdrop-blur-md text-amber-100 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                                    Keepsake Jars
-                                </span>
-                            </div>
-                            <div class="p-5 text-center">
-                                <h3 class="font-serif font-bold text-lg text-chocDark group-hover:text-brandRed transition-colors">
-                                    Stuffed & Coated Dates
-                                </h3>
-                                <p class="text-xs text-gray-500 mt-1">Handcrafted Flavours • Keepsake Jars</p>
-                            </div>
-                        </div>
-                        <div class="px-5 pb-5 text-center">
-                            <span class="text-xs font-semibold text-brandRed inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                                View Collection <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                            </span>
-                        </div>
-                    </a>
+      <!-- Order & Delivery Banner -->
+      <p class="banner-text">
+        ORDER 2 DAYS IN ADVANCE &bull; HAND-PACKED WITH CARE &bull; FRESH INGREDIENTS
+      </p>
 
-                    <!-- Thick Milkshakes -->
-                    <a href="milkshakes.html" class="category-card bg-white rounded-2xl luxury-card-shadow group flex flex-col justify-between transition-all duration-300">
-                        <div>
-                            <div class="zoom-img-container aspect-[4/3] bg-amber-50 relative">
-                                <img src="https://lh3.googleusercontent.com/d/10333tsr8Xg9fgSYJcPC5EEtbiLuSAtZK" 
-                                     alt="Thick Milkshakes" 
-                                     class="zoom-img w-full h-full object-cover"
-                                     onerror="this.onerror=null; this.src='https://placehold.co/400x300/2B1B17/FAF6F0?text=Milkshakes';">
-                                <span class="absolute top-3 right-3 bg-chocDark/80 backdrop-blur-md text-amber-100 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                                    6 Flavours
-                                </span>
-                            </div>
-                            <div class="p-5 text-center">
-                                <h3 class="font-serif font-bold text-lg text-chocDark group-hover:text-brandRed transition-colors">
-                                    Thick Milkshakes
-                                </h3>
-                                <p class="text-xs text-gray-500 mt-1">Real Milk & Indulgent Flavours • Freshly Made</p>
-                            </div>
-                        </div>
-                        <div class="px-5 pb-5 text-center">
-                            <span class="text-xs font-semibold text-brandRed inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                                View Collection <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+      <!-- Social Icons with Updated Links -->
+      <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 24px;">
+        <a href="https://wa.me/919088055818" target="_blank" title="WhatsApp" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/1qmtByzzVWRH8GbYRvboxbqQ7vVMvugTY" alt="WhatsApp" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+        <a href="https://instagram.com/fivian.in" target="_blank" title="Instagram" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/1d_lH4q3EBbucuoTOtA_E6VzIAe_hHBWb" alt="Instagram" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+        <a href="https://youtube.com/@fivianindia" target="_blank" title="YouTube" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/13DdNGoSKsdvMd4LQwX6I0Qjc8BJVBB59" alt="YouTube" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+        <a href="https://facebook.com/fivian.in" target="_blank" title="Facebook" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+          <img src="https://lh3.googleusercontent.com/d/1caAi5AIPIrPCiyMPqOJiXw_csihy4YNt" alt="Facebook" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+      </div>
 
-        <!-- Flavoura Savoury Section (Strictly Center-Aligned & UK English) -->
-        <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-            <div class="bg-gradient-to-br from-[#2B1B17] to-[#4A261D] rounded-3xl text-white p-8 sm:p-10 shadow-xl border border-amber-500/20 text-center flex flex-col items-center justify-center">
-                
-                <span class="bg-amber-400/20 text-goldLight text-xs font-bold tracking-widest uppercase px-3.5 py-1 rounded-full mb-3 border border-amber-400/30">
-                    Savoury Line
-                </span>
-                
-                <h2 class="text-2xl sm:text-3xl font-serif text-white mb-3">
-                    Discover <span class="text-amber-300">Flavoura</span> Savoury Delights
-                </h2>
+      <!-- Copyright -->
+      <p style="font-size: 0.75rem; color: #A0948D; font-weight: 600; letter-spacing: 1px;">
+        © 2026 FIVIAN INDIA | ALL RIGHTS RESERVED
+      </p>
 
-                <p class="text-amber-100/90 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto mb-6">
-                    Looking for savoury indulgence alongside your chocolates? Explore Flavoura by Fivian—featuring roasted flavoured makhanas, artisan spiced cashews, and gourmet premix masalas.
-                </p>
+    </div>
+  </footer>
 
-                <!-- Image Placeholder Box for Flavoura Picture -->
-                <div class="w-full max-w-md bg-white/5 border border-dashed border-amber-300/30 rounded-2xl p-4 mb-6 flex flex-col items-center justify-center min-h-[140px] text-amber-200/70">
-                    <i class="fa-solid fa-image text-2xl mb-1 text-amber-300/50"></i>
-                    <span class="text-xs font-medium">[ Flavoura Product Image Showcase Placeholder ]</span>
-                    <span class="text-[10px] text-amber-300/40 mt-0.5">Recommended resolution: 600x300</span>
-                </div>
+  <script>
+    function getCart() { return JSON.parse(localStorage.getItem('fivian_cart') || '{}'); }
+    function saveCart(cart) { localStorage.setItem('fivian_cart', JSON.stringify(cart)); }
 
-                <a href="https://fivian.in/flavoura" target="_blank" rel="noopener font-medium" 
-                   class="bg-amber-400 hover:bg-amber-300 text-chocDark font-bold text-sm px-8 py-3 rounded-full shadow-md transition-all duration-300 inline-flex items-center gap-2">
-                    <span>Explore Flavoura Range</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                </a>
-            </div>
-        </section>
+    function openCart() {
+      let cart = getCart();
+      let list = document.getElementById('cartItemsList');
+      list.innerHTML = '';
+      if (Object.keys(cart).length === 0) {
+        list.innerHTML = '<p style="color: var(--text-muted);">Your cart is currently empty.</p>';
+      } else {
+        for (let [item, qty] of Object.entries(cart)) {
+          list.innerHTML += `<div class="cart-item"><span>${item} (x${qty})</span><button onclick="removeItem('${item}')" style="background:none; border:none; color:var(--brand-red-accent); cursor:pointer; font-weight:700;">Remove</button></div>`;
+        }
+      }
+      document.getElementById('cartModal').style.display = 'flex';
+    }
 
-        <!-- Our Story Section -->
-        <section class="py-14 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-            <div class="bg-white rounded-3xl p-8 sm:p-12 luxury-card-shadow border border-amber-900/10">
-                <div class="text-center mb-8">
-                    <span class="text-brandRed font-semibold text-xs uppercase tracking-widest block mb-1">Heart of Fivian</span>
-                    <h2 class="text-2xl sm:text-4xl font-serif text-chocDark">Our Story</h2>
-                    <p class="text-gray-500 text-xs sm:text-sm mt-1">A mother-daughter duo built from the ground up.</p>
-                    <div class="w-12 h-1 bg-brandRed mx-auto mt-3 rounded-full"></div>
-                </div>
+    function removeItem(item) {
+      let cart = getCart();
+      delete cart[item];
+      saveCart(cart);
+      openCart();
+    }
 
-                <!-- Structured Story Layout with Character -->
-                <div class="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed">
-                    <p class="first-letter:text-4xl first-letter:font-serif first-letter:text-brandRed first-letter:float-left first-letter:mr-2 first-letter:font-bold">
-                        <strong class="text-chocDark">Fivian</strong> is a homegrown brand born from a mother-daughter duo with a shared passion for culinary excellence and thoughtful design. Named after our family of five, Fivian was created to give a formal identity to Arshia Ahmad’s 15+ years of award-winning culinary expertise, turning proven artisanal recipes into an unmistakable gourmet brand.
-                    </p>
+    function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
 
-                    <!-- Quote Highlight Card -->
-                    <div class="my-6 p-5 bg-amber-50/70 rounded-2xl border-l-4 border-brandRed italic text-chocDark font-serif text-sm sm:text-base text-center">
-                        "From unique flavour pairings like Rose-Pistachio, Paan, and Rasmalai to our viral Kunafa bar, every creation is handcrafted in small batches in our Kolkata workshop."
-                    </div>
+    function sendWhatsAppOrder() {
+      let cart = getCart();
+      if (Object.keys(cart).length === 0) return alert('Your cart is empty!');
+      let text = "Hello Fivian! I'd like to place an order:\n";
+      for (let [item, qty] of Object.entries(cart)) {
+        text += `- ${item} x${qty}\n`;
+      }
+      window.open(`https://wa.me/919088055818?text=${encodeURIComponent(text)}`, '_blank');
+    }
+  </script>
 
-                    <p>
-                        The visual story on the outside is shaped by her daughter, Madeeha Anwar, an MBA in Marketing who handles all branding, custom packaging, and visual design. Rooted in Make-in-India principles, Fivian offers an authentic, small-batch alternative to mass-produced sweets—delivering pure flavour, fresh local ingredients, and personalised gifting experiences.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Reverted & Refined Footer (Exact original structure, balanced colors) -->
-    <footer id="contact" class="bg-chocDark text-amber-100/90 pt-12 pb-8 border-t-4 border-brandRed">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center space-y-3 mb-8">
-                <h3 class="font-serif text-2xl text-white italic">Fivian</h3>
-                <p class="text-xs uppercase tracking-widest text-amber-200/80">Handcrafted Artisanal Chocolates</p>
-
-                <!-- Contact Information -->
-                <div class="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-gray-300 pt-3">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-location-dot text-brandRed"></i>
-                        <span>12 Gora Chand Road, Kolkata 700014</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-phone text-brandRed"></i>
-                        <a href="tel:+919088055818" class="hover:text-white transition-colors">+91 9088 055 818</a>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-envelope text-brandRed"></i>
-                        <a href="mailto:fivianindia@gmail.com" class="hover:text-white transition-colors">fivianindia@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="text-[11px] text-gray-400 tracking-wider uppercase pt-2">
-                    Order 2 Days in Advance • Hand-packed with Care • Fresh Ingredients
-                </div>
-            </div>
-
-            <!-- Social Media Icons (Rounded Corners Fix) -->
-            <div class="flex items-center justify-center gap-4 py-5 border-t border-amber-900/40">
-                <a href="https://wa.me/919088055818" target="_blank" rel="noopener" class="social-icon-btn">
-                    <img src="https://lh3.googleusercontent.com/d/1qmtByzzVWRH8GbYRvboxbqQ7vVMvugTY" alt="WhatsApp" class="w-8 h-8 object-contain"
-                         onerror="this.onerror=null; this.src='https://placehold.co/32x32/25D366/FFF?text=WA';">
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon-btn">
-                    <img src="https://lh3.googleusercontent.com/d/1d_lH4q3EBbucuoTOtA_E6VzIAe_hHBWb" alt="Instagram" class="w-8 h-8 object-contain"
-                         onerror="this.onerror=null; this.src='https://placehold.co/32x32/E4405F/FFF?text=IG';">
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener" class="social-icon-btn">
-                    <img src="https://lh3.googleusercontent.com/d/13DdNGoSKsdvMd4LQwX6I0Qjc8BJVBB59" alt="YouTube" class="w-8 h-8 object-contain"
-                         onerror="this.onerror=null; this.src='https://placehold.co/32x32/FF0000/FFF?text=YT';">
-                </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon-btn">
-                    <img src="https://lh3.googleusercontent.com/d/1caAi5AIPIrPCiyMPqOJiXw_csihy4YNt" alt="Facebook" class="w-8 h-8 object-contain"
-                         onerror="this.onerror=null; this.src='https://placehold.co/32x32/1877F2/FFF?text=FB';">
-                </a>
-            </div>
-
-            <div class="text-center text-[10px] text-gray-400 pt-4">
-                © 2026 FIVIAN INDIA | ALL RIGHTS RESERVED
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="cart-modal-container">
-            <div class="bg-chocDark text-white p-4 flex items-center justify-between border-b border-amber-900/20">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-bag-shopping text-brandRed"></i>
-                    <h3 class="font-serif font-bold text-base">Your Order Basket</h3>
-                </div>
-                <button onclick="closeCartModal()" class="text-amber-200 hover:text-white p-1 focus:outline-none">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <div id="cart-items-container" class="p-5 overflow-y-auto flex-grow space-y-3">
-                <!-- Items populated by JS -->
-            </div>
-
-            <div class="p-5 bg-amber-50/50 border-t border-gray-100 flex flex-col gap-3">
-                <div class="flex items-center justify-between font-bold text-chocDark text-sm">
-                    <span>Total Items:</span>
-                    <span id="cart-total-qty">0</span>
-                </div>
-                <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all text-sm">
-                    <i class="fa-brands fa-whatsapp text-base"></i>
-                    <span>Place Order via WhatsApp</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript logic -->
-    <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        function getCart() {
-            return JSON.parse(localStorage.getItem('fivian_cart') || '[]');
-        }
-
-        function saveCart(cart) {
-            localStorage.setItem('fivian_cart', JSON.stringify(cart));
-            updateCartBadge();
-        }
-
-        /* Cart Badge Handler (Hides when 0) */
-        function updateCartBadge() {
-            const cart = getCart();
-            const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-            const badge = document.getElementById('cart-badge');
-            if (badge) {
-                if (totalCount > 0) {
-                    badge.innerText = totalCount;
-                    badge.classList.remove('hidden');
-                    badge.classList.add('flex');
-                } else {
-                    badge.classList.add('hidden');
-                    badge.classList.remove('flex');
-                }
-            }
-        }
-
-        function openCartModal() {
-            const modal = document.getElementById('cart-modal');
-            const container = document.getElementById('cart-modal-container');
-            renderCartItems();
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                container.classList.remove('scale-95');
-            }, 10);
-        }
-
-        function closeCartModal() {
-            const modal = document.getElementById('cart-modal');
-            const container = document.getElementById('cart-modal-container');
-            modal.classList.add('opacity-0');
-            container.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        function renderCartItems() {
-            const container = document.getElementById('cart-items-container');
-            const cart = getCart();
-            const totalQtyEl = document.getElementById('cart-total-qty');
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 space-y-2">
-                        <i class="fa-solid fa-basket-shopping text-3xl text-amber-900/20"></i>
-                        <p class="text-gray-500 text-xs font-medium">Your basket is currently empty.</p>
-                        <a href="#catalog" onclick="closeCartModal()" class="inline-block bg-brandRed text-white text-xs font-semibold px-4 py-2 rounded-lg">
-                            Start Shopping
-                        </a>
-                    </div>
-                `;
-                totalQtyEl.innerText = '0';
-                return;
-            }
-
-            let totalQty = 0;
-            let html = '';
-
-            cart.forEach((item, index) => {
-                totalQty += (item.quantity || 1);
-                html += `
-                    <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-amber-900/10 shadow-sm">
-                        <div class="flex-grow pr-3">
-                            <h4 class="font-semibold text-xs text-chocDark">${item.name}</h4>
-                            ${item.variant ? `<p class="text-[11px] text-gray-500">${item.variant}</p>` : ''}
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden">
-                                <button onclick="updateItemQuantity(${index}, -1)" class="px-2 py-0.5 bg-gray-50 text-xs font-bold text-gray-600 hover:bg-gray-200">-</button>
-                                <span class="px-2 py-0.5 text-xs font-semibold text-chocDark">${item.quantity || 1}</span>
-                                <button onclick="updateItemQuantity(${index}, 1)" class="px-2 py-0.5 bg-gray-50 text-xs font-bold text-gray-600 hover:bg-gray-200">+</button>
-                            </div>
-                            <button onclick="removeItemFromCart(${index})" class="text-red-500 hover:text-red-700 p-1">
-                                <i class="fa-solid fa-trash-can text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-            totalQtyEl.innerText = totalQty;
-        }
-
-        function updateItemQuantity(index, change) {
-            let cart = getCart();
-            if (cart[index]) {
-                cart[index].quantity = (cart[index].quantity || 1) + change;
-                if (cart[index].quantity <= 0) {
-                    cart.splice(index, 1);
-                }
-            }
-            saveCart(cart);
-            renderCartItems();
-        }
-
-        function removeItemFromCart(index) {
-            let cart = getCart();
-            cart.splice(index, 1);
-            saveCart(cart);
-            renderCartItems();
-        }
-
-        function sendWhatsAppOrder() {
-            const cart = getCart();
-            if (cart.length === 0) {
-                alert('Your basket is empty. Add items before placing an order.');
-                return;
-            }
-
-            let message = "Hello Fivian Chocolates! I would like to place an order:\n\n";
-            cart.forEach((item, i) => {
-                message += `${i + 1}. ${item.name} ${item.variant ? `(${item.variant})` : ''} x ${item.quantity || 1}\n`;
-            });
-            message += "\nPlease let me know availability and delivery details in Kolkata.";
-
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/919088055818?text=${encodedMessage}`, '_blank');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            updateCartBadge();
-        });
-    </script>
-
-    <!-- Vercel Analytics -->
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
