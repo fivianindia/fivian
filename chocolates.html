@@ -350,7 +350,7 @@
   </footer>
 
   <script>
-    // All 17 varieties with precise 50g & 100g lh3 direct image URLs and prices
+    // Product list with Milk and Hazelnut updated to 50g only
     const chocolateProducts = [
       {
         id: "signature-blend",
@@ -366,11 +366,11 @@
         id: "milk",
         name: "Milk Chocolate Bar",
         desc: "A smooth, classic milk chocolate bar crafted for a comforting, familiar sweetness in every single square.",
-        prices: { "50g": 50, "100g": 100 },
+        prices: { "50g": 50 },
         images: {
-          "50g": "https://lh3.googleusercontent.com/d/1A7TpNfLoo7JF394C7iPEi8ewA1LyfPPu",
-          "100g": "https://lh3.googleusercontent.com/d/1mF6O7_I4lf30atpnYGQZm7MIMVH4HcUW"
-        }
+          "50g": "https://lh3.googleusercontent.com/d/1A7TpNfLoo7JF394C7iPEi8ewA1LyfPPu"
+        },
+        exclusiveSmall: true
       },
       {
         id: "dark",
@@ -396,21 +396,21 @@
         id: "butterscotch",
         name: "Butterscotch Chocolate Bar",
         desc: "A smooth chocolate base studded with crisp, buttery granules that bring a delightful crunch to every bite.",
-        prices: { "50g": 60, "100g": 130 },
+        prices: { "50g": 60 },
         images: {
-          "50g": "https://lh3.googleusercontent.com/d/1aQ_C7IbHL-DldzlLwSrZcfykGnk5wWxh",
-          "100g": "https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji"
-        }
+          "50g": "https://lh3.googleusercontent.com/d/1aQ_C7IbHL-DldzlLwSrZcfykGnk5wWxh"
+        },
+        exclusiveSmall: true
       },
       {
         id: "crackle",
         name: "Crackle Chocolate Bar",
         desc: "Light, crispy pieces folded into a smooth chocolate bar, offering an airy and satisfying snap reminiscent of classic crispello styles.",
-        prices: { "50g": 60, "100g": 120 },
+        prices: { "50g": 60 },
         images: {
-          "50g": "https://lh3.googleusercontent.com/d/1OPylxt7BXZfR_hTw6SX-8x6lo7gT2GEi",
-          "100g": "https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji"
-        }
+          "50g": "https://lh3.googleusercontent.com/d/1OPylxt7BXZfR_hTw6SX-8x6lo7gT2GEi"
+        },
+        exclusiveSmall: true
       },
       {
         id: "cookie-cream",
@@ -466,31 +466,31 @@
         id: "sugar-free",
         name: "Sugar-Free Chocolate Bar",
         desc: "A bitter, robust chocolate bar specially crafted for diabetic individuals or those looking to skip the sugar without compromising on the authentic chocolate experience.",
-        prices: { "50g": 80, "100g": 100 },
+        prices: { "50g": 80 },
         images: {
-          "50g": "https://lh3.googleusercontent.com/d/1Ck5PthTP6xFi8htBZUnyt_15OYc0rzNA",
-          "100g": "https://lh3.googleusercontent.com/d/1mF6O7_I4lf30atpnYGQZm7MIMVH4HcUW"
-        }
+          "50g": "https://lh3.googleusercontent.com/d/1Ck5PthTP6xFi8htBZUnyt_15OYc0rzNA"
+        },
+        exclusiveSmall: true
       },
       {
         id: "hazelnut",
         name: "Hazelnut Chocolate Bar",
         desc: "Smooth chocolate paired with crunchy roasted hazelnuts for a classic, luxurious crunch.",
-        prices: { "50g": 90, "100g": 160 },
+        prices: { "50g": 90 },
         images: {
-          "50g": "https://lh3.googleusercontent.com/d/1sQoo8Vh9Y6VtvHeNcEGuar0Ylb6p8gJK",
-          "100g": "https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji"
-        }
+          "50g": "https://lh3.googleusercontent.com/d/1sQoo8Vh9Y6VtvHeNcEGuar0Ylb6p8gJK"
+        },
+        exclusiveSmall: true
       },
       {
         id: "paan-bahaar",
         name: "Paan Bahaar Chocolate Bar",
         desc: "A refreshing white chocolate base blended with traditional paan and gulkand flavours, finished with colourful tutti frutti bits.",
-        prices: { "50g": 90, "100g": 150 },
+        prices: { "50g": 90 },
         images: {
-          "50g": "https://lh3.googleusercontent.com/d/10PhEgE_9MmU7wuinq0QpHK9Erw-Y2-Fe",
-          "100g": "https://lh3.googleusercontent.com/d/1RvbfbPLOAPRXg2E28E2FX5Bo1Y8d0ceE"
-        }
+          "50g": "https://lh3.googleusercontent.com/d/10PhEgE_9MmU7wuinq0QpHK9Erw-Y2-Fe"
+        },
+        exclusiveSmall: true
       },
       {
         id: "rasmalai",
@@ -549,8 +549,11 @@
       let cart = getCart();
 
       chocolateProducts.forEach(product => {
-        const hasBothSizes = !product.exclusiveBig;
-        const initialSize = hasBothSizes ? '50g' : '100g';
+        const hasBothSizes = !product.exclusiveBig && !product.exclusiveSmall;
+        let initialSize = '50g';
+        if (product.exclusiveBig) initialSize = '100g';
+        if (product.exclusiveSmall) initialSize = '50g';
+
         const cartKey = `${product.name} (${initialSize})`;
         const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
         const currentPrice = product.prices[initialSize];
@@ -569,12 +572,21 @@
               </div>
             </div>
           `;
-        } else {
+        } else if (product.exclusiveBig) {
           carouselHtml = `
             <div class="carousel-container">
               <div class="carousel-slide active" data-size="100g">
                 <img src="${product.images['100g']}" alt="${product.name} 100g" loading="lazy">
                 <span class="size-badge">100g Only</span>
+              </div>
+            </div>
+          `;
+        } else {
+          carouselHtml = `
+            <div class="carousel-container">
+              <div class="carousel-slide active" data-size="50g">
+                <img src="${product.images['50g']}" alt="${product.name} 50g" loading="lazy">
+                <span class="size-badge">50g Only</span>
               </div>
             </div>
           `;
@@ -588,10 +600,16 @@
               <button class="size-btn" data-size="100g" onclick="switchProductSize('${product.id}', '100g')">100g (₹${product.prices['100g']})</button>
             </div>
           `;
-        } else {
+        } else if (product.exclusiveBig) {
           sizeSelectorHtml = `
             <div class="size-selector">
               <button class="size-btn active" data-size="100g">100g Only (₹${product.prices['100g']})</button>
+            </div>
+          `;
+        } else {
+          sizeSelectorHtml = `
+            <div class="size-selector">
+              <button class="size-btn active" data-size="50g">50g Only (₹${product.prices['50g']})</button>
             </div>
           `;
         }
@@ -684,10 +702,14 @@
     }
 
     function getSelectedSize(productId) {
+      const product = chocolateProducts.find(p => p.id === productId);
+      if (product.exclusiveBig) return '100g';
+      if (product.exclusiveSmall) return '50g';
+
       const sizeContainer = document.getElementById(`sizes-${productId}`);
-      if (!sizeContainer) return '100g';
+      if (!sizeContainer) return '50g';
       const activeBtn = sizeContainer.querySelector('.size-btn.active');
-      return activeBtn ? activeBtn.dataset.size : '100g';
+      return activeBtn ? activeBtn.dataset.size : '50g';
     }
 
     function updateActionWrapper(productId) {
@@ -792,7 +814,7 @@
         return;
       }
 
-      let name = document.getElementById('customerName').value.trims ? document.getElementById('customerName').value.trim() : document.getElementById('customerName').value.trim();
+      let name = document.getElementById('customerName').value.trim();
       let phone = document.getElementById('customerPhone').value.trim();
       let address = document.getElementById('customerAddress').value.trim();
 
