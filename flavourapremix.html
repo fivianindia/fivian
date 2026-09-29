@@ -1404,73 +1404,73 @@
 
     // SUBMIT ORDER WITH DISCORD WEBHOOK LOGGING + WHATSAPP REDIRECT
     async function submitOrder(e) {
-  e.preventDefault();
+      e.preventDefault();
 
-  const name = document.getElementById('custName').value.trim();
-  const rawPhone = document.getElementById('custPhone').value.trim();
-  const address = document.getElementById('custAddress').value.trim();
+      const name = document.getElementById('custName').value.trim();
+      const rawPhone = document.getElementById('custPhone').value.trim();
+      const address = document.getElementById('custAddress').value.trim();
 
-  // Strict JS fallback check for Indian Mobile Number
-  const phonePattern = /^[6-9]\d{9}$/;
-  if (!phonePattern.test(rawPhone)) {
-    alert("Please enter a valid 10-digit Indian mobile number.");
-    return;
-  }
+      // Strict JS fallback check for Indian Mobile Number
+      const phonePattern = /^[6-9]\d{9}$/;
+      if (!phonePattern.test(rawPhone)) {
+        alert("Please enter a valid 10-digit Indian mobile number.");
+        return;
+      }
 
-  const fullPhone = `+91 ${rawPhone}`;
+      const fullPhone = `+91 ${rawPhone}`;
 
-  // 1. Build Item Summary
-  let itemsSummary = '';
-  let totalQty = 0;
-  for (let item in cart) {
-    itemsSummary += `• ${item} x ${cart[item]} = ₹${cart[item] * itemPrice}\n`;
-    totalQty += cart[item];
-  }
+      // 1. Build Item Summary
+      let itemsSummary = '';
+      let totalQty = 0;
+      for (let item in cart) {
+        itemsSummary += `• ${item} x ${cart[item]} = ₹${cart[item] * itemPrice}\n`;
+        totalQty += cart[item];
+      }
 
-  // 2. SPICE BOT DISCORD WEBHOOK
-  const discordWebhookUrl = "https://discord.com/api/webhooks/1548727130454761502/mPdx-s3alhHKIW08zIj30GA0dUboM2_suBbnYdUD0HQbsmpIeqYdt11LUcX1VYhZZDfC";
+      // 2. NEW SPICE BOT DISCORD WEBHOOK (Flavoura Channel)
+      const discordWebhookUrl = "https://discord.com/api/webhooks/1548727130454761502/uQbUb9BvtlTtMTnQ_p2pIy8NpEg0-giznGYbSz53Ux3ASdwYvndbcUNYli1yaNMSc_fh";
 
-  const discordPayload = {
-    username: "Spice Bot",
-    embeds: [{
-      title: "🛒 NEW FLAVOURA ORDER REQUEST",
-      color: 12068138, // Flavoura Brand Red
-      fields: [
-        { name: "Customer Name", value: name, inline: true },
-        { name: "Phone Number", value: fullPhone, inline: true },
-        { name: "Delivery Address", value: address },
-        { name: "Items Ordered", value: itemsSummary || "None" },
-        { name: "Total Packs", value: `${totalQty} packs`, inline: true },
-        { name: "Subtotal", value: `₹${totalQty * itemPrice}`, inline: true }
-      ],
-      timestamp: new Date().toISOString()
-    }]
-  };
+      const discordPayload = {
+        username: "Spice Bot",
+        embeds: [{
+          title: "🛒 NEW FLAVOURA ORDER REQUEST",
+          color: 12068138, // Flavoura Brand Red
+          fields: [
+            { name: "Customer Name", value: name, inline: true },
+            { name: "Phone Number", value: fullPhone, inline: true },
+            { name: "Delivery Address", value: address },
+            { name: "Items Ordered", value: itemsSummary || "None" },
+            { name: "Total Packs", value: `${totalQty} packs`, inline: true },
+            { name: "Subtotal", value: `₹${totalQty * itemPrice}`, inline: true }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
 
-  try {
-    await fetch(discordWebhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(discordPayload)
-    });
-  } catch (err) {
-    console.error("Spice Bot Discord Webhook Error:", err);
-  }
+      try {
+        await fetch(discordWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(discordPayload)
+        });
+      } catch (err) {
+        console.error("Spice Bot Discord Webhook Error:", err);
+      }
 
-  // 3. WHATSAPP REDIRECT FOR CUSTOMER
-  const message = `*NEW FLAVOURA ORDER REQUEST*\n\n` +
-                  `*Customer Name:* ${name}\n` +
-                  `*Phone:* ${fullPhone}\n` +
-                  `*Delivery Address:* ${address}\n\n` +
-                  `*ITEMS ORDERED:*\n${itemsSummary}\n` +
-                  `*Item Subtotal (${totalQty} packs):* ₹${totalQty * itemPrice}\n\n` +
-                  `Please call me back to confirm order & total delivery charge.`;
+      // 3. WHATSAPP REDIRECT FOR CUSTOMER
+      const message = `*NEW FLAVOURA ORDER REQUEST*\n\n` +
+                      `*Customer Name:* ${name}\n` +
+                      `*Phone:* ${fullPhone}\n` +
+                      `*Delivery Address:* ${address}\n\n` +
+                      `*ITEMS ORDERED:*\n${itemsSummary}\n` +
+                      `*Item Subtotal (${totalQty} packs):* ₹${totalQty * itemPrice}\n\n` +
+                      `Please call me back to confirm order & total delivery charge.`;
 
-  const whatsappUrl = `https://wa.me/919088055818?text=${encodeURIComponent(message)}`;
-  window.open(whatsappUrl, '_blank');
+      const whatsappUrl = `https://wa.me/919088055818?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
 
-  closeModalDirect('checkoutModal');
-}
+      closeModalDirect('checkoutModal');
+    }
   </script>
 
 </body>
