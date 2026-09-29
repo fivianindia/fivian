@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flavoura | Instant Cooking Premixes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;550;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --brand-red: #B8252A;
+      --brand-red-dark: #8E1B1F;
+      --brand-gold: #D48C28;
+      --brand-cream: #FFFDF9;
+      --brand-dark: #1F1917;
+      --brand-gray: #6B625E;
+      --border-color: #EFE8DC;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+      --shadow: 0 10px 25px rgba(0,0,0,0.06);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--brand-cream);
+      color: var(--brand-dark);
+      line-height: 1.5;
+      padding-bottom: 80px; /* Space for sticky cart bar */
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER & NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 253, 249, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      padding: 0.7rem 4%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    /* BUTTONS */
+    .btn {
+      padding: 0.75rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border: none;
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-youtube {
+      background: #FF0000;
+      color: white;
+    }
+
+    .btn-ingredients {
+      background: #FAF7F2;
+      color: var(--brand-dark);
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 0.8rem;
+      font-size: 0.78rem;
+      border-radius: 8px;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 550;
+      transition: background 0.2s ease;
+    }
+
+    .btn-ingredients:hover {
+      background: #EFE8DC;
+    }
+
+    /* ADD TO CART BUTTON & QUANTITY CONTROLLER */
+    .cart-action-wrap {
+      margin-top: 0.2rem;
+    }
+
+    .btn-add-cart {
+      width: 100%;
+      background: var(--brand-red);
+      color: white;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-add-cart:hover {
+      background: var(--brand-red-dark);
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAF7F2;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      background: none;
+      border: none;
+      width: 34px;
+      height: 32px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brand-red);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .qty-btn:hover {
+      background: #EFE8DC;
+    }
+
+    .qty-value {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+    }
+
+    /* HERO SECTION */
+    .hero-container {
+      padding: 1rem 4% 0.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .hero-banner-wrap {
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      background: #FFF;
+    }
+
+    .hero-banner-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: #FFFFFF;
+      padding: 1.5rem 4%;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      margin-top: 1rem;
+    }
+
+    .trust-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+
+    @media (min-width: 768px) {
+      .trust-container {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
+      }
+    }
+
+    .trust-item {
+      background: #FAF7F2;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.9rem;
+      text-align: center;
+    }
+
+    .trust-item h4 {
+      font-size: 0.88rem;
+      color: var(--brand-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .trust-item p {
+      font-size: 0.78rem;
+      color: var(--brand-gray);
+      line-height: 1.35;
+    }
+
+    /* PRODUCTS GRID */
+    .products-section {
+      padding: 2rem 4% 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--brand-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .product-img {
+      width: 40%;
+      aspect-ratio: 9 / 16;
+      background: #FAF7F2;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.65);
+      display: block;
+    }
+
+    .product-details {
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 60%;
+    }
+
+    .product-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--brand-dark);
+      margin-bottom: 0.2rem;
+      line-height: 1.2;
+    }
+
+    .product-desc {
+      font-size: 0.75rem;
+      color: var(--brand-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .quick-method-box {
+      background: #FAF7F2;
+      border-radius: 8px;
+      padding: 0.45rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #EFE4D6;
+    }
+
+    .quick-method-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--brand-red);
+      letter-spacing: 0.5px;
+      margin-bottom: 0.2rem;
+    }
+
+    .quick-method-steps {
+      font-size: 0.7rem;
+      color: #4A423E;
+      line-height: 1.3;
+    }
+
+    .price-tag {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--brand-red);
+    }
+
+    .weight-tag {
+      font-size: 0.75rem;
+      color: var(--brand-gray);
+      font-weight: 500;
+    }
+
+    .product-action {
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    /* STICKY BOTTOM CART BAR */
+    .sticky-cart-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #1F1917;
+      color: white;
+      padding: 0.8rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+      z-index: 1500;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .sticky-cart-bar.active {
+      transform: translateY(0);
+    }
+
+    .cart-summary-text h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--brand-gold);
+    }
+
+    .cart-summary-text p {
+      font-size: 0.78rem;
+      color: #CCC;
+    }
+
+    .btn-checkout {
+      background: var(--brand-red);
+      color: white;
+      padding: 0.65rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-checkout:hover {
+      background: var(--brand-red-dark);
+    }
+
+    /* MODALS OVERLAY */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: white;
+      border-radius: var(--radius);
+      max-width: 480px;
+      width: 100%;
+      padding: 1.5rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      border: 1px solid var(--border-color);
+      transform: translateY(20px);
+      transition: transform 0.25s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--brand-red);
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    .modal-card p.ingredients-text {
+      font-size: 0.88rem;
+      color: var(--brand-dark);
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+      background: #FAF7F2;
+      padding: 0.9rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .modal-btn-ok {
+      background: var(--brand-red);
+      color: white;
+      border: none;
+      padding: 0.6rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* CHECKOUT FORM STYLES */
+    .cart-items-list {
+      background: #FAF7F2;
+      border-radius: 10px;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      margin-bottom: 1rem;
+      font-size: 0.82rem;
+    }
+
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px dashed #E5DEC9;
+    }
+
+    .cart-item-row:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--brand-red);
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 0.8rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      background: #FFFDF9;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--brand-red);
+    }
+
+    /* PHONE INPUT WITH FIXED +91 PREFIX */
+    .phone-input-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: #FFFDF9;
+      overflow: hidden;
+    }
+
+    .phone-prefix {
+      background: #EFE8DC;
+      color: var(--brand-dark);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 0.7rem;
+      border-right: 1px solid var(--border-color);
+      user-select: none;
+    }
+
+    .phone-input-wrap input {
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0.6rem 0.8rem;
+    }
+
+    .notice-box {
+      background: #FFF5E5;
+      border: 1px solid var(--brand-gold);
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #7A4E08;
+      margin-bottom: 1rem;
+      line-height: 1.35;
+    }
+
+    /* MID-PAGE CTA FOR YOUTUBE */
+    .catalogue-cta-wrap {
+      text-align: center;
+      margin: 2rem auto 1rem;
+      padding: 0 4%;
+    }
+
+    /* STANDALONE HOME DELIVERY TEXT */
+    .delivery-text-standalone {
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--brand-red-dark);
+      margin: 0.8rem 0 2rem;
+      padding: 0 4%;
+    }
+
+    /* 3-INGREDIENT COOKING SECTION */
+    .how-it-works {
+      background: #F8F3EC;
+      padding: 2.5rem 4%;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .steps-flow {
+      max-width: 1000px;
+      margin: 1.5rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .steps-flow {
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+    }
+
+    .step-badge {
+      background: white;
+      padding: 1rem 1.2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 280px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .step-badge h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--brand-red);
+      margin-bottom: 0.2rem;
+    }
+
+    .step-badge p {
+      font-size: 0.82rem;
+      color: var(--brand-gray);
+      font-weight: 500;
+    }
+
+    .step-plus {
+      font-size: 1.4rem;
+      color: var(--brand-gold);
+      font-weight: 800;
+      user-select: none;
+    }
+
+    /* FAQ ACCORDION SECTION */
+    .faq-section {
+      padding: 3rem 4%;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 1rem 1.2rem;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .faq-question:hover {
+      color: var(--brand-red);
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      color: var(--brand-gold);
+      transition: transform 0.3s ease;
+      font-weight: 700;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 1.2rem;
+      background: #FAF7F2;
+      border-top: 0px solid transparent;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding: 0.9rem 1.2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .faq-answer p {
+      font-size: 0.85rem;
+      color: var(--brand-gray);
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #14100F;
+      color: #A39B98;
+      padding: 3rem 4% 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-col h3 {
+      color: white;
+      font-family: var(--font-heading);
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .footer-col p, .footer-col a {
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .footer-col a:hover {
+      color: #FFF;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #2B2523;
+      padding-top: 1.2rem;
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 0.6rem 4%;
+      }
+
+      .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.82rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand-logo">
+      <img src="https://lh3.googleusercontent.com/d/1BOQm9Xw0A_eFbhqlFRYokwxuVke2cYJ3" alt="Flavoura Logo">
+    </div>
+    <nav>
+      <a href="https://wa.me/919088055818?text=Hi!%20I%20want%20to%20inquire%20about%20Flavoura%20Instant%20Premixes" target="_blank" class="btn btn-whatsapp">
+        WhatsApp Order
+      </a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-container">
+    <div class="hero-banner-wrap">
+      <img src="https://lh3.googleusercontent.com/d/1TNHCex2SNq5V95PPURlBXIl_xxZZWWW-" alt="Flavoura - Delicious Meals in Minutes">
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="trust-container">
+      <div class="trust-item">
+        <h4>⚡ Zero Prep Cooking</h4>
+        <p>No chopping onions or peeling garlic. Just add puree/curd and cook!</p>
+      </div>
+      <div class="trust-item">
+        <h4>🌿 100% Pure Vegetarian</h4>
+        <p>Premix is 100% veg but can be used with Paneer, Veggies & Chicken!</p>
+      </div>
+      <div class="trust-item">
+        <h4>🎓 Hostel & Busy Life</h4>
+        <p>Last-minute restaurant-style food without complex recipes or mess.</p>
+      </div>
+      <div class="trust-item">
+        <h4>🚫 No Preservatives</h4>
+        <p>Handcrafted quality with real nuts & authentic spices.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGUE SECTION -->
+  <section class="products-section" id="catalogue">
+    <div class="section-header">
+      <h2>Instant Premix Range</h2>
+      <p>Flat ₹120 per pack. Order directly via WhatsApp.</p>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- Achaari -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/1aji77tplyuewCGq5Utjl1_o500Up-AcC" alt="Achaari Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">Achaari Premix</h3>
+            <p class="product-desc">Tangy, zesty pickle flavor base with saunf, zeera, mustard & kalaunji.</p>
+
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• 400g Tomato Puree + 500g Protein + 80g Premix (entire bottle). Sauté & cook in oil.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(80g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('Achaari Premix', 'This premix contains methi daana, saunf, zeera, mustard, kalaunji, Kashmiri red chilli, coriander seeds, citric acid, onion, ginger, and garlic powders, black salt, garam masala, and haldi.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-Achaari Premix">
+              <button class="btn-add-cart" onclick="updateQty('Achaari Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Haryali -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/1rmVdIN9BQxlbXgLN6IM0OX1A5E46PK6q" alt="Haryali Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">Haryali Premix</h3>
+            <p class="product-desc">Fresh green marinade with green chilli, kaju, and fried onion.</p>
+
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• 500g Protein + 60g Premix (full bottle). Add oil/butter, pan fry & cook.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(60g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('Haryali Premix', 'This premix contains dalchini, cardamom (black and green), clove, black pepper, star anise, kaju powder, onion and milk powders, zeera, coriander, ginger, garam masala, garlic flakes, green chilli, fried onion, salt and food colour.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-Haryali Premix">
+              <button class="btn-add-cart" onclick="updateQty('Haryali Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Angaara -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/15Y9dkWPW9dJcm2KsXGib4fZtB5gP5LRV" alt="Angaara Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">Angaara Premix</h3>
+            <p class="product-desc">Rich restaurant-style marinade with cashews, almonds, and spices.</p>
+
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• 500g Protein + 80g Premix (full bottle) + 200g Thick Curd. Cook till tender.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(80g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('Angaara Premix', 'This premix contains cashew, almond, dalchini, green cardamom, Kashmiri lal mirch, clove, black pepper, star anise, ginger, milk, and garlic powders, cornflour, Kashmiri red chilli, coriander, cumin, and garam masala powders, salt, kasuri methi, and fried onion.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-Angaara Premix">
+              <button class="btn-add-cart" onclick="updateQty('Angaara Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fish Fry -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/1b9cMhLQoNv9bkncIHA3JQF4mGJ4MLRpD" alt="Fish Fry Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">Fish Fry Premix</h3>
+            <p class="product-desc">Crispy marinade with ajwain, rai, cumin, and Kashmiri chilli.</p>
+
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• 500g Fish Slices + 20g Premix (1/3 bottle) + 1 tbsp Lemon Juice. Shallow pan-fry.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(60g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('Fish Fry Premix', 'This premix contains coriander powder, Kashmiri red chilli, garlic and ginger powders, cumin powder, turmeric, chaat masala, garam masala, rai, and ajwain.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-Fish Fry Premix">
+              <button class="btn-add-cart" onclick="updateQty('Fish Fry Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tandoori -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/1SDIxz_5Td3mHqZLl5Pi-LBLUPtnjJ1wW" alt="Tandoori Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">Tandoori Premix</h3>
+            <p class="product-desc">Classic tandoori marinade with aamchur, jayphal, and Kashmiri chilli.</p>
+
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• 500g Chicken/Paneer + 30g Premix (1/2 bottle) + 200g Curd + Lemon juice. Cook in pan.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(60g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('Tandoori Premix', 'This premix contains Kashmiri chilli powder, zeera powder, chaat masala, aamchur powder, salt, ginger powder, garlic powder, garam masala and jayphal powder.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-Tandoori Premix">
+              <button class="btn-add-cart" onclick="updateQty('Tandoori Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- White Gravy -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/1ZnNnrIqWTiJEBpkotLc4nMMLosV-teOf" alt="White Gravy Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">White Gravy</h3>
+            <p class="product-desc">Rich Mughlai gravy with cashew, melon seeds, and white sesame.</p>
+            
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• <strong>Paneer:</strong> Mix 60g premix + milk paste. Cook in butter/oil until thick, add 500g Paneer.</span>
+                <span>• <strong>Chicken:</strong> Marinate 500g chicken with 60g premix + 200g curd. Cook in butter/oil.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(60g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('White Gravy Premix', 'This premix contains cashew, melon seeds, white sesame, milk powder, chaat masala, salt, cornflour, onion powder, garlic powder, ginger powder, sugar, garam masala, and kasuri methi.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-White Gravy Premix">
+              <button class="btn-add-cart" onclick="updateQty('White Gravy Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Red Gravy -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/1RNYkqEYmSXWtiaEQcJKiOdq6MwFpMqle" alt="Red Gravy Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">Red Gravy</h3>
+            <p class="product-desc">Classic North Indian gravy base with cashews, milk powder, and red chilli.</p>
+            
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• <strong>Veg/Paneer:</strong> Cook 400g tomato puree in oil. Add 80g premix water-paste + 500g Paneer/Veg.</span>
+                <span>• <strong>Chicken:</strong> Marinate 500g chicken with 80g premix + curd/water. Add to cooked tomato puree.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(80g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('Red Gravy Premix', 'This premix contains cashew, white sesame, melon seeds, milk powder, chaat masala, onion powder, garlic powder, ginger powder, red chilli powder, garam masala, cornflour, salt, sugar, kasuri methi, ghee, and red food color.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-Red Gravy Premix">
+              <button class="btn-add-cart" onclick="updateQty('Red Gravy Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Golden Gravy -->
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://lh3.googleusercontent.com/d/1AtIqdvmWTJBsqtHeWW-3201oYfc_F89g" alt="Golden Gravy Instant Premix">
+        </div>
+        <div class="product-details">
+          <div>
+            <h3 class="product-title">Golden Gravy</h3>
+            <p class="product-desc">Rich cashew & sesame base. Great for Shahi Paneer, Veggies or Chicken.</p>
+
+            <div class="quick-method-box">
+              <div class="quick-method-title">⚡ How to Cook (500g):</div>
+              <div class="quick-method-steps">
+                <span>• 400g Tomato Puree + 80g Premix (entire bottle) + 500g Protein/Veg. Cook in oil until thick.</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-action">
+            <div>
+              <span class="price-tag">₹120</span> <span class="weight-tag">(80g Pack)</span>
+            </div>
+            <button class="btn-ingredients" onclick="openIngredientsModal('Golden Gravy Premix', 'This premix contains cashew, melon seeds, white sesame, milk powder, chaat masala, salt, onion powder, garlic powder, ginger powder, haldi, red chilli powder, coriander powder, garam masala, kasuri methi, and sugar.')">🔍 Check Ingredients</button>
+            <div class="cart-action-wrap" id="action-Golden Gravy Premix">
+              <button class="btn-add-cart" onclick="updateQty('Golden Gravy Premix', 1)">🛒 Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WATCH VIDEO RECIPES BUTTON -->
+  <div class="catalogue-cta-wrap">
+    <a href="https://youtube.com/playlist?list=PLcIbgv4CULTTXqynXPDaPgVsT-ob_uLhc" target="_blank" class="btn btn-youtube">
+      ▶ Watch Video Recipes on YouTube
+    </a>
+  </div>
+
+  <!-- INDEPENDENT HOME DELIVERY NOTICE -->
+  <div class="delivery-text-standalone">
+    🚚 Home Delivery Available | Pan-India Shipping
+  </div>
+
+  <!-- 3-INGREDIENT MAGIC SECTION -->
+  <section class="how-it-works">
+    <div class="section-header">
+      <h2>3-Ingredient Magic</h2>
+      <p>Combine these essentials for a quick, restaurant-style dish every time.</p>
+    </div>
+    <div class="steps-flow">
+      <div class="step-badge">
+        <h3>Main Protein / Veg</h3>
+        <p>Chicken / Paneer / Veggies</p>
+      </div>
+      <div class="step-plus">+</div>
+      <div class="step-badge">
+        <h3>Flavoura Premix</h3>
+        <p>Your Favorite Flavor Pack</p>
+      </div>
+      <div class="step-plus">+</div>
+      <div class="step-badge">
+        <h3>Masala Base</h3>
+        <p>Curd or Tomato Puree</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ ACCORDION SECTION -->
+  <section class="faq-section">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about Flavoura Instant Premixes.</p>
+    </div>
+
+    <div class="faq-container">
+      
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I need to add ginger-garlic paste or onions?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No, that's the whole specialty! You don't need to chop or saute onions, garlic, or ginger. Everything is blended directly into the premix for zero-prep cooking.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I need to add salt or extra spices?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Salt and whole spices are already pre-portioned in every pack. You don't need to add anything extra, though you can adjust salt to taste if you prefer a bolder flavor.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Will the dish have a gravy or be dry like a kebab/tikka?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>It's totally customizable! Adding curd or tomato puree gives you a rich, thick restaurant-style gravy. Prefer a dry starter/tikka? Simply marinate with less liquid and pan-fry!</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How long does it take to cook a dish?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Your meal will be ready within 30 minutes maximum! It's designed for maximum speed without compromising on authentic taste.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Who is Flavoura best for?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>It’s perfect for hostel/college students, busy working professionals, families, or anyone who wants quick, home-cooked gourmet meals—especially on days when the cook skips!</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What is the spice & heat level across different premixes?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Angaara and Tandoori are our spiciest, boldest blends. If you prefer a mild, creamy taste, go for the White Gravy Premix.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What is the shelf life and how should I store it?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Flavoura premixes easily last up to 6 months. Simply store the bottle in a cool, dry place away from direct sunlight.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is there a minimum order quantity and how does shipping work?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>There is no minimum order quantity—you can order as few as 1 bottle! Delivery charges are fulfilled by the customer, and we accept all standard digital payment methods (UPI, GPay, Paytm, cards) on WhatsApp.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>FLAVOURA</h3>
+        <p>Instant cooking premixes made with natural ingredients, real nuts & whole spices.</p>
+        <p>🚚 Pan-India Shipping Available</p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact & Socials</h3>
+        <p>📞 Phone: +91 9088055818</p>
+        <p>📷 Instagram: <a href="https://instagram.com/thearshiaahmad" target="_blank">@thearshiaahmad</a></p>
+        <p>▶ YouTube: <a href="https://www.youtube.com/@arshiaahmad" target="_blank">@arshiaahmad</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>FSSAI Compliance</h3>
+        <p><strong>FSSAI Reg No:</strong> 22824038000288</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Flavoura. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- STICKY BOTTOM CART BAR -->
+  <div class="sticky-cart-bar" id="stickyCartBar">
+    <div class="cart-summary-text">
+      <h4 id="stickyTotalItems">0 Items Added</h4>
+      <p id="stickyTotalPrice">Item Total: ₹0</p>
+    </div>
+    <button class="btn-checkout" onclick="openCheckoutModal()">Proceed to Order →</button>
+  </div>
+
+  <!-- INGREDIENTS MODAL HTML -->
+  <div class="modal-overlay" id="ingredientsModal" onclick="closeModal('ingredientsModal', event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 id="modalProductTitle">Product Title</h3>
+      <p class="ingredients-text" id="modalIngredientsList">Ingredients list goes here...</p>
+      <button class="modal-btn-ok" onclick="closeModalDirect('ingredientsModal')">OK</button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT FORM MODAL HTML -->
+  <div class="modal-overlay" id="checkoutModal" onclick="closeModal('checkoutModal', event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3>Your Order Summary</h3>
+      
+      <div class="cart-items-list" id="cartItemsBreakdown">
+        <!-- Dynamically filled via JavaScript -->
+      </div>
+
+      <div class="notice-box">
+        📞 <strong>Delivery & Callback Info:</strong> Once submitted, we will call/message you to confirm exact delivery charges (via Uber Parcel/Courier) and provide instant UPI QR payment details!
+      </div>
+
+      <form id="checkoutForm" onsubmit="submitOrder(event)">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="custName" required placeholder="e.g. Rahul Sharma">
+        </div>
+        <div class="form-group">
+  <label>Phone Number (10 Digits) *</label>
+  <div class="phone-input-wrap">
+    <span class="phone-prefix">+91</span>
+    <input 
+      type="tel" 
+      id="custPhone" 
+      required 
+      placeholder="9830012345" 
+      maxlength="10" 
+      pattern="[6-9][0-9]{9}"
+      oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+      title="Please enter a valid 10-digit Indian mobile number."
+    >
+  </div>
+</div>
+        <div class="form-group">
+          <label>Complete Delivery Address *</label>
+          <textarea id="custAddress" rows="3" required placeholder="Flat No, House Name, Street, Landmark, Pincode"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-whatsapp" style="width: 100%; padding: 0.8rem; font-size: 0.95rem;">
+          📲 Submit Order for Call-Back
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT FOR CART, ACCORDION, MODALS & DISCORD WEBHOOK -->
+  <script>
+    // CART STATE
+    const cart = {};
+    const itemPrice = 120;
+
+    function updateQty(productName, delta) {
+      if (!cart[productName]) cart[productName] = 0;
+      cart[productName] += delta;
+
+      if (cart[productName] <= 0) {
+        delete cart[productName];
+      }
+
+      // Update Product Card Action UI
+      renderProductCardAction(productName);
+      renderCartBar();
+    }
+
+    function renderProductCardAction(productName) {
+      const container = document.getElementById(`action-${productName}`);
+      if (!container) return;
+
+      const currentQty = cart[productName] || 0;
+
+      if (currentQty > 0) {
+        container.innerHTML = `
+          <div class="qty-control">
+            <button class="qty-btn" onclick="updateQty('${productName}', -1)">-</button>
+            <span class="qty-value">${currentQty}</span>
+            <button class="qty-btn" onclick="updateQty('${productName}', 1)">+</button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <button class="btn-add-cart" onclick="updateQty('${productName}', 1)">🛒 Add to Cart</button>
+        `;
+      }
+    }
+
+    function renderCartBar() {
+      let totalQty = 0;
+      for (let item in cart) {
+        totalQty += cart[item];
+      }
+
+      const cartBar = document.getElementById('stickyCartBar');
+      if (totalQty > 0) {
+        cartBar.classList.add('active');
+        document.getElementById('stickyTotalItems').innerText = `${totalQty} Item${totalQty > 1 ? 's' : ''} Added`;
+        document.getElementById('stickyTotalPrice').innerText = `Item Total: ₹${totalQty * itemPrice}`;
+      } else {
+        cartBar.classList.remove('active');
+      }
+    }
+
+    // FAQ Accordion Toggle
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        if (!isActive) {
+          faqItem.classList.add('active');
+        }
+      });
+    });
+
+    // Modal Control Functions
+    function openIngredientsModal(title, text) {
+      document.getElementById('modalProductTitle').innerText = title;
+      document.getElementById('modalIngredientsList').innerText = text;
+      document.getElementById('ingredientsModal').classList.add('active');
+    }
+
+    function openCheckoutModal() {
+      const breakdown = document.getElementById('cartItemsBreakdown');
+      breakdown.innerHTML = '';
+
+      let totalQty = 0;
+      for (let item in cart) {
+        totalQty += cart[item];
+        const row = document.createElement('div');
+        row.className = 'cart-item-row';
+        row.innerHTML = `<span>${item} x ${cart[item]}</span><span>₹${cart[item] * itemPrice}</span>`;
+        breakdown.appendChild(row);
+      }
+
+      const totalRow = document.createElement('div');
+      totalRow.className = 'cart-total-row';
+      totalRow.innerHTML = `<span>Items Total (${totalQty} packs)</span><span>₹${totalQty * itemPrice}</span>`;
+      breakdown.appendChild(totalRow);
+
+      document.getElementById('checkoutModal').classList.add('active');
+    }
+
+    function closeModalDirect(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+
+    function closeModal(modalId, event) {
+      if (event.target === document.getElementById(modalId)) {
+        closeModalDirect(modalId);
+      }
+    }
+
+    // SUBMIT ORDER WITH DISCORD WEBHOOK LOGGING + WHATSAPP REDIRECT
+    async function submitOrder(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('custName').value.trim();
+  const rawPhone = document.getElementById('custPhone').value.trim();
+  const address = document.getElementById('custAddress').value.trim();
+
+  // Strict JS fallback check for Indian Mobile Number
+  const phonePattern = /^[6-9]\d{9}$/;
+  if (!phonePattern.test(rawPhone)) {
+    alert("Please enter a valid 10-digit Indian mobile number.");
+    return;
+  }
+
+  const fullPhone = `+91 ${rawPhone}`;
+
+  // 1. Build Item Summary
+  let itemsSummary = '';
+  let totalQty = 0;
+  for (let item in cart) {
+    itemsSummary += `• ${item} x ${cart[item]} = ₹${cart[item] * itemPrice}\n`;
+    totalQty += cart[item];
+  }
+
+  // 2. SPICE BOT DISCORD WEBHOOK
+  const discordWebhookUrl = "https://discord.com/api/webhooks/1548727130454761502/mPdx-s3alhHKIW08zIj30GA0dUboM2_suBbnYdUD0HQbsmpIeqYdt11LUcX1VYhZZDfC";
+
+  const discordPayload = {
+    username: "Spice Bot",
+    embeds: [{
+      title: "🛒 NEW FLAVOURA ORDER REQUEST",
+      color: 12068138, // Flavoura Brand Red
+      fields: [
+        { name: "Customer Name", value: name, inline: true },
+        { name: "Phone Number", value: fullPhone, inline: true },
+        { name: "Delivery Address", value: address },
+        { name: "Items Ordered", value: itemsSummary || "None" },
+        { name: "Total Packs", value: `${totalQty} packs`, inline: true },
+        { name: "Subtotal", value: `₹${totalQty * itemPrice}`, inline: true }
+      ],
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  try {
+    await fetch(discordWebhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(discordPayload)
+    });
+  } catch (err) {
+    console.error("Spice Bot Discord Webhook Error:", err);
+  }
+
+  // 3. WHATSAPP REDIRECT FOR CUSTOMER
+  const message = `*NEW FLAVOURA ORDER REQUEST*\n\n` +
+                  `*Customer Name:* ${name}\n` +
+                  `*Phone:* ${fullPhone}\n` +
+                  `*Delivery Address:* ${address}\n\n` +
+                  `*ITEMS ORDERED:*\n${itemsSummary}\n` +
+                  `*Item Subtotal (${totalQty} packs):* ₹${totalQty * itemPrice}\n\n` +
+                  `Please call me back to confirm order & total delivery charge.`;
+
+  const whatsappUrl = `https://wa.me/919088055818?text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, '_blank');
+
+  closeModalDirect('checkoutModal');
+}
+  </script>
+
+</body>
+</html>
