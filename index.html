@@ -29,7 +29,7 @@
     body { background-color: var(--bg-cream); color: var(--choc-dark); font-family: var(--font-sans); line-height: 1.5; }
 
     /* Top Bar */
-    .top-bar { background: var(--choc-dark); color: var(--bg-cream); text-align: center; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; }
+    .top-bar { background: var(--choc-dark); color: var(--bg-cream); text-align: center; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3px; }
 
     /* Mobile Responsive Header Nav */
     header { 
@@ -38,7 +38,7 @@
       position: sticky; 
       top: 0; 
       z-index: 100; 
-      padding: 12px 16px;
+      padding: 10px 14px;
     }
     .header-container {
       max-width: 1100px;
@@ -47,11 +47,11 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
     }
     .brand-logo { text-decoration: none; display: flex; align-items: center; gap: 8px; order: 1; }
-    .brand-logo img { height: 38px; width: auto; display: block; object-fit: contain; }
-    .brand-name { font-family: var(--font-serif); font-style: italic; font-size: 1.7rem; font-weight: 700; color: var(--choc-dark); letter-spacing: -0.5px; margin: 0; }
+    .brand-logo img { height: 34px; width: auto; display: block; object-fit: contain; }
+    .brand-name { font-family: var(--font-serif); font-style: italic; font-size: 1.6rem; font-weight: 700; color: var(--choc-dark); letter-spacing: -0.5px; margin: 0; }
     .brand-name span { color: var(--brand-red-accent); font-style: normal; }
 
     .cart-btn { 
@@ -59,31 +59,47 @@
       background: var(--brand-red-accent); 
       color: #FFFFFF; 
       border: none; 
-      padding: 8px 18px; 
+      padding: 6px 14px; 
       border-radius: 30px; 
       font-weight: 700; 
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       cursor: pointer; 
       display: flex; 
       align-items: center; 
       gap: 6px; 
       white-space: nowrap;
-      box-shadow: 0 2px 8px rgba(200, 16, 46, 0.25);
+      box-shadow: 0 2px 8px rgba(200, 16, 46, 0.2);
       transition: opacity 0.2s, transform 0.2s; 
     }
     .cart-btn:hover { opacity: 0.95; transform: scale(1.02); }
 
+    /* Mobile-Optimized Horizontal Scrollable Nav */
     nav {
       order: 3;
       width: 100%;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px 18px;
-      padding-top: 10px;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 16px;
+      padding-top: 8px;
+      margin-top: 2px;
       border-top: 1px solid #F5F1EB;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
     }
-    nav a { text-decoration: none; color: var(--choc-dark); font-weight: 600; font-size: 0.88rem; white-space: nowrap; transition: color 0.2s; }
+    nav::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+    nav a { 
+      text-decoration: none; 
+      color: var(--choc-dark); 
+      font-weight: 600; 
+      font-size: 0.85rem; 
+      white-space: nowrap; 
+      transition: color 0.2s;
+      padding: 2px 0;
+    }
     nav a:hover, nav a.active { color: var(--brand-red-accent); }
 
     /* Desktop View Adjustments */
@@ -93,88 +109,91 @@
         order: 2;
         width: auto;
         padding-top: 0;
+        margin-top: 0;
         border-top: none;
         gap: 22px;
+        justify-content: center;
+        overflow-x: visible;
       }
-      .cart-btn { order: 3; }
+      .cart-btn { order: 3; padding: 8px 18px; font-size: 0.9rem; }
       .brand-logo img { height: 44px; }
       .brand-name { font-size: 1.8rem; }
     }
 
     /* Hero Section */
-    .hero { text-align: center; padding: 40px 20px 24px; max-width: 850px; margin: 0 auto; }
-    .hero h1 { font-family: var(--font-serif); font-style: italic; font-size: 2.8rem; color: var(--choc-dark); font-weight: 400; line-height: 1.2; margin-bottom: 12px; }
+    .hero { text-align: center; padding: 28px 16px 18px; max-width: 850px; margin: 0 auto; }
+    .hero h1 { font-family: var(--font-serif); font-style: italic; font-size: 2.1rem; color: var(--choc-dark); font-weight: 400; line-height: 1.25; margin-bottom: 10px; }
     .hero h1 span { color: var(--brand-red-accent); font-style: normal; font-weight: 700; }
-    .hero p { font-size: 1.15rem; color: var(--text-muted); font-weight: 500; max-width: 680px; margin: 0 auto; }
+    .hero p { font-size: 0.98rem; color: var(--text-muted); font-weight: 500; max-width: 680px; margin: 0 auto; line-height: 1.45; }
 
     /* Main Container & Section Titles */
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
-    .section-title { font-family: var(--font-serif); font-style: italic; font-size: 2.1rem; color: var(--choc-dark); font-weight: 700; margin-bottom: 4px; text-align: center; }
-    .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 24px; font-weight: 500; font-size: 0.95rem; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+    .section-title { font-family: var(--font-serif); font-style: italic; font-size: 1.8rem; color: var(--choc-dark); font-weight: 700; margin-bottom: 4px; text-align: center; }
+    .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 20px; font-weight: 500; font-size: 0.9rem; }
 
     /* Best Seller Spotlight */
-    .bestseller-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
-    .bestseller-img-wrap { border-radius: var(--radius-sm); overflow: hidden; background: #FAF6F0; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1.414 / 1; }
+    .bestseller-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.03); }
+    .bestseller-img-wrap { border-radius: var(--radius-sm); overflow: hidden; background: #FAF6F0; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1.414 / 1; text-decoration: none; }
     .bestseller-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     
-    .bestseller-info .badge { background: var(--brand-red-accent); color: #FFF; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 10px; }
-    .bestseller-info h3 { font-family: var(--font-serif); font-style: italic; font-size: 1.9rem; font-weight: 700; color: var(--choc-dark); margin-bottom: 10px; line-height: 1.2; }
-    .bestseller-info p { color: var(--text-muted); margin-bottom: 12px; font-size: 0.95rem; line-height: 1.5; }
-    .bestseller-info .note { font-size: 0.85rem; font-style: italic; color: var(--choc-mid); margin-bottom: 18px; border-left: 3px solid var(--brand-red-accent); padding-left: 10px; }
+    .bestseller-info .badge { background: var(--brand-red-accent); color: #FFF; font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 8px; }
+    .bestseller-info h3 { font-family: var(--font-serif); font-style: italic; font-size: 1.6rem; font-weight: 700; color: var(--choc-dark); margin-bottom: 8px; line-height: 1.2; }
+    .bestseller-info p { color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem; line-height: 1.5; }
+    .bestseller-info .note { font-size: 0.82rem; font-style: italic; color: var(--choc-mid); margin-bottom: 16px; border-left: 3px solid var(--brand-red-accent); padding-left: 10px; }
     
-    .action-btn { display: inline-block; background: var(--choc-dark); color: var(--bg-cream); text-decoration: none; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: background 0.2s; text-align: center; }
+    .action-btn { display: inline-block; background: var(--choc-dark); color: var(--bg-cream); text-decoration: none; padding: 10px 20px; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: background 0.2s; text-align: center; }
     .action-btn:hover { background: var(--brand-red-accent); }
 
     /* Category Cards Grid */
-    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
     .cat-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: inherit; transition: all 0.2s; display: flex; flex-direction: column; }
-    .cat-card:hover { border-color: var(--choc-dark); transform: translateY(-4px); }
+    .cat-card:hover { border-color: var(--choc-dark); transform: translateY(-3px); }
     
     /* Strict A5 Landscape Ratio (1.414 : 1) for Category Banners */
     .cat-img-box { width: 100%; aspect-ratio: 1.414 / 1; background: #FAF6F0; overflow: hidden; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-color); }
     .cat-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .cat-title { padding: 16px; font-weight: 800; font-size: 1.05rem; text-align: center; }
+    .cat-title { padding: 12px; font-weight: 800; font-size: 0.98rem; text-align: center; }
 
     /* About Us Styling */
-    .about-wrap { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-    .story-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
+    .about-wrap { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .story-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
     
     .story-quote-box {
       background: #FAF3EA;
       border-left: 4px solid var(--brand-red-accent);
-      padding: 18px 22px;
+      padding: 14px 18px;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      margin: 20px 0;
+      margin: 16px 0;
       font-family: var(--font-serif);
       font-style: italic;
       color: var(--choc-dark);
-      font-size: 1.05rem;
-      line-height: 1.6;
+      font-size: 0.98rem;
+      line-height: 1.5;
     }
     
     .story-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-top: 10px;
+      gap: 14px;
+      margin-top: 8px;
     }
     .story-item h4 {
       font-family: var(--font-serif);
       color: var(--choc-dark);
-      font-size: 1.05rem;
+      font-size: 1rem;
       margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .story-item p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+    .story-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
 
     /* Flavoura Twin Brand Card */
     .flavoura-card {
       background: #FFFDF9;
       border: 2px solid #E5C392;
       border-radius: var(--radius-lg);
-      padding: 32px 24px;
+      padding: 24px 18px;
       text-align: center;
       box-shadow: 0 6px 20px rgba(184, 115, 51, 0.08);
       display: flex;
@@ -182,30 +201,30 @@
       align-items: center;
     }
     .flavoura-logo-img {
-      max-width: 280px;
+      max-width: 240px;
       width: 100%;
       height: auto;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: block;
     }
     .flavoura-card p {
       max-width: 650px;
       color: var(--choc-mid);
-      font-size: 0.98rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 16px;
     }
     .flavoura-btn {
       background: #A33A2B;
       color: #FFFFFF;
       text-decoration: none;
-      padding: 12px 28px;
+      padding: 10px 24px;
       border-radius: 30px;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       display: inline-block;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(163, 58, 43, 0.25);
+      box-shadow: 0 4px 12px rgba(163, 58, 43, 0.22);
     }
     .flavoura-btn:hover {
       background: #872E21;
@@ -214,9 +233,9 @@
 
     /* Cart Modal */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
-    .modal-box { background: #FFF; padding: 24px; border-radius: var(--radius-lg); max-width: 420px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
-    .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; margin-top: 16px; cursor: pointer; transition: opacity 0.2s; }
+    .modal-box { background: #FFF; padding: 20px; border-radius: var(--radius-lg); max-width: 420px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+    .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.92rem; margin-top: 14px; cursor: pointer; transition: opacity 0.2s; }
     .checkout-btn:hover { opacity: 0.9; }
 
     /* Footer Layout */
@@ -232,29 +251,33 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
+      gap: 8px;
+      font-size: 0.85rem;
       color: #FAF6F0;
       font-weight: 500;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       width: 100%;
     }
     .footer-dot { display: none; }
     .banner-text {
-      font-size: 0.72rem;
-      letter-spacing: 1.1px;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
       font-weight: 700;
       text-transform: uppercase;
       color: #E8E1D9;
       border-top: 1px solid rgba(232,225,217,0.2);
       border-bottom: 1px solid rgba(232,225,217,0.2);
-      padding: 12px 10px;
-      margin-bottom: 24px;
-      line-height: 1.5;
+      padding: 10px 8px;
+      margin-bottom: 20px;
+      line-height: 1.4;
       width: 100%;
     }
 
     @media (min-width: 768px) {
+      .hero h1 { font-size: 2.8rem; }
+      .hero p { font-size: 1.15rem; }
+      .section-title { font-size: 2.1rem; }
+      .section-subtitle { font-size: 0.95rem; }
       .footer-contact-wrapper {
         flex-direction: row;
         justify-content: center;
@@ -272,9 +295,8 @@
     }
 
     @media (max-width: 768px) {
-      .bestseller-card { grid-template-columns: 1fr; gap: 20px; }
-      .hero h1 { font-size: 2.1rem; }
-      .container { padding: 16px; }
+      .bestseller-card { grid-template-columns: 1fr; gap: 16px; }
+      .container { padding: 16px 14px; }
     }
   </style>
 </head>
@@ -294,6 +316,7 @@
         🛒 Cart
       </button>
 
+      <!-- Scrollable Navigation -->
       <nav>
         <a href="/" class="active">Home</a>
         <a href="/chocolates/">Chocolates</a>
@@ -307,7 +330,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Handcrafted <span>Chocolates</span> & Gourmet Desserts</h1>
+    <h1>Handcrafted Chocolates & <span>Gourmet Desserts</span></h1>
     <p>Premium, artisanal chocolates and gourmet desserts. Handcrafted and hand-packed with care.</p>
   </section>
 
@@ -378,7 +401,7 @@
     <div class="about-wrap">
       <!-- Story Overview Card -->
       <div class="story-card">
-        <p style="font-size: 1.05rem; line-height: 1.6; color: var(--choc-dark); margin-bottom: 0;">
+        <p style="font-size: 0.98rem; line-height: 1.55; color: var(--choc-dark); margin-bottom: 0;">
           <strong>Fivian</strong> is a homegrown Kolkata brand named after our family of five, turning over 15 years of culinary passion into a refined artisanal experience.
         </p>
 
@@ -393,7 +416,7 @@
           </div>
 
           <div class="story-item">
-            <h4>🎨 Branding & Story</h4>
+            <h4>🎨 Brand, Story & Experience</h4>
             <p><strong>Madeeha Anwar</strong> (MBA, Marketing) gives Fivian its soul and story. She designs the visual identity, custom packaging, brand personality, and designed and built this entire website from the ground up to craft a memorable customer experience.</p>
           </div>
         </div>
@@ -401,7 +424,7 @@
 
       <!-- Twin Brand Showcase Card -->
       <div class="flavoura-card">
-        <span style="text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; font-weight: 800; color: #A33A2B; margin-bottom: 8px;">
+        <span style="text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.72rem; font-weight: 800; color: #A33A2B; margin-bottom: 8px;">
           Meet Our Twin Brand
         </span>
         
@@ -429,14 +452,14 @@
   </div>
 
   <!-- Custom Footer -->
-  <footer style="background: #2B1B17; color: #FAF6F0; text-align: center; padding: 40px 16px 24px; margin-top: 50px; border-top: 3px solid #C8102E;">
+  <footer style="background: #2B1B17; color: #FAF6F0; text-align: center; padding: 32px 16px 20px; margin-top: 40px; border-top: 3px solid #C8102E;">
     <div class="footer-content">
       
       <!-- Brand Header -->
-      <h2 style="font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 2.1rem; letter-spacing: 1px; font-weight: 700; color: #FAF6F0; margin-bottom: 2px;">
+      <h2 style="font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 1.9rem; letter-spacing: 1px; font-weight: 700; color: #FAF6F0; margin-bottom: 2px;">
         Fivian<span style="color: #C8102E; font-style: normal;">.</span>
       </h2>
-      <p style="font-style: italic; font-family: 'Libre Baskerville', Georgia, serif; color: #E8E1D9; margin-bottom: 24px; font-size: 0.9rem; opacity: 0.9;">
+      <p style="font-style: italic; font-family: 'Libre Baskerville', Georgia, serif; color: #E8E1D9; margin-bottom: 20px; font-size: 0.85rem; opacity: 0.9;">
         Handcrafted Artisanal Chocolates
       </p>
 
@@ -455,23 +478,23 @@
       </p>
 
       <!-- Social Icons -->
-      <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 24px;">
-        <a href="https://wa.me/919088055818" target="_blank" title="WhatsApp" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+      <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 20px;">
+        <a href="https://wa.me/919088055818" target="_blank" title="WhatsApp" class="social-link" style="display: inline-block; width: 36px; height: 36px; border-radius: 20%; overflow: hidden;">
           <img src="https://lh3.googleusercontent.com/d/1qmtByzzVWRH8GbYRvboxbqQ7vVMvugTY" alt="WhatsApp" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </a>
-        <a href="https://instagram.com/fivian.in" target="_blank" title="Instagram" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+        <a href="https://instagram.com/fivian.in" target="_blank" title="Instagram" class="social-link" style="display: inline-block; width: 36px; height: 36px; border-radius: 20%; overflow: hidden;">
           <img src="https://lh3.googleusercontent.com/d/1d_lH4q3EBbucuoTOtA_E6VzIAe_hHBWb" alt="Instagram" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </a>
-        <a href="https://youtube.com/@fivianindia" target="_blank" title="YouTube" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+        <a href="https://youtube.com/@fivianindia" target="_blank" title="YouTube" class="social-link" style="display: inline-block; width: 36px; height: 36px; border-radius: 20%; overflow: hidden;">
           <img src="https://lh3.googleusercontent.com/d/13DdNGoSKsdvMd4LQwX6I0Qjc8BJVBB59" alt="YouTube" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </a>
-        <a href="https://facebook.com/fivian.in" target="_blank" title="Facebook" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
+        <a href="https://facebook.com/fivian.in" target="_blank" title="Facebook" class="social-link" style="display: inline-block; width: 36px; height: 36px; border-radius: 20%; overflow: hidden;">
           <img src="https://lh3.googleusercontent.com/d/1caAi5AIPIrPCiyMPqOJiXw_csihy4YNt" alt="Facebook" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </a>
       </div>
 
       <!-- Copyright -->
-      <p style="font-size: 0.75rem; color: #A0948D; font-weight: 600; letter-spacing: 1px;">
+      <p style="font-size: 0.72rem; color: #A0948D; font-weight: 600; letter-spacing: 1px;">
         © 2026 FIVIAN INDIA | ALL RIGHTS RESERVED
       </p>
 
