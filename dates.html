@@ -313,160 +313,160 @@
   </footer>
 
   <script>
-    // Stuffed Dates Products List with Direct Google Drive LH3 Images
-    const datesProducts = [
-      {
-        id: "kunafa-dates",
-        name: "Kunafa Stuffed Dates",
-        desc: "Handcrafted dates stuffed with pistachio paste and toasted crispy vermicelli, dipped in chocolate coating.",
-        price: 370,
-        image: "https://lh3.googleusercontent.com/d/1QDIaCVbSQ3aD_KkhKHODIp8KPklGNYMK"
-      },
-      {
-        id: "peanut-dates",
-        name: "Peanut Stuffed Dates",
-        desc: "Juicy dates filled with roasted peanut filling and wrapped in a rich chocolate shell.",
-        price: 370,
-        image: "https://lh3.googleusercontent.com/d/1LRGT1Ief3EcJdecKKWKLWKyRk-wpVqpo"
-      },
-      {
-        id: "almond-dates",
-        name: "Whole Almond Stuffed Dates",
-        desc: "Classic whole dates stuffed with whole crunchy roasted almonds and chocolate-coated.",
-        price: 280,
-        image: "https://lh3.googleusercontent.com/d/1vsK5ngVDpORK4Jsu7XQf3EOaRsKu-r7z"
-      },
-      {
-        id: "rose-pistachio-dates",
-        name: "Rose Pistachio Stuffed Dates",
-        desc: "Floral and nutty dates stuffed with crushed pistachio paste and garnished with delicate rose petals.",
-        price: 370,
-        image: "https://lh3.googleusercontent.com/d/1PnCbLtOKNLsHnh-7LZq9HZx_ajzDYXuC"
-      },
-      {
-        id: "raffaello-dates",
-        name: "Raffaello Stuffed Dates",
-        desc: "White chocolate coated dates filled with velvety coconut filling and whole roasted almond.",
-        price: 370,
-        image: "https://lh3.googleusercontent.com/d/1gHuhBwFywM1NN8Ij_AGeJe8T0LLn_x8j"
-      },
-      {
-        id: "bounty-dates",
-        name: "Bounty Stuffed Dates",
-        desc: "Decadent dates stuffed with sweet moist coconut and draped in smooth chocolate.",
-        price: 370,
-        image: "https://lh3.googleusercontent.com/d/1u15xVSjy3cKZvFhKBtGdCUXVQm_rH7nO"
-      },
-      {
-        id: "mixed-nuts-dates",
-        name: "Mixed Nuts Stuffed Dates",
-        desc: "Loaded with a crunchy medley of almonds, cashews, and pistachios inside soft dates.",
-        price: 370,
-        image: "https://lh3.googleusercontent.com/d/1SFwVvLnxw7o_QD1QJpG206J3uWfXmpq5"
-      }
-    ];
+    // Stuffed Dates Products List (Box of 6 Pricing & Updated Order)
+const datesProducts = [
+  {
+    id: "almond-dates",
+    name: "Whole Almond Stuffed Dates",
+    desc: "Classic whole dates stuffed with a whole crunchy roasted almond and coated with chocolate.",
+    price: 180,
+    image: "https://lh3.googleusercontent.com/d/1vsK5ngVDpORK4Jsu7XQf3EOaRsKu-r7z"
+  },
+  {
+    id: "kunafa-dates",
+    name: "Kunafa Stuffed Dates",
+    desc: "Handcrafted dates stuffed with pistachio paste and toasted crispy vermicelli, dipped in chocolate coating.",
+    price: 240,
+    image: "https://lh3.googleusercontent.com/d/1QDIaCVbSQ3aD_KkhKHODIp8KPklGNYMK"
+  },
+  {
+    id: "peanut-dates",
+    name: "Peanut Stuffed Dates",
+    desc: "Soft dates filled with rich peanut butter and crunchy roasted peanuts, finished in a chocolate coating.",
+    price: 240,
+    image: "https://lh3.googleusercontent.com/d/1LRGT1Ief3EcJdecKKWKLWKyRk-wpVqpo"
+  },
+  {
+    id: "rose-pistachio-dates",
+    name: "Rose Pistachio Stuffed Dates",
+    desc: "Floral and nutty dates stuffed with crunchy chopped pistachios and delicate rose petals, coated in a smooth white chocolate base.",
+    price: 240,
+    image: "https://lh3.googleusercontent.com/d/1PnCbLtOKNLsHnh-7LZq9HZx_ajzDYXuC"
+  },
+  {
+    id: "raffaello-dates",
+    name: "Raffaello Stuffed Dates",
+    desc: "White chocolate coated dates filled with a whole crunchy almond, dusted with sweet coconut on the outside.",
+    price: 240,
+    image: "https://lh3.googleusercontent.com/d/1gHuhBwFywM1NN8Ij_AGeJe8T0LLn_x8j"
+  },
+  {
+    id: "bounty-dates",
+    name: "Bounty Stuffed Dates",
+    desc: "Decadent dates stuffed with sweet moist coconut and draped in smooth chocolate.",
+    price: 240,
+    image: "https://lh3.googleusercontent.com/d/1u15xVSjy3cKZvFhKBtGdCUXVQm_rH7nO"
+  },
+  {
+    id: "mixed-nuts-dates",
+    name: "Mixed Nuts Stuffed Dates",
+    desc: "Loaded with a crunchy medley of roasted almonds and cashews inside soft dates.",
+    price: 240,
+    image: "https://lh3.googleusercontent.com/d/1SFwVvLnxw7o_QD1QJpG206J3uWfXmpq5"
+  }
+];
 
-    function getCart() { return JSON.parse(localStorage.getItem('fivian_cart') || '{}'); }
-    function saveCart(cart) { localStorage.setItem('fivian_cart', JSON.stringify(cart)); updateCartBadge(); }
+function getCart() { return JSON.parse(localStorage.getItem('fivian_cart') || '{}'); }
+function saveCart(cart) { localStorage.setItem('fivian_cart', JSON.stringify(cart)); updateCartBadge(); }
 
-    function updateCartBadge() {
-      let cart = getCart();
-      let totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById('cartCountBadge').innerText = totalQty;
+function updateCartBadge() {
+  let cart = getCart();
+  let totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById('cartCountBadge').innerText = totalQty;
+}
+
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  let cart = getCart();
+
+  datesProducts.forEach(product => {
+    const cartKey = `${product.name} (Box of 6)`;
+    const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
+
+    let actionHtml = '';
+    if (currentQty === 0) {
+      actionHtml = `<button class="add-product-btn" id="btn-${product.id}" onclick="changeItemQty('${product.id}', 1)">+ Add</button>`;
+    } else {
+      actionHtml = `
+        <div class="qty-counter" id="counter-${product.id}">
+          <button onclick="changeItemQty('${product.id}', -1)">-</button>
+          <span>${currentQty}</span>
+          <button onclick="changeItemQty('${product.id}', 1)">+</button>
+        </div>
+      `;
     }
 
-    function renderProducts() {
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = '';
-      let cart = getCart();
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.dataset.id = product.id;
+    card.innerHTML = `
+      <div>
+        <div class="product-image-container">
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <span class="size-badge">Box of 6</span>
+        </div>
+        <div class="product-name">${product.name}</div>
+        <div class="product-desc">${product.desc}</div>
+      </div>
+      <div class="product-footer">
+        <span class="product-price">₹${product.price}</span>
+        <div id="action-wrap-${product.id}">
+          ${actionHtml}
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  updateCartBadge();
+}
 
-      datesProducts.forEach(product => {
-        const cartKey = `${product.name} (Box of 9)`;
-        const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
+function updateActionWrapper(productId) {
+  const product = datesProducts.find(p => p.id === productId);
+  const cartKey = `${product.name} (Box of 6)`;
+  let cart = getCart();
+  const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
 
-        let actionHtml = '';
-        if (currentQty === 0) {
-          actionHtml = `<button class="add-product-btn" id="btn-${product.id}" onclick="changeItemQty('${product.id}', 1)">+ Add</button>`;
-        } else {
-          actionHtml = `
-            <div class="qty-counter" id="counter-${product.id}">
-              <button onclick="changeItemQty('${product.id}', -1)">-</button>
-              <span>${currentQty}</span>
-              <button onclick="changeItemQty('${product.id}', 1)">+</button>
-            </div>
-          `;
-        }
+  const actionWrap = document.getElementById(`action-wrap-${productId}`);
+  if (!actionWrap) return;
 
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.dataset.id = product.id;
-        card.innerHTML = `
-          <div>
-            <div class="product-image-container">
-              <img src="${product.image}" alt="${product.name}" loading="lazy">
-              <span class="size-badge">Box of 9</span>
-            </div>
-            <div class="product-name">${product.name}</div>
-            <div class="product-desc">${product.desc}</div>
-          </div>
-          <div class="product-footer">
-            <span class="product-price">₹${product.price}</span>
-            <div id="action-wrap-${product.id}">
-              ${actionHtml}
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-      updateCartBadge();
-    }
+  if (currentQty === 0) {
+    actionWrap.innerHTML = `<button class="add-product-btn" onclick="changeItemQty('${productId}', 1)">+ Add</button>`;
+  } else {
+    actionWrap.innerHTML = `
+      <div class="qty-counter">
+        <button onclick="changeItemQty('${productId}', -1)">-</button>
+        <span>${currentQty}</span>
+        <button onclick="changeItemQty('${productId}', 1)">+</button>
+      </div>
+    `;
+  }
+}
 
-    function updateActionWrapper(productId) {
-      const product = datesProducts.find(p => p.id === productId);
-      const cartKey = `${product.name} (Box of 9)`;
-      let cart = getCart();
-      const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
+function changeItemQty(productId, change) {
+  const product = datesProducts.find(p => p.id === productId);
+  const cartKey = `${product.name} (Box of 6)`;
+  let cart = getCart();
 
-      const actionWrap = document.getElementById(`action-wrap-${productId}`);
-      if (!actionWrap) return;
+  let currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
+  let newQty = currentQty + change;
 
-      if (currentQty === 0) {
-        actionWrap.innerHTML = `<button class="add-product-btn" onclick="changeItemQty('${productId}', 1)">+ Add</button>`;
-      } else {
-        actionWrap.innerHTML = `
-          <div class="qty-counter">
-            <button onclick="changeItemQty('${productId}', -1)">-</button>
-            <span>${currentQty}</span>
-            <button onclick="changeItemQty('${productId}', 1)">+</button>
-          </div>
-        `;
-      }
-    }
-
-    function changeItemQty(productId, change) {
-      const product = datesProducts.find(p => p.id === productId);
-      const cartKey = `${product.name} (Box of 9)`;
-      let cart = getCart();
-
-      let currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
-      let newQty = currentQty + change;
-
-      if (newQty <= 0) {
-        delete cart[cartKey];
-      } else {
-        cart[cartKey] = {
-          name: product.name,
-          size: 'Box of 9',
-          price: product.price,
-          qty: newQty
-        };
-      }
-      saveCart(cart);
-      updateActionWrapper(productId);
-      if (document.getElementById('cartModal').style.display === 'flex') {
-        openCart();
-      }
-    }
+  if (newQty <= 0) {
+    delete cart[cartKey];
+  } else {
+    cart[cartKey] = {
+      name: product.name,
+      size: 'Box of 6',
+      price: product.price,
+      qty: newQty
+    };
+  }
+  saveCart(cart);
+  updateActionWrapper(productId);
+  if (document.getElementById('cartModal').style.display === 'flex') {
+    openCart();
+  }
+}
 
     function openCart() {
       let cart = getCart();
