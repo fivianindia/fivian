@@ -135,19 +135,91 @@
     .cat-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .cat-title { padding: 16px; font-weight: 800; font-size: 1.05rem; text-align: center; }
 
-    /* About Us / Brand Story */
-    .about-wrap { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; text-align: center; max-width: 850px; margin: 0 auto; }
-    .about-wrap p { font-size: 1rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.7; }
-    .about-wrap p:last-child { margin-bottom: 0; }
+    /* About Us Styling */
+    .about-wrap { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+    .story-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
+    
+    .story-quote-box {
+      background: #FAF3EA;
+      border-left: 4px solid var(--brand-red-accent);
+      padding: 18px 22px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 20px 0;
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--choc-dark);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    
+    .story-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .story-item h4 {
+      font-family: var(--font-serif);
+      color: var(--choc-dark);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .story-item p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
-    /* Cart Modal (Consistent with Truffles Page) */
+    /* Flavoura Twin Brand Card */
+    .flavoura-card {
+      background: #FFFDF9;
+      border: 2px solid #E5C392;
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(184, 115, 51, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flavoura-logo-img {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .flavoura-card p {
+      max-width: 650px;
+      color: var(--choc-mid);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .flavoura-btn {
+      background: #A33A2B;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-block;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(163, 58, 43, 0.25);
+    }
+    .flavoura-btn:hover {
+      background: #872E21;
+      transform: translateY(-2px);
+    }
+
+    /* Cart Modal */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
     .modal-box { background: #FFF; padding: 24px; border-radius: var(--radius-lg); max-width: 420px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
     .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
     .checkout-btn { background: #25D366; color: #FFF; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; margin-top: 16px; cursor: pointer; transition: opacity 0.2s; }
     .checkout-btn:hover { opacity: 0.9; }
 
-    /* Footer Mobile-Optimized Layout */
+    /* Footer Layout */
     .footer-content {
       max-width: 850px;
       margin: 0 auto;
@@ -167,9 +239,7 @@
       margin-bottom: 24px;
       width: 100%;
     }
-    .footer-dot {
-      display: none;
-    }
+    .footer-dot { display: none; }
     .banner-text {
       font-size: 0.72rem;
       letter-spacing: 1.1px;
@@ -212,27 +282,26 @@
 
   <div class="top-bar">Handcrafted Fresh in Kolkata | Direct Local & Nationwide Delivery Available</div>
 
-  <!-- Responsive Mobile Header with Consistent Navigation -->
+  <!-- Header -->
   <header>
     <div class="header-container">
-      <a href="index.html" class="brand-logo">
+      <a href="/" class="brand-logo">
         <img src="https://lh3.googleusercontent.com/d/1jkp6vnIVF5LLFulcj7Sm7LANKjuSvuWn" alt="Fivian Chocolates Logo">
         <span class="brand-name">Fivian<span>.</span></span>
       </a>
 
-      <!-- Consistent Red Cart Button -->
       <button class="cart-btn" onclick="openCart()">
         🛒 Cart
       </button>
 
       <nav>
-  <a href="/">Home</a>
-  <a href="/chocolates/">Chocolates</a>
-  <a href="/truffles/">Truffles</a>
-  <a href="/dates/">Dates</a>
-  <a href="/milkshakes/">Milkshakes</a>
-  <a href="/#about">Contact</a>
-</nav>
+        <a href="/" class="active">Home</a>
+        <a href="/chocolates/">Chocolates</a>
+        <a href="/truffles/">Truffles</a>
+        <a href="/dates/">Dates</a>
+        <a href="/milkshakes/">Milkshakes</a>
+        <a href="/#about">Contact</a>
+      </nav>
     </div>
   </header>
 
@@ -248,15 +317,15 @@
     <p class="section-subtitle">Our signature viral creation crafted with honest local ingredients.</p>
 
     <div class="bestseller-card">
-      <div class="bestseller-img-wrap">
+      <a href="/chocolates/" class="bestseller-img-wrap">
         <img src="https://lh3.googleusercontent.com/d/1XU35Wurbl1MFBwL0GKsLpQUYYwZBI6cq" alt="Dubai Viral Kunafa Chocolate Bar">
-      </div>
+      </a>
       <div class="bestseller-info">
         <span class="badge">Viral Favourite</span>
         <h3>Dubai Kunafa Chocolate Bar</h3>
         <p>Crafted using smooth compound chocolate filled with our house-roasted vermicelli and freshly whipped pistachio paste. We specially formulated this creation to bring the world-famous Dubai chocolate experience to youth and dessert lovers at an accessible price point, without compromising on crunch or flavour.</p>
         <p class="note">*A premium couverture chocolate version is also available upon request!</p>
-        <a href="chocolates.html" class="action-btn">Get Here</a>
+        <a href="/chocolates/" class="action-btn">Get Yours Here</a>
       </div>
     </div>
   </section>
@@ -268,7 +337,7 @@
 
     <div class="category-grid">
       <!-- 1. Chocolate Bars -->
-      <a href="chocolates.html" class="cat-card">
+      <a href="/chocolates/" class="cat-card">
         <div class="cat-img-box">
           <img src="https://lh3.googleusercontent.com/d/1Hu_MJdShVmaFrlCtOjftQ9XCoqtmI6Ji" alt="Handcrafted Chocolate Bars">
         </div>
@@ -276,7 +345,7 @@
       </a>
 
       <!-- 2. Artisanal Truffles -->
-      <a href="truffles.html" class="cat-card">
+      <a href="/truffles/" class="cat-card">
         <div class="cat-img-box">
           <img src="https://lh3.googleusercontent.com/d/1GDbNcT1LYT5YxPsq7PJhjzXsWrSM9koh" alt="Artisanal Truffles Range">
         </div>
@@ -284,7 +353,7 @@
       </a>
 
       <!-- 3. Stuffed & Coated Dates -->
-      <a href="stuffeddates.html" class="cat-card">
+      <a href="/dates/" class="cat-card">
         <div class="cat-img-box">
           <img src="https://lh3.googleusercontent.com/d/1S1FOpeer9LJluhB0VPnpaO__o7CUeoo-" alt="Stuffed & Coated Dates Range">
         </div>
@@ -292,7 +361,7 @@
       </a>
 
       <!-- 4. Thick Milkshakes -->
-      <a href="milkshakes.html" class="cat-card">
+      <a href="/milkshakes/" class="cat-card">
         <div class="cat-img-box">
           <img src="https://lh3.googleusercontent.com/d/10333tsr8Xg9fgSYJcPC5EEtbiLuSAtZK" alt="Gourmet Milkshakes Range">
         </div>
@@ -304,14 +373,46 @@
   <!-- About Us Section -->
   <section class="container" id="about">
     <h2 class="section-title">About Us</h2>
-    <p class="section-subtitle">A mother-daughter duo built from the ground up.</p>
+    <p class="section-subtitle">A mother-daughter duo building an empire from the ground up.</p>
 
     <div class="about-wrap">
-      <p>Fivian is a homegrown brand born from a mother-daughter duo with a shared passion for culinary excellence and thoughtful design. Named after our family of five, Fivian was created to give a formal identity to Arshia Ahmad’s 15+ years of award-winning culinary expertise, turning proven artisanal recipes into an unmistakable gourmet brand.</p>
-      
-      <p>Every single chocolate, truffle, and stuffed date is handcrafted, preservative-free, and made in small batches in our Kolkata workshop under Arshia's direct supervision. From unique flavour pairings like Rose-Pistachio, Paan, and Rasmalai to our take on the viral Kunafa chocolate bar, the magic inside every product comes from her kitchen mastery.</p>
-      
-      <p>The visual story on the outside is shaped by her daughter, Madeeha Anwar, an MBA in Marketing who handles all branding, custom packaging, and visual design. Rooted in Make-in-India principles, Fivian offers an authentic, small-batch alternative to mass-produced sweets—delivering pure flavour, fresh local ingredients, and personalised gifting experiences.</p>
+      <!-- Story Overview Card -->
+      <div class="story-card">
+        <p style="font-size: 1.05rem; line-height: 1.6; color: var(--choc-dark); margin-bottom: 0;">
+          <strong>Fivian</strong> is a homegrown Kolkata brand named after our family of five, turning over 15 years of culinary passion into a refined artisanal experience.
+        </p>
+
+        <div class="story-quote-box">
+          "Every item is handcrafted in small batches, preservative-free, authentic, and loaded with fresh local ingredients."
+        </div>
+
+        <div class="story-list">
+          <div class="story-item">
+            <h4>👩‍🍳 Culinary Excellence</h4>
+            <p><strong>Arshia Ahmad</strong> brings 15+ years of culinary experience, having showcased her craft across multiple television appearances. She is the artisan behind every product, handcrafting custom recipes and signature treats from scratch in small batches.</p>
+          </div>
+
+          <div class="story-item">
+            <h4>🎨 Branding & Story</h4>
+            <p><strong>Madeeha Anwar</strong> (MBA, Marketing) gives Fivian its soul and story. She designs the visual identity, custom packaging, brand personality, and designed and built this entire website from the ground up to craft a memorable customer experience.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Twin Brand Showcase Card -->
+      <div class="flavoura-card">
+        <span style="text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; font-weight: 800; color: #A33A2B; margin-bottom: 8px;">
+          Meet Our Twin Brand
+        </span>
+        
+        <img src="https://lh3.googleusercontent.com/d/1BOQm9Xw0A_eFbhqlFRYokwxuVke2cYJ3" alt="Flavoura - Swaad Jo Maa Ki Yaad Dilae" class="flavoura-logo-img">
+
+        <p>
+          Beyond artisanal sweets, we celebrate authentic Indian culinary roots through <strong>Flavoura</strong>. Dedicated to traditional savouries and timeless kitchen recipes, Flavoura brings you wholesome, rich flavours crafted to evoke the warmth of home.
+        </p>
+
+        <a href="/flavourapremix" class="flavoura-btn">Check Out The Flavoura Line</a>
+      </div>
     </div>
   </section>
 
@@ -353,7 +454,7 @@
         ORDER 2 DAYS IN ADVANCE &bull; HAND-PACKED WITH CARE &bull; FRESH INGREDIENTS
       </p>
 
-      <!-- Social Icons with Updated Links -->
+      <!-- Social Icons -->
       <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 24px;">
         <a href="https://wa.me/919088055818" target="_blank" title="WhatsApp" class="social-link" style="display: inline-block; width: 38px; height: 38px; border-radius: 20%; overflow: hidden;">
           <img src="https://lh3.googleusercontent.com/d/1qmtByzzVWRH8GbYRvboxbqQ7vVMvugTY" alt="WhatsApp" style="width: 100%; height: 100%; object-fit: cover; display: block;">
