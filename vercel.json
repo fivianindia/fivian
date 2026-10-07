@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/flavourapremix", "destination": "https://myflavoura.in", "permanent": true },
+    { "source": "/flavourapremix/", "destination": "https://myflavoura.in", "permanent": true }
+  ]
 }
