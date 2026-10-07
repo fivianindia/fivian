@@ -29,6 +29,10 @@ var d='';Object.keys(cart).forEach(function(k){var c=cart[k];d+='- '+c.n+(c.l?' 
 var m="Hello Fivian! I'd like to place an order:\n"+d+'\nEstimated total: '+rs(t.t)+' (+ delivery)\n\nName: '+n+'\nPhone: '+ph+'\nAddress: '+ad;
 if(DISCORD_WEBHOOK){try{fetch(DISCORD_WEBHOOK,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'New Website Order',color:13112366,fields:[{name:'Customer',value:n,inline:true},{name:'Phone',value:ph,inline:true},{name:'Address',value:ad.slice(0,1000)},{name:'Items',value:d.slice(0,1000)},{name:'Estimated Total',value:rs(t.t)+' (+ delivery)'}]}]})})}catch(e){}}
 window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank')}
+function sendContact(){var n=$('#cn').value.trim(),p=$('#cp').value.trim(),e=$('#ce').value.trim(),m=$('#cm').value.trim(),er=$('#cerr'),ok=$('#cok'),bt=$('#csend');ok.hidden=true;
+var msg=!n?'Please enter your name.':p.replace(/\D/g,'').length<10?'Please enter a valid phone number.':!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)?'Please enter a valid email address.':'';
+if(msg){er.textContent=msg;er.hidden=false;return}er.hidden=true;bt.disabled=true;bt.textContent='Sending...';
+fetch(DISCORD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'New Contact Enquiry',color:13112366,fields:[{name:'Name',value:n,inline:true},{name:'Phone',value:p,inline:true},{name:'Email',value:e},{name:'Message',value:(m||'(none)').slice(0,1000)}]}]})}).then(function(r){if(!r.ok)throw 0;['#cn','#cp','#ce','#cm'].forEach(function(s){$(s).value=''});ok.hidden=false}).catch(function(){er.textContent='Sorry, that did not send. Please WhatsApp us instead.';er.hidden=false}).then(function(){bt.disabled=false;bt.textContent='Send Message'})}
 function modal(id,on){$(id).hidden=!on;document.body.style.overflow=on?'hidden':''}
 document.addEventListener('click',function(e){var el=e.target,card=el.closest('.card');
 var b=el.closest('[data-a]');
@@ -39,6 +43,7 @@ if(el.closest('#cartBtn')||el.closest('#stk')){renderCart();modal('#cartM',true)
 var p=el.closest('[data-policy]');if(p){e.preventDefault();$$('#polM section').forEach(function(s){s.hidden=true});$('#pol-'+p.dataset.policy).hidden=false;modal('#polM',true);return}
 if(el.closest('[data-fclose]')){modal('#folM',false);return}
 if(el.closest('[data-close]')||el.classList.contains('ov')){modal('#cartM',false);modal('#polM',false);modal('#folM',false);return}
+if(el.closest('#csend')){sendContact();return}
 if(el.closest('#send'))send();
 if(el.closest('#clear')){cart={};save();refresh()}});
 document.addEventListener('keydown',function(e){if(e.key=='Escape'){modal('#cartM',false);modal('#polM',false)}});
