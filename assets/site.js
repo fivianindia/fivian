@@ -12,7 +12,7 @@ function paint(card,skipAct){var s=cardState(card),x=s.x,q=cart[s.key]?cart[s.ke
 $$('.ph img',card).forEach(function(im,n){im.classList.toggle('on',n==s.i)});$$('.sz button',card).forEach(function(z,n){z.classList.toggle('on',n==s.i)});var tg=$('.tag',card);if(x.w&&x.w>x.p){tg.hidden=false;tg.textContent=Math.round((1-x.p/x.w)*100)+'% off'}else tg.hidden=true;
 $('.pr',card).innerHTML=(x.w&&x.w>x.p?'<del>'+rs(x.w)+'</del>':'')+rs(x.p)+(x.l&&s.v.length==1?'<small>'+x.l+'</small>':'');
 if(skipAct)return;$('.act',card).innerHTML=q?'<div class="q"><button data-a="m" aria-label="Remove one">\u2212</button><span>'+q+'</span><button data-a="p" aria-label="Add one">+</button></div>':'<button class="add" data-a="p">+ Add</button>'}
-function refresh(){var t=totals();$('#cnt').textContent=t.q;$$('.card').forEach(paint);var s=$('#stk');s.hidden=!t.q;s.textContent='\uD83D\uDED2 View Cart \u2022 '+t.q+' item'+(t.q>1?'s':'')+' \u2022 '+rs(t.t);if(!$('#cartM').hidden)renderCart()}
+function refresh(){var t=totals();$('#cnt').textContent=t.q;$$('.card').forEach(function(c){paint(c)});var s=$('#stk');s.hidden=!t.q;s.textContent='\uD83D\uDED2 View Cart \u2022 '+t.q+' item'+(t.q>1?'s':'')+' \u2022 '+rs(t.t);if(!$('#cartM').hidden)renderCart()}
 function renderCart(){var box=$('#items'),t=totals();box.innerHTML='';
 if(!t.q){box.innerHTML='<p class="emp">Your cart is empty. Add something sweet!</p>'}
 Object.keys(cart).forEach(function(k){var c=cart[k],r=document.createElement('div');r.className='it';
@@ -21,13 +21,13 @@ var q=document.createElement('div');q.className='q';q.innerHTML='<button data-k=
 r.appendChild(l);r.appendChild(q);box.appendChild(r)});
 $('#tot').textContent=rs(t.t)}
 function send(){var t=totals();if(!t.q)return alert('Your cart is empty!');
-var n=$('#fn').value.trim(),ph=$('#fp').value.trim(),ad=$('#fa').value.trim(),dt=$('#fd').value,er=$('#er');
+var n=$('#fn').value.trim(),ph=$('#fp').value.trim(),ad=$('#fa').value.trim(),er=$('#er');
 var msg=!n?'Please enter your name.':ph.replace(/\D/g,'').length<10?'Please enter a valid phone number.':!ad?'Please enter your delivery address.':'';
 if(msg){er.textContent=msg;er.hidden=false;return}er.hidden=true;
 try{localStorage.setItem(KEY+'_c',JSON.stringify({n:n,p:ph,a:ad}))}catch(e){}
 var d='';Object.keys(cart).forEach(function(k){var c=cart[k];d+='- '+c.n+(c.l?' ('+c.l+')':'')+' x'+c.q+' = '+rs(c.p*c.q)+'\n'});
-var m="Hello Fivian! I'd like to place an order:\n"+d+'\nEstimated total: '+rs(t.t)+' (+ delivery)\n\nName: '+n+'\nPhone: '+ph+'\nAddress: '+ad+(dt?'\nDate needed: '+dt:'');
-if(DISCORD_WEBHOOK){try{fetch(DISCORD_WEBHOOK,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'New Website Order',color:13112366,fields:[{name:'Customer',value:n,inline:true},{name:'Phone',value:ph,inline:true},{name:'Address',value:ad.slice(0,1000)},{name:'Needed by',value:dt||'Not specified',inline:true},{name:'Items',value:d.slice(0,1000)},{name:'Estimated Total',value:rs(t.t)+' (+ delivery)'}]}]})})}catch(e){}}
+var m="Hello Fivian! I'd like to place an order:\n"+d+'\nEstimated total: '+rs(t.t)+' (+ delivery)\n\nName: '+n+'\nPhone: '+ph+'\nAddress: '+ad;
+if(DISCORD_WEBHOOK){try{fetch(DISCORD_WEBHOOK,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'New Website Order',color:13112366,fields:[{name:'Customer',value:n,inline:true},{name:'Phone',value:ph,inline:true},{name:'Address',value:ad.slice(0,1000)},{name:'Items',value:d.slice(0,1000)},{name:'Estimated Total',value:rs(t.t)+' (+ delivery)'}]}]})})}catch(e){}}
 window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank')}
 function modal(id,on){$(id).hidden=!on;document.body.style.overflow=on?'hidden':''}
 document.addEventListener('click',function(e){var el=e.target,card=el.closest('.card');
@@ -37,12 +37,13 @@ if(b&&card){card.dataset.man=1;var s=cardState(card);change(s.key,s.meta,b.datas
 var z=el.closest('.sz button');if(z&&card){card.dataset.man=1;card.dataset.sel=z.dataset.i;$$('.sz button',card).forEach(function(x){x.classList.toggle('on',x===z)});paint(card);return}
 if(el.closest('#cartBtn')||el.closest('#stk')){renderCart();modal('#cartM',true);return}
 var p=el.closest('[data-policy]');if(p){e.preventDefault();$$('#polM section').forEach(function(s){s.hidden=true});$('#pol-'+p.dataset.policy).hidden=false;modal('#polM',true);return}
-if(el.closest('[data-close]')||el.classList.contains('ov')){modal('#cartM',false);modal('#polM',false);return}
+if(el.closest('[data-fclose]')){modal('#folM',false);return}
+if(el.closest('[data-close]')||el.classList.contains('ov')){modal('#cartM',false);modal('#polM',false);modal('#folM',false);return}
 if(el.closest('#send'))send();
 if(el.closest('#clear')){cart={};save();refresh()}});
 document.addEventListener('keydown',function(e){if(e.key=='Escape'){modal('#cartM',false);modal('#polM',false)}});
 $$('.card').forEach(function(c){var v=JSON.parse(c.dataset.v);v.slice(1).forEach(function(x){var im=new Image();im.src=x.i;im.alt=c.dataset.name+' '+x.l;$('.ph',c).appendChild(im)})});
 try{var sv=JSON.parse(localStorage.getItem(KEY+'_c')||'{}');$('#fn').value=sv.n||'';$('#fp').value=sv.p||'';$('#fa').value=sv.a||''}catch(e){}
-var dd=new Date(Date.now()+172800000);$('#fd').min=dd.toISOString().slice(0,10);
 setInterval(function(){$$('.card').forEach(function(c){var v=JSON.parse(c.dataset.v);if(v.length<2||c.dataset.man||c.matches(':hover'))return;if(Object.keys(cart).some(function(k){return k.indexOf(c.dataset.id+'|')==0}))return;c.dataset.sel=((+c.dataset.sel||0)+1)%v.length;paint(c,true)})},3000);
-refresh()})();
+function follow(){var s=0;try{s=sessionStorage.getItem('fivianFollowSeen')}catch(e){}if(s)return;if(!$('#cartM').hidden||!$('#polM').hidden)return setTimeout(follow,3000);try{sessionStorage.setItem('fivianFollowSeen','1')}catch(e){}modal('#folM',true)}
+setTimeout(follow,6000);refresh()})();
