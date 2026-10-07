@@ -96,7 +96,7 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;back
 .fol .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .fol .lnk{margin-top:10px;font-size:.85rem}
 @keyframes folIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-.fol::before{background:linear-gradient(135deg,#2B1B17,#5A3228 55%,#C8102E);border-bottom:3px solid #E5C392}
+.fol::before{background:linear-gradient(135deg,#5A3228,#A3201F 55%,#E0183B);border-bottom:3px solid #E5C392}
 .fol::after{content:"";font-size:0;background:#fff url(https://lh3.googleusercontent.com/d/1jkp6vnIVF5LLFulcj7Sm7LANKjuSvuWn) center/62% no-repeat;border:3px solid #E5C392;box-shadow:0 8px 20px rgba(43,27,23,.35)}
 .fol p b{color:#C8102E}
 .fol .btn{background:linear-gradient(135deg,#E0183B,#B00D28);box-shadow:0 10px 24px rgba(200,16,46,.35)}
