@@ -1,9 +1,10 @@
 (function(){
-var KEY='fivian_cart_v2',WA='919088055818',DISCORD_WEBHOOK='https://discord.com/api/webhooks/1548727130454761502/uQbUb9BvtlTtMTnQ_p2pIy8NpEg0-giznGYbSz53Ux3ASdwYvndbcUNYli1yaNMSc_fh';
+var KEY='fivian_cart_v2',WA='919088055818';
 try{localStorage.removeItem('fivian_cart')}catch(e){}
 var cart={};try{cart=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
 var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
 var rs=function(n){return'\u20B9'+n};
+function notify(t,d){return fetch('/api/notify',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({type:t,data:d})})}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(cart))}catch(e){}}
 function totals(){var q=0,t=0;for(var k in cart){q+=cart[k].q;t+=cart[k].q*cart[k].p}return{q:q,t:t}}
 function change(key,meta,d){var c=cart[key]||(cart[key]={n:meta.n,l:meta.l,p:meta.p,q:0});c.q+=d;if(c.q<=0)delete cart[key];save();refresh()}
@@ -27,12 +28,12 @@ if(msg){er.textContent=msg;er.hidden=false;return}er.hidden=true;
 try{localStorage.setItem(KEY+'_c',JSON.stringify({n:n,p:ph,a:ad}))}catch(e){}
 var d='';Object.keys(cart).forEach(function(k){var c=cart[k];d+='- '+c.n+(c.l?' ('+c.l+')':'')+' x'+c.q+' = '+rs(c.p*c.q)+'\n'});
 var m="Hello Fivian! I'd like to place an order:\n"+d+'\nEstimated total: '+rs(t.t)+' (+ delivery)\n\nName: '+n+'\nPhone: '+ph+'\nAddress: '+ad;
-if(DISCORD_WEBHOOK){try{fetch(DISCORD_WEBHOOK,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'New Website Order',color:13112366,fields:[{name:'Customer',value:n,inline:true},{name:'Phone',value:ph,inline:true},{name:'Address',value:ad.slice(0,1000)},{name:'Items',value:d.slice(0,1000)},{name:'Estimated Total',value:rs(t.t)+' (+ delivery)'}]}]})})}catch(e){}}
+try{notify('order',{name:n,phone:ph,address:ad,items:Object.keys(cart).map(function(k){var c=cart[k];return{n:c.n,l:c.l,q:c.q,p:c.p}})})}catch(e){}
 window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank')}
 function sendContact(){var n=$('#cn').value.trim(),p=$('#cp').value.trim(),e=$('#ce').value.trim(),m=$('#cm').value.trim(),er=$('#cerr'),ok=$('#cok'),bt=$('#csend');ok.hidden=true;
 var msg=!n?'Please enter your name.':p.replace(/\D/g,'').length<10?'Please enter a valid phone number.':!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)?'Please enter a valid email address.':'';
 if(msg){er.textContent=msg;er.hidden=false;return}er.hidden=true;bt.disabled=true;bt.textContent='Sending...';
-fetch(DISCORD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:'New Contact Enquiry',color:13112366,fields:[{name:'Name',value:n,inline:true},{name:'Phone',value:p,inline:true},{name:'Email',value:e},{name:'Message',value:(m||'(none)').slice(0,1000)}]}]})}).then(function(r){if(!r.ok)throw 0;['#cn','#cp','#ce','#cm'].forEach(function(s){$(s).value=''});ok.hidden=false}).catch(function(){er.textContent='Sorry, that did not send. Please WhatsApp us instead.';er.hidden=false}).then(function(){bt.disabled=false;bt.textContent='Send Message'})}
+notify('contact',{name:n,phone:p,email:e,message:m}).then(function(r){if(!r.ok)throw 0;['#cn','#cp','#ce','#cm'].forEach(function(s){$(s).value=''});ok.hidden=false}).catch(function(){er.textContent='Sorry, that did not send. Please WhatsApp us instead.';er.hidden=false}).then(function(){bt.disabled=false;bt.textContent='Send Message'})}
 function modal(id,on){$(id).hidden=!on;document.body.style.overflow=on?'hidden':''}
 document.addEventListener('click',function(e){var el=e.target,card=el.closest('.card');
 var b=el.closest('[data-a]');
